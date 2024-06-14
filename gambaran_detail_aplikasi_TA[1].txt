@@ -8,7 +8,7 @@
 	4. diskon 
 	5. total penjualan 
 	6. pembayaran
-	7. saldo
+	
 2. Menu admin
 	- login ( username & password ) yang telah didaftarkan
 	- admin dapat mengelola data dan informasi mengenai tambah customer
