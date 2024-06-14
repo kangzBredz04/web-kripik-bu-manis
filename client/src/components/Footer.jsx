@@ -9,7 +9,7 @@ import { LuMapPin } from "react-icons/lu";
 export default function Footer() {
   // const { theme } = useContext(AdminContext);
   return (
-    <footer className={`py-12 px-4 font-KumbhSans bg-gray-100`}>
+    <footer className="py-12 px-4 font-poppins bg-brown-dark text-white">
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         <div>
           <h2 className="text-lg font-semibold mb-4">Bantuan</h2>
@@ -45,13 +45,13 @@ export default function Footer() {
         <div>
           <h2 className="text-lg font-semibold mb-4">Ikuti Kami</h2>
           <div className="flex space-x-4">
-            <Link to="/profile" className="text-gray-700 hover:text-gray-900 ">
+            <Link to="/profile" className=" hover:text-gray-400 ">
               <FaInstagram className="text-xl" />
             </Link>
-            <Link to="/wishlist" className="text-gray-700 hover:text-gray-900">
+            <Link to="/wishlist" className=" hover:text-gray-400">
               <FiYoutube className="text-xl" />
             </Link>
-            <Link to="/cart" className="text-gray-700 hover:text-gray-900">
+            <Link to="/cart" className=" hover:text-gray-400">
               <FiFacebook className="text-xl" />
             </Link>
           </div>
