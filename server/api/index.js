@@ -1,12 +1,22 @@
 import express from "express";
 import "dotenv/config";
+import cookieParser from "cookie-parser";
+import cors from "cors";
 
 import ProductRoute from "./routes/product-route.js";
 import AuthRoute from "./routes/auth-route.js";
 
 const app = express();
 
+app.use(
+  cors({
+    origin: ["http://localhost:5173", "https://sahaba-fashion.vercel.app"],
+    credentials: true,
+  })
+);
+
 app.use(express.json());
+app.use(cookieParser());
 
 const router = express.Router();
 app.use("/api", router);
