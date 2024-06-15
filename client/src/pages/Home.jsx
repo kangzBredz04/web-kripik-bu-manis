@@ -1,9 +1,45 @@
+/* eslint-disable no-unused-vars */
 import { useContext } from "react";
-import CardProduct from "./CardProduct";
+import CardProduct from "../components/CardProduct";
 import { AllContext } from "../App";
 
+const products = [
+  {
+    id: 1,
+    name: "Keripik Original",
+    price: 20000,
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Modimagni quibusdam dolor cumque",
+    image: "/Keripik Original.jpeg",
+  },
+  {
+    id: 2,
+    name: "Keripik Pedas",
+    price: 10000,
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Modimagni quibusdam dolor cumque",
+    image: "/Keripik Pedas.jpeg",
+  },
+  {
+    id: 3,
+    name: "Keripik Coklat",
+    price: 15000,
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Modimagni quibusdam dolor cumque",
+    image: "/Keripik Coklat.jpeg",
+  },
+  {
+    id: 1,
+    name: "Keripik Original",
+    price: 20000,
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Modimagni quibusdam dolor cumque",
+    image: "/Keripik Original.jpeg",
+  },
+];
+
 export default function Home() {
-  const { products } = useContext(AllContext);
+  // const { products } = useContext(AllContext);
   // const filterProduct = (category) => {
   //   return products.filter((p) => p.category === category).slice(0, 4);
   // };
@@ -15,19 +51,11 @@ export default function Home() {
         <div className="flex flex-col gap-3 py-8 m-auto">
           <div>
             <h1 className="text-center font-medium text-xl tracking-wider">
-              TEMUKAN KOLEKSI TERBARU SEKARANG
+              BEST SELLER
             </h1>
           </div>
-          <div className="text-center">
-            <h3
-              className="text-sm underline cursor-pointer"
-              // onClick={() => navigate("/shop")}
-            >
-              Tampilkan Semua
-            </h3>
-          </div>
         </div>
-        <div className="grid grid-cols-4">
+        <div className="grid grid-cols-4 gap-5 px-5 py-5">
           {products.map((p) => (
             <CardProduct
               key={p.id}
