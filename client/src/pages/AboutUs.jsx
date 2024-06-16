@@ -22,10 +22,10 @@ export default function AboutUs() {
             menciptakan cita rasa yang autentik dan memanjakan lidah Anda.
           </p>
         </div>
-        <img src="/Aside About Us.jpeg" alt="Gambar" className="w-4/12" />
+        <img src="/Aside About Us.jpg" alt="Gambar" className="w-4/12" />
       </div>
       <div className="flex gap-10 px-7 py-10">
-        <img src="/Aside About Us 2.jpeg" alt="Gambar" className="w-4/12" />
+        <img src="/Aside About Us 2.jpg" alt="Gambar" className="w-4/12" />
         <div className="flex flex-col gap-3">
           <h1 className="text-2xl font-bold tracking-wide">
             Komitmen pada Kepuasan Pelanggan
