@@ -14,7 +14,7 @@ export default function Header() {
       <div className="container mx-auto  py-4 flex justify-between items-center">
         <div className="flex items-center">
           <Link to="/" className="text-xl font-bold tracking-widest">
-            KERIPIK BU MANIS
+            KRIPIK BU MANIS
           </Link>
         </div>
         <nav className="grow flex justify-evenly ">
