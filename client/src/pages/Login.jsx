@@ -54,7 +54,7 @@ export default function Login() {
   return (
     <div className="py-12 flex items-center justify-center bg-brown-light font-poppins">
       <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
-        <h2 className="text-3xl mb-6 text-center text-brown-dark font-bold">
+        <h2 className="text-3xl mb-6 text-brown-dark font-bold">
           {isCustomerLogin ? "Customer Login" : "Admin Login"}
         </h2>
         <div className="my-4 text-center grid grid-cols-2">
@@ -126,8 +126,10 @@ export default function Login() {
         </form>
         <div className="flex justify-center mt-4">
           <h1 className="text-brown-dark">
-            Don&apos;t have account?{" "}
-            <Link className="font-bold underline">Register</Link>
+            Belum punya akun?{" "}
+            <Link to={"/register"} className="font-bold underline">
+              Register
+            </Link>
           </h1>
         </div>
       </div>
