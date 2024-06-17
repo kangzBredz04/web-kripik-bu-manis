@@ -34,7 +34,9 @@ export default function DetailProduct() {
           </div>
           <div>
             <div className="my-10 mx-8 flex flex-col gap-5">
-              <h1 className="text-4xl font-bold text-brown-dark">{product.name}</h1>
+              <h1 className="text-4xl font-bold text-brown-dark">
+                {product.name}
+              </h1>
               <h1 className="font-semibold text-2xl">
                 Rp{parseInt(product.price).toLocaleString("id-ID")} {""}/Kg
               </h1>
