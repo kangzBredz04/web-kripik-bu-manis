@@ -8,6 +8,7 @@ import ErrorPageACust from "./pages/ErrorPageCust.jsx";
 import Home from "./pages/Home.jsx";
 import AboutUs from "./pages/AboutUs.jsx";
 import DetailProduct from "./pages/DetailProduct.jsx";
+import Login from "./pages/Login.jsx";
 
 const router = createBrowserRouter([
   {
@@ -16,9 +17,14 @@ const router = createBrowserRouter([
     errorElement: <ErrorPageACust />,
     children: [
       {
+        path: "/login",
+        element: <Login />,
+      },
+      {
         path: "/",
         element: <Home />,
       },
+
       {
         path: "/about-us",
         element: <AboutUs />,
