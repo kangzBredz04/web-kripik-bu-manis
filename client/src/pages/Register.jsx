@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { api } from "../utils.js";
 
 export default function Register() {
   const [customerCode, setCustomerCode] = useState("");
@@ -6,24 +8,24 @@ export default function Register() {
   const [name, setName] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
     if (!customerCode || !password || !name) {
-      setError("All fields are required");
+      setError("Harus diisi semua");
       return;
     }
-
     setError("");
-    // Here you can add the code to handle the form submission, e.g., sending data to the server
-    console.log("Customer Code:", customerCode);
-    console.log("Password:", password);
-    console.log("Name:", name);
+    api.post("/auth/register", register).then((res) => {
+      alert(res.msg);
+    });
   };
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="py-8 flex items-center justify-center bg-brown-light font-poppins">
       <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-6">Register Account</h2>
+        <h2 className="text-3xl font-bold mb-6 text-brown-dark">
+          Register Account
+        </h2>
         {error && <p className="text-red-500 mb-4">{error}</p>}
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -36,15 +38,6 @@ export default function Register() {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700">Password</label>
-            <input
-              type="password"
-              className="mt-1 p-2 w-full border rounded"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <div className="mb-4">
             <label className="block text-gray-700">Name</label>
             <input
               type="text"
@@ -53,13 +46,30 @@ export default function Register() {
               onChange={(e) => setName(e.target.value)}
             />
           </div>
+          <div className="mb-4">
+            <label className="block text-gray-700">Password</label>
+            <input
+              type="password"
+              className="mt-1 p-2 w-full border rounded"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
           <button
             type="submit"
-            className="w-full py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+            className="w-full py-3 bg-brown-dark text-xl text-white rounded hover:bg-white hover:text-brown-dark hover:border hover:border-brown-dark"
           >
             Register
           </button>
         </form>
+        <div className="flex justify-center mt-4">
+          <h1 className="text-brown-dark">
+            Sudah punya akun?{" "}
+            <Link to={"/login"} className="font-bold underline">
+              Login
+            </Link>
+          </h1>
+        </div>
       </div>
     </div>
   );

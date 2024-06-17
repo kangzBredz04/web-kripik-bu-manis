@@ -11,6 +11,7 @@ export const registerAccount = async (req, res) => {
       "INSERT INTO customers (customer_code, name, password) VALUES ($1, $2, $3) RETURNING *",
       [customer_code, name, hashPassword]
     );
+
     res
       .status(201)
       .json({ msg: "Registrasi akun telah berhasil", data: result.rows[0] });
