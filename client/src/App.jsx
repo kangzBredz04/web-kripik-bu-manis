@@ -8,6 +8,7 @@ export const AllContext = createContext();
 
 function App() {
   const [user, setUser] = useState({});
+  const [register, setRegister] = useState({});
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -18,6 +19,8 @@ function App() {
       value={{
         products,
         setProducts,
+        register,
+        setRegister,
       }}
     >
       <Header />
