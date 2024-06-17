@@ -7,6 +7,7 @@ import { api } from "./utils.js";
 export const AllContext = createContext();
 
 function App() {
+  const [user, setUser] = useState({});
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -20,7 +21,7 @@ function App() {
       }}
     >
       <Header />
-      <Outlet />
+      <Outlet context={[user, setUser]} />
       <Footer />
     </AllContext.Provider>
   );
