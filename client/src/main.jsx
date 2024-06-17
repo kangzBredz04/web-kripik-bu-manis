@@ -9,6 +9,7 @@ import Home from "./pages/Home.jsx";
 import AboutUs from "./pages/AboutUs.jsx";
 import DetailProduct from "./pages/DetailProduct.jsx";
 import Login from "./pages/Login.jsx";
+import Register from "./pages/Register.jsx";
 
 const router = createBrowserRouter([
   {
@@ -17,14 +18,17 @@ const router = createBrowserRouter([
     errorElement: <ErrorPageACust />,
     children: [
       {
+        path: "/",
+        element: <Home />,
+      },
+      {
         path: "/login",
         element: <Login />,
       },
       {
-        path: "/",
-        element: <Home />,
+        path: "/register",
+        element: <Register />,
       },
-
       {
         path: "/about-us",
         element: <AboutUs />,
