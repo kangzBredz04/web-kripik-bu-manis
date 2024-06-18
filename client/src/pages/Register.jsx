@@ -1,23 +1,30 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useContext, useEffect, useState } from "react";
+import { Link, useOutletContext } from "react-router-dom";
 import { api } from "../utils.js";
+import { AllContext } from "../App";
 
 export default function Register() {
-  const [customerCode, setCustomerCode] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-  const [error, setError] = useState("");
+  const { register, setRegister } = useContext(AllContext);
+  const [user, setUser] = useOutletContext();
+
+  useEffect(() => {
+    const randomCode = Math.floor(1000 + Math.random() * 9000); // Generate a 4-digit random number
+    // setCustomerCode(`CS${randomCode}`);
+    setRegister({
+      ...register,
+      customer_code: `CS${randomCode}`,
+    });
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (!customerCode || !password || !name) {
-      setError("Harus diisi semua");
-      return;
-    }
-    setError("");
     api.post("/auth/register", register).then((res) => {
       alert(res.msg);
+      localStorage.setItem("id", res.data.id);
+      localStorage.setItem("customer_code", res.data.customer_code);
+      localStorage.setItem("name", res.data.name);
+      window.location.href = "/";
     });
   };
   return (
@@ -26,33 +33,50 @@ export default function Register() {
         <h2 className="text-3xl font-bold mb-6 text-brown-dark">
           Register Account
         </h2>
-        {error && <p className="text-red-500 mb-4">{error}</p>}
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-gray-700">Customer Code</label>
             <input
               type="text"
               className="mt-1 p-2 w-full border rounded"
-              value={customerCode}
-              onChange={(e) => setCustomerCode(e.target.value)}
+              value={register.customer_code}
+              disabled
+              // onChange={(e) =>
+              //   setRegister({
+              //     ...register,
+              //     customer_code: customerCode,
+              //   })
+              // }
             />
           </div>
           <div className="mb-4">
             <label className="block text-gray-700">Name</label>
             <input
+              required
               type="text"
               className="mt-1 p-2 w-full border rounded"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={register.name}
+              onChange={(e) =>
+                setRegister({
+                  ...register,
+                  name: e.target.value,
+                })
+              }
             />
           </div>
           <div className="mb-4">
             <label className="block text-gray-700">Password</label>
             <input
+              required
               type="password"
               className="mt-1 p-2 w-full border rounded"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={register.password}
+              onChange={(e) =>
+                setRegister({
+                  ...register,
+                  password: e.target.value,
+                })
+              }
             />
           </div>
           <button
