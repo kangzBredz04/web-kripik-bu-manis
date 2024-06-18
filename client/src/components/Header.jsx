@@ -64,20 +64,31 @@ export default function Header() {
           )}
           {showPopup && (
             <div className="absolute right-1 mt-11 w-48 bg-white border border-gray-200 shadow-lg rounded-lg">
-              <IoClose
+              {/* <IoClose
                 size={25}
                 onClick={togglePopup}
                 className="absolute text-brown-dark cursor-pointer right-1"
-              />
+              /> */}
               <div className="p-4 flex flex-col items-center">
                 <FaUserCircle size={50} className="text-brown-dark mb-4" />
                 <div className="text-center">
                   <p className="text-sm text-brown-dark font-semibold">
-                    Customer Code: 12345
+                    Customer Code: {`${localStorage.getItem("customer_code")}`}
                   </p>
                   <p className="text-sm text-brown-dark font-semibold">
-                    Name: John Doe
+                    Name: {`${localStorage.getItem("name")}`}
                   </p>
+                  <button
+                    onClick={() => {
+                      localStorage.removeItem("id");
+                      localStorage.removeItem("customer_code");
+                      localStorage.removeItem("name");
+                      window.location.href = "/login";
+                    }}
+                    className="bg-brown-dark mt-2 py-1 px-9 rounded-lg"
+                  >
+                    Logout
+                  </button>
                 </div>
               </div>
             </div>
