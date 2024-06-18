@@ -9,7 +9,7 @@ import {
 
 const router = express.Router();
 
-router.get("/my-account", getCurrentUser); // Router untuk mendapatkan data user yang sedang login
+router.get("/my-account", verifyToken, getCurrentUser); // Router untuk mendapatkan data user yang sedang login
 router.post("/register", registerAccount); // Router untuk registrasi akun
 router.post("/login", loginAccount); // Router untuk login akun
 router.get("/logout", logoutAccount); // Router untuk logout account
