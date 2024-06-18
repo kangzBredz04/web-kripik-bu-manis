@@ -7,6 +7,7 @@ export const registerAccount = async (req, res) => {
   const { customer_code, name, password } = req.body;
   try {
     const hashPassword = await argon2.hash(password);
+
     const result = await pool.query(
       "INSERT INTO customers (customer_code, name, password) VALUES ($1, $2, $3) RETURNING *",
       [customer_code, name, hashPassword]
