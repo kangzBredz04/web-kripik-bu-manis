@@ -67,11 +67,6 @@ export default function Header() {
           )}
           {showPopup && (
             <div className="absolute right-1 mt-11 w-48 bg-white border border-gray-200 shadow-lg rounded-lg">
-              {/* <IoClose
-                size={25}
-                onClick={togglePopup}
-                className="absolute text-brown-dark cursor-pointer right-1"
-              /> */}
               <div className="p-4 flex flex-col items-center">
                 <FaUserCircle size={50} className="text-brown-dark mb-4" />
                 <div className="text-center">
