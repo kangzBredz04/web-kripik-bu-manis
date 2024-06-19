@@ -11,44 +11,49 @@ export default function Login() {
     setIsCustomerLogin(!isCustomerLogin);
   };
 
-  const [login, setLogin] = useState({
-    usernameoremail: "",
+  const [loginCustomer, setLoginCustomer] = useState({
+    customer_code: "",
     password: "",
   });
 
-  // Event saat mengetik pada textfield
-  function handleChange(e) {
-    setLogin({
-      ...login,
+  const [loginAdmin, setLoginAdmin] = useState({
+    username: "",
+    password: "",
+  });
+
+  function handleChangeCustomer(e) {
+    setLoginCustomer({
+      ...loginCustomer,
+      [e.target.name]: e.target.value,
+    });
+  }
+
+  function handleChangeAdmin(e) {
+    setLoginAdmin({
+      ...loginAdmin,
       [e.target.name]: e.target.value,
     });
   }
 
   const navigate = useNavigate();
   function handleSubmit(e) {
-    // e.preventDefault();
-    // api.post("/auth/login", login).then((response) => {
-    //   if (!response.token) {
-    //     alert(response.msg);
-    //   } else {
-    //     alert(response.message);
-    //     api.get("/auth/my-account").then((res) => {
-    //       setUser(res.data);
-    //       localStorage.setItem("role", res.data.role);
-    //       localStorage.setItem("id", res.data.id);
-    //       if (res.data.role === "admin") {
-    //         console.log("Masuk sebagai admin");
-    //         navigate("/admin");
-    //         // window.location.reload();
-    //       } else {
-    //         console.log("Masuk sebagai user");
-    //         navigate("/");
-    //         // window.location.reload();
-    //       }
-    //     });
-    //     localStorage.setItem("token", response.token);
-    //   }
-    // });
+    e.preventDefault();
+    if (isCustomerLogin) {
+      api.post("/auth/login-customer", loginCustomer).then((res) => {
+        console.log(res.token);
+        if (!res.token) {
+          alert(res.msg);
+        } else {
+          alert(res.msg);
+          console.log(res);
+          localStorage.setItem("id", res.data.id);
+          localStorage.setItem("customer_code", res.data.customer_code);
+          localStorage.setItem("name", res.data.name);
+          localStorage.setItem("token", res.token);
+          window.location.href = "/";
+        }
+      });
+    }
   }
 
   return (
@@ -79,14 +84,22 @@ export default function Login() {
             Admin
           </span>
         </div>
-        <form>
+        <form onSubmit={handleSubmit}>
           {isCustomerLogin ? (
             <>
               <div className="mb-4">
                 <label className="block text-brown-dark font-bold">
                   Customer Code
                 </label>
-                <input type="text" className="mt-1 p-2 w-full border rounded" />
+                <input
+                  type="text"
+                  id="customer_code"
+                  name="customer_code"
+                  value={loginCustomer.customer_code}
+                  onChange={handleChangeCustomer}
+                  required
+                  className="mt-1 p-2 w-full border rounded"
+                />
               </div>
               <div className="mb-4">
                 <label className="block text-brown-dark font-bold">
@@ -94,6 +107,10 @@ export default function Login() {
                 </label>
                 <input
                   type="password"
+                  id="password"
+                  name="password"
+                  value={loginCustomer.password}
+                  onChange={handleChangeCustomer}
                   className="mt-1 p-2 w-full border rounded"
                 />
               </div>
@@ -104,7 +121,14 @@ export default function Login() {
                 <label className="block text-brown-dark font-bold">
                   Username
                 </label>
-                <input type="text" className="mt-1 p-2 w-full border rounded" />
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  value={loginAdmin.username}
+                  onChange={handleChangeAdmin}
+                  className="mt-1 p-2 w-full border rounded"
+                />
               </div>
               <div className="mb-4">
                 <label className="block text-brown-dark font-bold">
@@ -112,6 +136,10 @@ export default function Login() {
                 </label>
                 <input
                   type="password"
+                  id="password"
+                  name="password"
+                  value={loginAdmin.password}
+                  onChange={handleChangeAdmin}
                   className="mt-1 p-2 w-full border rounded"
                 />
               </div>
@@ -119,6 +147,7 @@ export default function Login() {
           )}
           <button
             type="submit"
+            onSubmit={handleSubmit}
             className="w-full py-3 font-bold text-xl bg-brown-dark text-white rounded hover:bg-white hover:border hover:border-brown-dark hover:text-brown-dark"
           >
             Login
