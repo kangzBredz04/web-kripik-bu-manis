@@ -13,16 +13,24 @@ import Loading from "../components/Loading";
 import { FaPlus, FaMinus } from "react-icons/fa6";
 
 export default function DetailProduct() {
+  const navigate = useNavigate();
   const { id } = useParams();
   const { products } = useContext(AllContext);
   //   const [user] = useOutletContext();
   const product = products.find((p) => p.id == parseInt(id));
+  const [cartProduct, setCartProduct] = useState({});
 
   const productsLike = products
     .filter((p) => p.id !== localStorage.getItem("id_product"))
     .slice(0, 4);
 
-  const navigate = useNavigate();
+  useEffect(() => {
+    setCartProduct({
+      id_customer: localStorage.getItem("id"),
+      id_product: localStorage.getItem("id_product"),
+      total_product: 1,
+    });
+  }, []);
 
   if (product?.id) {
     return (
@@ -47,17 +55,40 @@ export default function DetailProduct() {
             <div className="my-10 mx-8 gap-5 flex items-center justify-between">
               <div className="flex gap-5 items-center">
                 <button className="py-3 px-3 bg-brown-dark rounded-full text-white text-xl font-bold">
-                  <FaMinus />
+                  <FaMinus
+                    onClick={() => {
+                      if (cartProduct.total_product > 1) {
+                        setCartProduct({
+                          ...cartProduct,
+                          total_product:
+                            parseInt(cartProduct.total_product) - 1,
+                        });
+                      }
+                    }}
+                  />
                 </button>
-                <p className="text-2xl">1</p>
+                <p className="text-2xl">{cartProduct.total_product}</p>
                 <button className="py-3 px-3 bg-brown-dark rounded-3xl text-white text-xl font-bold">
-                  <FaPlus />
+                  <FaPlus
+                    onClick={() => {
+                      if (cartProduct.total_product < product.stock) {
+                        setCartProduct({
+                          ...cartProduct,
+                          total_product:
+                            parseInt(cartProduct.total_product) + 1,
+                        });
+                      }
+                    }}
+                  />
                 </button>
               </div>
               <button
                 onClick={() => {
                   if (localStorage.getItem("id")) {
-                    alert("Bisa");
+                    api.post("/cart/add", cartProduct).then((res) => {
+                      alert(res.msg);
+                      window.location.reload();
+                    });
                   } else {
                     alert("Anda harus login dahulu");
                     navigate("/login");
@@ -65,7 +96,7 @@ export default function DetailProduct() {
                 }}
                 className="w-full py-2 px-11 bg-brown-dark rounded-3xl text-white text-xl font-bold"
               >
-                PESAN
+                MASUKAN KERANJANG
               </button>
             </div>
           </div>
