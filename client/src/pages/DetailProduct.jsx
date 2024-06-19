@@ -22,6 +22,8 @@ export default function DetailProduct() {
     .filter((p) => p.id !== localStorage.getItem("id_product"))
     .slice(0, 4);
 
+  const navigate = useNavigate();
+
   if (product?.id) {
     return (
       <div className="bg-brown-light font-poppins">
@@ -52,7 +54,17 @@ export default function DetailProduct() {
                   <FaPlus />
                 </button>
               </div>
-              <button className="w-full py-2 px-11 bg-brown-dark rounded-3xl text-white text-xl font-bold">
+              <button
+                onClick={() => {
+                  if (localStorage.getItem("id")) {
+                    alert("Bisa");
+                  } else {
+                    alert("Anda harus login dahulu");
+                    navigate("/login");
+                  }
+                }}
+                className="w-full py-2 px-11 bg-brown-dark rounded-3xl text-white text-xl font-bold"
+              >
                 PESAN
               </button>
             </div>
