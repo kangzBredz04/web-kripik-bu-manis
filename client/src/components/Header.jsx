@@ -6,12 +6,11 @@ import { FiUser, FiMoon } from "react-icons/fi";
 import { FaUserCircle } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 import { SlBag } from "react-icons/sl";
-import { useState } from "react";
-// import { useContext } from "react";
-// import { AllContext } from "../App";
+import { useContext, useState } from "react";
+import { AllContext } from "../App";
 
 export default function Header() {
-  // const { wishlist, cart } = useContext(AllContext);
+  const { wishlist, cart } = useContext(AllContext);
   const [showPopup, setShowPopup] = useState(false);
   const navigate = useNavigate();
   const togglePopup = () => {
@@ -25,7 +24,7 @@ export default function Header() {
             KRIPIK BU MANIS
           </Link>
         </div>
-        <nav className="grow flex justify-evenly ">
+        <nav className="grow flex justify-evenly">
           <Link to="/" className="font-bold hover:text-gray-200 text-sm">
             BERANDA
           </Link>
@@ -41,9 +40,13 @@ export default function Header() {
         </nav>
         <div className="flex justify-evenly  w-1/6">
           <Link to="/cart" className="text-white hover:text-gray-200 relative">
-            <div className="absolute -right-2 -top-2 text-brown-dark px-[5px] bg-white rounded-full text-xs font-semibold">
-              1
-            </div>
+            {cart.length < 1 ? (
+              ""
+            ) : (
+              <div className="absolute -right-2 -top-2 text-brown-dark px-[5px] bg-white rounded-full text-xs font-semibold">
+                {cart?.length}
+              </div>
+            )}
             <SlBag className="text-xl" />
           </Link>
           {localStorage.getItem("id") ? (
