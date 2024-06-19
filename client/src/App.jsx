@@ -8,17 +8,23 @@ export const AllContext = createContext();
 
 function App() {
   const [user, setUser] = useState({});
+  const [cart, setCart] = useState([]);
   const [register, setRegister] = useState({});
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
     api.get("/product/get-all").then((response) => setProducts(response));
-  }, []);
+    api
+      .get(`/cart/get/${localStorage.getItem("id")}`)
+      .then((response) => setCart(response));
+  }, [user?.id]);
   return (
     <AllContext.Provider
       value={{
         products,
         setProducts,
+        cart,
+        setCart,
         register,
         setRegister,
       }}
