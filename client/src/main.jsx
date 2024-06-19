@@ -10,6 +10,7 @@ import AboutUs from "./pages/AboutUs.jsx";
 import DetailProduct from "./pages/DetailProduct.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
+import ErrorPageAdmin from "./pages/ErrorPageAdmin.jsx";
 
 const router = createBrowserRouter([
   {
@@ -39,11 +40,37 @@ const router = createBrowserRouter([
       },
     ],
   },
+
   {
     path: "/admin",
     element: <Admin />,
-    // errorElement: <ErrorPageAdmin />,
-    children: [],
+    errorElement: <ErrorPageAdmin />,
+    children: [
+      {
+        path: "/admin",
+        // element: <DashboardAdmin />,
+      },
+      // {
+      //   path: "/admin/profile",
+      //   element: <MyAccountAdmin />,
+      // },
+      // {
+      //   path: "/admin/user",
+      //   element: <UserAdmin />,
+      // },
+      // {
+      //   path: "/admin/stock",
+      //   element: <StockAdmin />,
+      // },
+      // {
+      //   path: "/admin/order",
+      //   element: <OrderAdmin />,
+      // },
+      // {
+      //   path: "/admin/product",
+      //   element: <ProductAdmin />,
+      // },
+    ],
   },
 ]);
 
