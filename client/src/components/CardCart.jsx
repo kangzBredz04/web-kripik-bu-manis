@@ -7,15 +7,13 @@ import { api } from "../utils";
 export default function CardCart({
   id_cart,
   id_product,
-  name_product,
+  name,
   image,
-  name_size,
   total_product,
   price,
-  id_size,
 }) {
   return (
-    <div className="flex flex-row items-center justify-between gap-5 py-2 border-b-[1px] border-black">
+    <div className="flex flex-row items-center justify-between gap-5 py-2 border-b-[1px] border-black font-poppins">
       <IoMdCloseCircleOutline
         className="text-2xl cursor-pointer"
         // onClick={() => {
@@ -28,12 +26,10 @@ export default function CardCart({
         to={`/product/${id_product}`}
         className="w-3/5 flex flex-row items-center gap-7 py-2"
       >
-        <img src={image} alt="" className="w-12" />
-        <div className="flex flex-col gap-1">
-          <h1 className="text-base font-extrabold tracking-wider">
-            {name_product} - {name_size}
-          </h1>
-          <h1 className="text-sm text-gray-600 font-semibold tracking-wider">
+        <img src={image} alt="" className="w-16" />
+        <div className="flex flex-col gap-3">
+          <h1 className="text-base font-extrabold tracking-wider">{name}</h1>
+          <h1 className="text-sm  font-extrabold tracking-wider">
             {total_product} x Rp{parseInt(price).toLocaleString("id-ID")}
           </h1>
         </div>
@@ -49,7 +45,6 @@ export default function CardCart({
                     id_user: localStorage.getItem("id"),
                     id_product: id_product,
                     total_product: parseInt(total_product) - 1,
-                    id_size: id_size,
                   })
                   .then(() => {
                     window.location.reload();
@@ -57,7 +52,7 @@ export default function CardCart({
               }
             }}
           />
-          <h1>{total_product}</h1>
+          <h1 className="font-extrabold">{total_product}</h1>
           <FaPlus
             className="cursor-pointer"
             onClick={() => {
@@ -66,7 +61,6 @@ export default function CardCart({
                   id_user: localStorage.getItem("id"),
                   id_product: id_product,
                   total_product: parseInt(total_product) + 1,
-                  id_size: id_size,
                 })
                 .then((res) => {
                   if (res.status === 404) {
