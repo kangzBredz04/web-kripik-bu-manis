@@ -18,7 +18,7 @@ export default function CartUser() {
       0
     );
     setSubTotal(sum);
-  }, [cart[0]]);
+  }, [cart]);
 
   const navigate = useNavigate();
 
