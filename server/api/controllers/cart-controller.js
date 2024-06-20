@@ -61,3 +61,40 @@ export const addCart = async (req, res) => {
     res.status(500).json({ msg: error.message });
   }
 };
+
+// Controller untuk mengubah data keranjang berdasarkan id
+export const updateCart = async (req, res) => {
+  try {
+    const findCart = await pool.query(" SELECT * FROM carts WHERE id = $1", [
+      req.params.id,
+    ]);
+
+    const findStock = await pool.query("SELECT * FROM products WHERE id = $1", [
+      req.body.id_product,
+    ]);
+
+    if (req.body.total_product > findStock.rows[0].stock) {
+      res.status(404).json({ status: 404, msg: "Stok tidak mencukupi" });
+    } else {
+      await pool.query("UPDATE carts SET total_product = $1 WHERE id = $2", [
+        req.body.total_product,
+        req.params.id,
+      ]);
+      res.status(200).json({
+        msg: "Keranjang berhasil di ubah",
+      });
+    }
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
+};
+
+// Controller untuk menghapus data stok berdasarkan id
+export const deleteCart = async (req, res) => {
+  try {
+    await pool.query("DELETE FROM carts WHERE id = $1", [req.params.id]);
+    res.status(200).json({ msg: "Keranjang berhasil dihapus." });
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
+};
