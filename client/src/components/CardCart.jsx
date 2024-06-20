@@ -16,11 +16,11 @@ export default function CardCart({
     <div className="flex flex-row items-center justify-between gap-5 py-2 border-b-[1px] border-black font-poppins">
       <IoMdCloseCircleOutline
         className="text-2xl cursor-pointer"
-        // onClick={() => {
-        //   api.delete(`/cart/delete/${id_cart}`).then(() => {
-        //     window.location.reload();
-        //   });
-        // }}
+        onClick={() => {
+          api.delete(`/cart/delete/${id_cart}`).then(() => {
+            window.location.reload();
+          });
+        }}
       />
       <Link
         to={`/product/${id_product}`}
@@ -42,7 +42,7 @@ export default function CardCart({
               if (total_product > 1) {
                 api
                   .put(`/cart/update/${id_cart}`, {
-                    id_user: localStorage.getItem("id"),
+                    id_customer: localStorage.getItem("id"),
                     id_product: id_product,
                     total_product: parseInt(total_product) - 1,
                   })
@@ -58,7 +58,7 @@ export default function CardCart({
             onClick={() => {
               api
                 .put(`/cart/update/${id_cart}`, {
-                  id_user: localStorage.getItem("id"),
+                  id_customer: localStorage.getItem("id"),
                   id_product: id_product,
                   total_product: parseInt(total_product) + 1,
                 })
