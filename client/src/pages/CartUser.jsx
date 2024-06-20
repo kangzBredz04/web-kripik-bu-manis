@@ -56,8 +56,8 @@ export default function CartUser() {
                 ))}
               </div>
             </div>
-            <div className="w-1/4 border h-fit border-brown-dark bg-brown-dark px-4 py-2">
-              <div className="flex flex-row items-center justify-between py-4 border-b-[1px] border-black">
+            <div className="w-1/4 border h-fit border-brown-dark bg-brown-dark px-4 py-2 text-white">
+              <div className="flex flex-row items-center justify-between py-4 border-b-[1px] border-white">
                 <h1 className="text-base font-extrabold tracking-wider">
                   SUBTOTAL
                 </h1>
@@ -65,7 +65,7 @@ export default function CartUser() {
                   Rp{subTotal.toLocaleString("id-ID")}
                 </h1>
               </div>
-              <div className="flex flex-row items-center justify-between py-4 border-b-[1px] border-black">
+              <div className="flex flex-row items-center justify-between py-4 border-b-[1px] border-white">
                 <h1 className="text-base font-extrabold tracking-wider">
                   DISKON
                 </h1>
@@ -73,7 +73,7 @@ export default function CartUser() {
                   Rp. 0
                 </h1>
               </div>
-              <div className="flex flex-row items-center justify-between py-4 border-b-[1px] border-black">
+              <div className="flex flex-row items-center justify-between py-4 border-b-[1px] border-white">
                 <h1 className="text-base font-extrabold tracking-wider">
                   TOTAL
                 </h1>
@@ -81,12 +81,64 @@ export default function CartUser() {
                   Rp{(subTotal - diskon).toLocaleString("id-ID")}
                 </h1>
               </div>
+              <div className="flex flex-col justify-between py-2 border-b-[1px] border-white">
+                <h1 className="text-base font-extrabold tracking-wider">
+                  METODE PEMBAYARAN
+                </h1>
+                <div className="">
+                  <label className="flex items-center gap-2">
+                    <input
+                      type="radio"
+                      value="Bank Transfer - BCA"
+                      //   checked={payment === "Bank Transfer - BCA"}
+                      //   onChange={handleOptionPayment}
+                    />
+                    Bank Transfer - BCA
+                  </label>
+                  <label className="flex items-center gap-2">
+                    <input
+                      type="radio"
+                      value="Bank Transfer - BNI"
+                      //   checked={payment === "Bank Transfer - BNI"}
+                      // onChange={handleOptionPayment}
+                    />
+                    Bank Transfer - BNI
+                  </label>
+                  <label className="flex items-center gap-2">
+                    <input
+                      type="radio"
+                      value="Bank Transfer - BRI"
+                      //   checked={payment === "Bank Transfer - BRI"}
+                      // onChange={handleOptionPayment}
+                    />
+                    Bank Transfer - BRI
+                  </label>
+                  <label className="flex items-center gap-2">
+                    <input
+                      type="radio"
+                      value="Bank Transfer - BSI"
+                      //   checked={payment === "Bank Transfer - BSI"}
+                      // onChange={handleOptionPayment}
+                    />
+                    Bank Transfer - BSI
+                  </label>
+                  <label className="flex items-center gap-2">
+                    <input
+                      type="radio"
+                      value="COD"
+                      //   checked={payment === "QRIS"}
+                      // onChange={handleOptionPayment}
+                    />
+                    COD
+                  </label>
+                </div>
+              </div>
               <div
                 onClick={() => {
                   // window.location.href = "/checkout";
                   navigate("/checkout");
                 }}
-                className="flex justify-center py-4 mb-2 bg-white outline text-black cursor-pointer hover:bg-black hover:text-white"
+                className="flex justify-center py-4 mb-2 bg-white outline outline-white text-brown-dark cursor-pointer hover:bg-brown-dark hover:text-white"
               >
                 <h1 className="text-base font-extrabold tracking-wider">
                   CHECKOUT
