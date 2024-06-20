@@ -12,19 +12,19 @@ export default function CartUser() {
   const [subTotal, setSubTotal] = useState(0);
   const [diskon, setDiskon] = useState(0);
 
-  //   useEffect(() => {
-  //     const sum = cart.reduce(
-  //       (acc, curr) => acc + parseInt(curr.price) * parseInt(curr.total_product),
-  //       0
-  //     );
-  //     setSubTotal(sum);
-  //   }, [cart]);
+  useEffect(() => {
+    const sum = cart?.reduce(
+      (acc, curr) => acc + parseInt(curr.price) * parseInt(curr.total_product),
+      0
+    );
+    setSubTotal(sum);
+  }, [cart[0]]);
 
   const navigate = useNavigate();
 
-  if (localStorage.getItem("id_customer")) {
+  if (localStorage.getItem("id")) {
     return (
-      <div className="flex flex-col gap-5 py-5 bg-white">
+      <div className="flex flex-col gap-5 py-5 bg-brown-light font-poppins">
         <h1 className="text-center font-bold tracking-widest text-2xl">
           KERANJANG
         </h1>
@@ -48,17 +48,15 @@ export default function CartUser() {
                     key={c.id}
                     id_cart={c.id}
                     id_product={c.id_product}
-                    name_product={c.name_product}
-                    image={c.image_1}
-                    name_size={c.name_size}
+                    name={c.name}
+                    image={c.image}
                     total_product={c.total_product}
                     price={c.price}
-                    id_size={c.id_size}
                   />
                 ))}
               </div>
             </div>
-            <div className="w-1/4 border h-fit border-gray-700 px-4 py-2">
+            <div className="w-1/4 border h-fit border-brown-dark bg-brown-dark px-4 py-2">
               <div className="flex flex-row items-center justify-between py-4 border-b-[1px] border-black">
                 <h1 className="text-base font-extrabold tracking-wider">
                   SUBTOTAL
