@@ -11,20 +11,28 @@ export default function CartUser() {
 
   const [subTotal, setSubTotal] = useState(0);
   const [diskon, setDiskon] = useState(0);
+  const [selectedBank, setSelectedBank] = useState("");
 
   useEffect(() => {
-    const sum = cart?.reduce(
-      (acc, curr) => acc + parseInt(curr.price) * parseInt(curr.total_product),
-      0
-    );
-    setSubTotal(sum);
+    if (Array.isArray(cart)) {
+      const sum = cart.reduce(
+        (acc, curr) =>
+          acc + parseInt(curr.price) * parseInt(curr.total_product),
+        0
+      );
+      setSubTotal(sum);
+    }
   }, [cart]);
+
+  const handleBankChange = (event) => {
+    setSelectedBank(event.target.value);
+  };
 
   const navigate = useNavigate();
 
   if (localStorage.getItem("id")) {
     return (
-      <div className="flex flex-col gap-5 py-5 bg-brown-light font-poppins">
+      <div className="flex flex-col gap-5 py-5 bg-gray-200 font-poppins">
         <h1 className="text-center font-bold tracking-widest text-2xl">
           KERANJANG
         </h1>
@@ -91,7 +99,7 @@ export default function CartUser() {
                       type="radio"
                       value="Bank Transfer - BCA"
                       //   checked={payment === "Bank Transfer - BCA"}
-                      //   onChange={handleOptionPayment}
+                      onChange={handleBankChange}
                     />
                     Bank Transfer - BCA
                   </label>
@@ -100,7 +108,7 @@ export default function CartUser() {
                       type="radio"
                       value="Bank Transfer - BNI"
                       //   checked={payment === "Bank Transfer - BNI"}
-                      // onChange={handleOptionPayment}
+                      onChange={handleBankChange}
                     />
                     Bank Transfer - BNI
                   </label>
@@ -109,7 +117,7 @@ export default function CartUser() {
                       type="radio"
                       value="Bank Transfer - BRI"
                       //   checked={payment === "Bank Transfer - BRI"}
-                      // onChange={handleOptionPayment}
+                      onChange={handleBankChange}
                     />
                     Bank Transfer - BRI
                   </label>
@@ -118,10 +126,23 @@ export default function CartUser() {
                       type="radio"
                       value="Bank Transfer - BSI"
                       //   checked={payment === "Bank Transfer - BSI"}
-                      // onChange={handleOptionPayment}
+                      onChange={handleBankChange}
                     />
                     Bank Transfer - BSI
                   </label>
+                  {selectedBank && (
+                    <div className="mt-6 p-4 bg-gray-50 border rounded">
+                      <h3 className="text-lg font-semibold">Bank Details</h3>
+                      <p>
+                        <strong>Account Number:</strong>{" "}
+                        {/* {bankDetails[selectedBank].accountNumber} */}
+                      </p>
+                      <p>
+                        <strong>Account Name:</strong>{" "}
+                        {/* {bankDetails[selectedBank].accountName} */}
+                      </p>
+                    </div>
+                  )}
                   <label className="flex items-center gap-2">
                     <input
                       type="radio"
