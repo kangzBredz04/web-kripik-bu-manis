@@ -13,6 +13,25 @@ export default function CartUser() {
   const [diskon, setDiskon] = useState(0);
   const [selectedBank, setSelectedBank] = useState("");
 
+  const bankDetails = [
+    {
+      id: 1,
+      name: "Bank Transfer - BCA",
+    },
+    {
+      id: 2,
+      name: "Bank Transfer - BRI",
+    },
+    {
+      id: 3,
+      name: "Bank Transfer - BNI",
+    },
+    {
+      id: 4,
+      name: "Bank Transfer - BSI",
+    },
+  ];
+
   useEffect(() => {
     if (Array.isArray(cart)) {
       const sum = cart.reduce(
@@ -25,7 +44,11 @@ export default function CartUser() {
   }, [cart]);
 
   const handleBankChange = (event) => {
-    setSelectedBank(event.target.value);
+    if (event.target.value === "COD") {
+      setSelectedBank("");
+    } else {
+      setSelectedBank(event.target.value);
+    }
   };
 
   const navigate = useNavigate();
@@ -94,52 +117,31 @@ export default function CartUser() {
                   METODE PEMBAYARAN
                 </h1>
                 <div className="">
-                  <label className="flex items-center gap-2">
-                    <input
-                      type="radio"
-                      value="Bank Transfer - BCA"
-                      //   checked={payment === "Bank Transfer - BCA"}
-                      onChange={handleBankChange}
-                    />
-                    Bank Transfer - BCA
-                  </label>
-                  <label className="flex items-center gap-2">
-                    <input
-                      type="radio"
-                      value="Bank Transfer - BNI"
-                      //   checked={payment === "Bank Transfer - BNI"}
-                      onChange={handleBankChange}
-                    />
-                    Bank Transfer - BNI
-                  </label>
-                  <label className="flex items-center gap-2">
-                    <input
-                      type="radio"
-                      value="Bank Transfer - BRI"
-                      //   checked={payment === "Bank Transfer - BRI"}
-                      onChange={handleBankChange}
-                    />
-                    Bank Transfer - BRI
-                  </label>
-                  <label className="flex items-center gap-2">
-                    <input
-                      type="radio"
-                      value="Bank Transfer - BSI"
-                      //   checked={payment === "Bank Transfer - BSI"}
-                      onChange={handleBankChange}
-                    />
-                    Bank Transfer - BSI
-                  </label>
+                  {bankDetails.map((b) => (
+                    <label key={b.id} className="flex items-center gap-2">
+                      <input
+                        type="radio"
+                        name="Metode Transfer"
+                        onChange={handleBankChange}
+                      />
+                      {b.name}
+                    </label>
+                  ))}
                   {selectedBank && (
-                    <div className="mt-6 p-4 bg-gray-50 border rounded">
-                      <h3 className="text-lg font-semibold">Bank Details</h3>
-                      <p>
-                        <strong>Account Number:</strong>{" "}
-                        {/* {bankDetails[selectedBank].accountNumber} */}
+                    <div className="max-w-md mx-auto bg-white shadow-lg rounded-lg p-2 text-black">
+                      <p className="text-lg font-bold mb-4">Informasi Bank</p>
+                      <p className="mb-1 text-sm">
+                        <strong>Nama Bank:</strong> BCA
+                      </p>
+                      <p className="mb-1">
+                        <strong>Nomor Rekening:</strong> 123
+                      </p>
+                      <p className="mb-4">
+                        <strong>Atas Nama:</strong> ABS
                       </p>
                       <p>
-                        <strong>Account Name:</strong>{" "}
-                        {/* {bankDetails[selectedBank].accountName} */}
+                        Silahkan transfer sesuai total pesanan agar pemesanan
+                        produk bisa langsung diproses.
                       </p>
                     </div>
                   )}
@@ -147,8 +149,8 @@ export default function CartUser() {
                     <input
                       type="radio"
                       value="COD"
-                      //   checked={payment === "QRIS"}
-                      // onChange={handleOptionPayment}
+                      name="Metode Transfer"
+                      onChange={handleBankChange}
                     />
                     COD
                   </label>
