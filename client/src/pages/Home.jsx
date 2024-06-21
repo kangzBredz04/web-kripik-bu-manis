@@ -44,8 +44,8 @@ export default function Home() {
   const filteredProducts = products.slice(1, 5);
 
   return (
-    <div className="flex flex-col gap-20 bg-brown-light">
-      <div className="w-full"></div>
+    <div className="flex flex-col gap-20 bg-gray-200">
+      {/* <div className="w-full"></div> */}
       <div className="flex flex-col">
         <div className="flex flex-col gap-3 py-8 m-auto">
           <div>
