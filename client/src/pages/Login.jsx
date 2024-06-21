@@ -57,7 +57,7 @@ export default function Login() {
   }
 
   return (
-    <div className="py-12 flex items-center justify-center bg-brown-light font-poppins">
+    <div className="py-12 flex items-center justify-center bg-gray-200 font-poppins">
       <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
         <h2 className="text-3xl mb-6 text-brown-dark font-bold">
           {isCustomerLogin ? "Customer Login" : "Admin Login"}
