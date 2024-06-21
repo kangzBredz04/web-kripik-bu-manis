@@ -1,8 +1,8 @@
 /* eslint-disable react/no-unescaped-entities */
 export default function AboutUs() {
   return (
-    <div className="flex flex-col gap-5 py-5 bg-brown-light font-poppins">
-      <h1 className="text-center font-bold tracking-widest text-3xl">
+    <div className="flex flex-col gap-5 py-5 bg-gray-200 font-poppins">
+      <h1 className="text-center mt-5 font-bold tracking-widest text-3xl">
         TENTANG KAMI
       </h1>
       <div className="flex gap-10 px-7 py-10">
