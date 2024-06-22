@@ -11,12 +11,16 @@ function App() {
   const [cart, setCart] = useState([]);
   const [register, setRegister] = useState({});
   const [products, setProducts] = useState([]);
+  const [codeVouchers, setCodeVouchers] = useState([]);
 
   useEffect(() => {
     api.get("/product/get-all").then((response) => setProducts(response));
     api
       .get(`/cart/get/${localStorage.getItem("id")}`)
       .then((response) => setCart(response));
+    api
+      .get(`/code/get/${localStorage.getItem("id")}`)
+      .then((response) => setCodeVouchers(response));
   }, [user?.id]);
   return (
     <AllContext.Provider
@@ -27,6 +31,8 @@ function App() {
         setCart,
         register,
         setRegister,
+        codeVouchers,
+        setCodeVouchers,
       }}
     >
       <Header />
