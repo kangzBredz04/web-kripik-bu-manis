@@ -7,11 +7,13 @@ import { useNavigate } from "react-router-dom";
 import NotCart from "./NotCart";
 
 export default function CartUser() {
-  const { cart } = useContext(AllContext);
+  const { cart, codeVouchers } = useContext(AllContext);
 
   const [subTotal, setSubTotal] = useState(0);
   const [diskon, setDiskon] = useState(0);
   const [selectedBank, setSelectedBank] = useState("");
+
+  console.log(codeVouchers);
 
   const bankDetails = [
     {
@@ -96,6 +98,25 @@ export default function CartUser() {
                   Rp{subTotal.toLocaleString("id-ID")}
                 </h1>
               </div>
+              <div className="flex flex-col gap-3 py-4 border-b-[1px] border-white">
+                <h1 className="text-base font-extrabold tracking-wider">
+                  MASUKAN KODE VOUCHER
+                </h1>
+                <div className="flex flex-row gap-2">
+                  <input
+                    type="text"
+                    // value={value}
+                    // onChange={onChange}
+                    className="w-full p-1 border text-black border-gray-300 rounded focus:outline-none "
+                  />
+                  <button
+                    onClick={{}}
+                    className="bg-white rounded text-brown-dark font-semibold px-2 tracking-wider"
+                  >
+                    SUBMIT
+                  </button>
+                </div>
+              </div>
               <div className="flex flex-row items-center justify-between py-4 border-b-[1px] border-white">
                 <h1 className="text-base font-extrabold tracking-wider">
                   DISKON
@@ -112,14 +133,7 @@ export default function CartUser() {
                   Rp{(subTotal - diskon).toLocaleString("id-ID")}
                 </h1>
               </div>
-              <div className="flex flex-row items-center justify-between py-4 border-b-[1px] border-white">
-                <h1 className="text-base font-extrabold tracking-wider">
-                  DISKON
-                </h1>
-                <h1 className="text-base font-extrabold tracking-wider">
-                  Rp. 0
-                </h1>
-              </div>
+
               <div className="flex flex-col justify-between py-2 border-b-[1px] border-white">
                 <h1 className="text-base font-extrabold tracking-wider">
                   METODE PEMBAYARAN
