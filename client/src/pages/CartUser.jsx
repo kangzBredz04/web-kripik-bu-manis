@@ -112,6 +112,14 @@ export default function CartUser() {
                   Rp{(subTotal - diskon).toLocaleString("id-ID")}
                 </h1>
               </div>
+              <div className="flex flex-row items-center justify-between py-4 border-b-[1px] border-white">
+                <h1 className="text-base font-extrabold tracking-wider">
+                  DISKON
+                </h1>
+                <h1 className="text-base font-extrabold tracking-wider">
+                  Rp. 0
+                </h1>
+              </div>
               <div className="flex flex-col justify-between py-2 border-b-[1px] border-white">
                 <h1 className="text-base font-extrabold tracking-wider">
                   METODE PEMBAYARAN
@@ -129,17 +137,17 @@ export default function CartUser() {
                   ))}
                   {selectedBank && (
                     <div className="max-w-md mx-auto bg-white shadow-lg rounded-lg p-2 text-black">
-                      <p className="text-lg font-bold mb-4">Informasi Bank</p>
-                      <p className="mb-1 text-sm">
+                      <p className="text-base font-bold mb-2">Informasi Bank</p>
+                      <p className="mb-1 text-xs">
                         <strong>Nama Bank:</strong> BCA
                       </p>
-                      <p className="mb-1">
+                      <p className="mb-1 text-xs">
                         <strong>Nomor Rekening:</strong> 123
                       </p>
-                      <p className="mb-4">
+                      <p className="mb-1 text-xs">
                         <strong>Atas Nama:</strong> ABS
                       </p>
-                      <p>
+                      <p className="text-xs">
                         Silahkan transfer sesuai total pesanan agar pemesanan
                         produk bisa langsung diproses.
                       </p>
