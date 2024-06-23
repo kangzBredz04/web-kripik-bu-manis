@@ -1,11 +1,13 @@
 import express from "express";
 import { verifyToken } from "../middleware/auth-middleware.js";
-import { getCodeVoucher } from "../controllers/code-voucher.js";
+import {
+  deleteCodeVoucher,
+  getCodeVoucher,
+} from "../controllers/code-voucher.js";
 
 const router = express.Router();
 
-router.get("/get/:id", getCodeVoucher); // Router untuk mendapatkan keranjang by id customer
-// router.post("/add", addCart); // Router untuk menambahkan data keranjang
-// router.delete("/delete/:id", deleteCart); // Router untuk menghapus data keranjang berdasarkan id
+router.get("/get/:id", getCodeVoucher); // Router untuk mendapatkan kode voucher by id customer
+router.delete("/delete/:id", deleteCodeVoucher); // Router untuk menghapus data kode voucher berdasarkan id
 
 export default router;
