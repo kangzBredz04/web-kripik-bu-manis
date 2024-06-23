@@ -6,7 +6,7 @@ import CardCart from "../components/CardCart";
 import { useNavigate } from "react-router-dom";
 import NotCart from "./NotCart";
 
-export default function CartUser() {
+export default function CartCustomer() {
   const { cart, codeVouchers } = useContext(AllContext);
 
   const [subTotal, setSubTotal] = useState(0);
@@ -62,8 +62,8 @@ export default function CartUser() {
           KERANJANG
         </h1>
         {cart.length > 0 ? (
-          <div className="flex gap-4 py-5 px-5">
-            <div className="w-3/4 p-3  flex flex-col gap-3">
+          <div className="flex flex-col gap-4 py-5 px-5">
+            <div className="w-full p-3  flex flex-col gap-3">
               <div className="flex flex-row items-center">
                 <h1 className="w-3/5 text-center text-base font-extrabold tracking-wider">
                   PRODUK
@@ -89,7 +89,7 @@ export default function CartUser() {
                 ))}
               </div>
             </div>
-            <div className="w-1/4 border h-fit border-brown-dark bg-brown-dark px-4 py-2 text-white">
+            <form className="w-full border h-fit border-brown-dark bg-brown-dark px-4 py-2 text-white">
               <div className="flex flex-row items-center justify-between py-4 border-b-[1px] border-white">
                 <h1 className="text-base font-extrabold tracking-wider">
                   SUBTOTAL
@@ -98,32 +98,32 @@ export default function CartUser() {
                   Rp{subTotal.toLocaleString("id-ID")}
                 </h1>
               </div>
-              <div className="flex flex-col gap-3 py-4 border-b-[1px] border-white">
-                <h1 className="text-base font-extrabold tracking-wider">
-                  MASUKAN KODE VOUCHER
-                </h1>
-                <div className="flex flex-row gap-2">
-                  <input
-                    type="text"
-                    // value={value}
-                    // onChange={onChange}
-                    className="w-full p-1 border text-black border-gray-300 rounded focus:outline-none "
-                  />
-                  <button
-                    onClick={{}}
-                    className="bg-white rounded text-brown-dark font-semibold px-2 tracking-wider"
-                  >
-                    SUBMIT
-                  </button>
+              <div className=" flex w-full justify-between gap-5">
+                <div className="w-1/2 py-4 border-b-[1px] border-white">
+                  <div className="flex flex-row gap-2">
+                    <input
+                      type="text"
+                      placeholder="MASUKAN KODE VOUCHER"
+                      // value={value}
+                      // onChange={onChange}
+                      className="w-full p-1 border text-black border-gray-300 rounded focus:outline-none placeholder:text-gray-500 placeholder:font-bold placeholder:tracking-wider"
+                    />
+                    <button
+                      onClick={{}}
+                      className="bg-white rounded text-brown-dark font-semibold px-2 tracking-wider"
+                    >
+                      SUBMIT
+                    </button>
+                  </div>
                 </div>
-              </div>
-              <div className="flex flex-row items-center justify-between py-4 border-b-[1px] border-white">
-                <h1 className="text-base font-extrabold tracking-wider">
-                  DISKON
-                </h1>
-                <h1 className="text-base font-extrabold tracking-wider">
-                  Rp. 0
-                </h1>
+                <div className="w-1/2 flex flex-row items-center  justify-between py-4 border-b-[1px] border-white">
+                  <h1 className="text-base font-extrabold tracking-wider">
+                    DISKON
+                  </h1>
+                  <h1 className="text-base font-extrabold tracking-wider">
+                    Rp. 0
+                  </h1>
+                </div>
               </div>
               <div className="flex flex-row items-center justify-between py-4 border-b-[1px] border-white">
                 <h1 className="text-base font-extrabold tracking-wider">
@@ -133,7 +133,6 @@ export default function CartUser() {
                   Rp{(subTotal - diskon).toLocaleString("id-ID")}
                 </h1>
               </div>
-
               <div className="flex flex-col justify-between py-2 border-b-[1px] border-white">
                 <h1 className="text-base font-extrabold tracking-wider">
                   METODE PEMBAYARAN
@@ -142,6 +141,7 @@ export default function CartUser() {
                   {bankDetails.map((b) => (
                     <label key={b.id} className="flex items-center gap-2">
                       <input
+                        required
                         type="radio"
                         name="Metode Transfer"
                         onChange={handleBankChange}
@@ -149,24 +149,6 @@ export default function CartUser() {
                       {b.name}
                     </label>
                   ))}
-                  {selectedBank && (
-                    <div className="max-w-md mx-auto bg-white shadow-lg rounded-lg p-2 text-black">
-                      <p className="text-base font-bold mb-2">Informasi Bank</p>
-                      <p className="mb-1 text-xs">
-                        <strong>Nama Bank:</strong> BCA
-                      </p>
-                      <p className="mb-1 text-xs">
-                        <strong>Nomor Rekening:</strong> 123
-                      </p>
-                      <p className="mb-1 text-xs">
-                        <strong>Atas Nama:</strong> ABS
-                      </p>
-                      <p className="text-xs">
-                        Silahkan transfer sesuai total pesanan agar pemesanan
-                        produk bisa langsung diproses.
-                      </p>
-                    </div>
-                  )}
                   <label className="flex items-center gap-2">
                     <input
                       type="radio"
@@ -178,18 +160,26 @@ export default function CartUser() {
                   </label>
                 </div>
               </div>
-              <div
+              <div className="flex flex-row items-center justify-between py-4 border-b-[1px] border-white">
+                <textarea
+                  placeholder="MASUKAN ALAMAT PENGIRIMAN"
+                  required
+                  rows={5}
+                  className="w-full p-1 border text-black border-gray-300 rounded focus:outline-none placeholder:text-gray-500 placeholder:font-bold placeholder:tracking-wider"
+                ></textarea>
+              </div>
+              <button
                 onClick={() => {
                   // window.location.href = "/checkout";
-                  navigate("/checkout");
+                  // navigate("/checkout");
                 }}
-                className="flex justify-center py-4 mb-2 bg-white outline outline-white text-brown-dark cursor-pointer hover:bg-brown-dark hover:text-white"
+                className="w-full flex justify-center py-4 mb-2 bg-white outline outline-white text-brown-dark cursor-pointer hover:bg-brown-dark hover:text-white"
               >
                 <h1 className="text-base font-extrabold tracking-wider">
                   CHECKOUT
                 </h1>
-              </div>
-            </div>
+              </button>
+            </form>
           </div>
         ) : (
           <NotCart />
