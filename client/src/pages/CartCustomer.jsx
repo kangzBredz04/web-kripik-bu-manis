@@ -5,14 +5,17 @@ import { AllContext } from "../App";
 import CardCart from "../components/CardCart";
 import { useNavigate } from "react-router-dom";
 import NotCart from "./NotCart";
+import { api } from "../utils";
 
 export default function CartCustomer() {
   const { cart, codeVouchers } = useContext(AllContext);
 
   const [subTotal, setSubTotal] = useState(0);
   const [diskon, setDiskon] = useState(0);
-  const [selectedBank, setSelectedBank] = useState("");
+  const [selectPayment, setSelectPayment] = useState("");
+  const [address, setAddress] = useState("");
   const [checkCode, setCheckCode] = useState("");
+  const [saleCustomer, setSaleCustomer] = useState({});
 
   console.log(codeVouchers);
 
@@ -46,15 +49,30 @@ export default function CartCustomer() {
     }
   }, [cart, diskon]);
 
-  const handleBankChange = (event) => {
-    if (event.target.value === "COD") {
-      setSelectedBank("");
-    } else {
-      setSelectedBank(event.target.value);
-    }
+  const handlePayment = (e) => {
+    setSelectPayment(e.target.value);
   };
 
   const navigate = useNavigate();
+
+  const [isReceiptOpen, setIsReceiptOpen] = useState(false);
+
+  function handleIsReceiptOpen() {
+    setIsReceiptOpen(!isReceiptOpen);
+  }
+
+  const [currentDate, setCurrentDate] = useState("");
+
+  useEffect(() => {
+    const date = new Date();
+    const formattedDate = date.toLocaleDateString("id-ID", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+    setCurrentDate(formattedDate);
+  }, []);
 
   if (localStorage.getItem("id")) {
     return (
@@ -121,6 +139,7 @@ export default function CartCustomer() {
                           alert(
                             `SELAMAT ANDA MENDAPATKAN POTONGAN BELANJA SEBESAR ${codeDiscount.discount}%`
                           );
+                          localStorage.setItem("id_code", codeDiscount.id);
                           setDiskon(
                             (subTotal * parseInt(codeDiscount.discount)) / 100
                           );
@@ -163,7 +182,8 @@ export default function CartCustomer() {
                         required
                         type="radio"
                         name="Metode Transfer"
-                        onChange={handleBankChange}
+                        value={b.name}
+                        onChange={handlePayment}
                       />
                       {b.name}
                     </label>
@@ -173,7 +193,7 @@ export default function CartCustomer() {
                       type="radio"
                       value="COD"
                       name="Metode Transfer"
-                      onChange={handleBankChange}
+                      onChange={handlePayment}
                     />
                     COD
                   </label>
@@ -182,15 +202,40 @@ export default function CartCustomer() {
               <div className="flex flex-row items-center justify-between py-4 border-b-[1px] border-white">
                 <textarea
                   placeholder="MASUKAN ALAMAT PENGIRIMAN"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
                   required
                   rows={5}
                   className="w-full p-1 border text-black border-gray-300 rounded focus:outline-none placeholder:text-gray-500 placeholder:font-bold placeholder:tracking-wider"
                 ></textarea>
               </div>
               <button
-                onClick={() => {
-                  // window.location.href = "/checkout";
-                  // navigate("/checkout");
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (selectPayment == "" || address == "") {
+                    alert(
+                      "METODE PEMBAYARAN DAN ALAMAT PENGIRIMAN JANGAN SAMPAI KOSONG"
+                    );
+                  } else {
+                    setSaleCustomer({
+                      id_customer: localStorage.getItem("id"),
+                      sales: cart,
+                      sub_total: subTotal,
+                      discount: diskon,
+                      total_sale: subTotal - diskon,
+                      type_of_payment: selectPayment,
+                      address: `${address}.`,
+                    });
+                    console.log(saleCustomer);
+                    api.delete(
+                      `/code/delete/${localStorage.getItem("id_code")}`
+                    );
+                    api.post("/sale/add", saleCustomer).then((res) => {
+                      alert(res.msg);
+                      // window.location.href = "/";
+                      saleCustomer({});
+                    });
+                  }
                 }}
                 className="w-full flex justify-center py-4 mb-2 bg-white outline outline-white text-brown-dark cursor-pointer hover:bg-brown-dark hover:text-white"
               >
@@ -202,6 +247,136 @@ export default function CartCustomer() {
           </div>
         ) : (
           <NotCart />
+        )}
+        {isReceiptOpen && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+            <div className="bg-white w-full max-w-4xl h-5/6 p-6 rounded-lg shadow-lg overflow-y-auto relative">
+              <button
+                className="absolute text-xl top-4 right-4 text-gray-700 font-bold"
+                onClick={handleIsReceiptOpen}
+              >
+                &#x2715;
+              </button>
+              <h2 className="text-2xl font-bold mb-4 text-center">
+                STRUK PEMBELIAN
+              </h2>
+              <table className="my-3 font-medium">
+                <tr>
+                  <td>NAMA CUSTOMER</td>
+                  <td>: {localStorage.getItem("name").toLocaleUpperCase()}</td>
+                </tr>
+                <tr>
+                  <td>ALAMAT</td>
+                  <td>: {address.toLocaleUpperCase()}</td>
+                </tr>
+                <tr>
+                  <td>WAKTU</td>
+                  <td>: {currentDate}</td>
+                </tr>
+              </table>
+              <div className=" p-3  flex flex-col gap-3 border-y-2 border-brown-dark">
+                <div className="flex flex-row items-center">
+                  <h1 className="w-3/6 text-base font-extrabold tracking-wider">
+                    PRODUK
+                  </h1>
+                  <h1 className="w-2/6 text-center text-base font-extrabold tracking-wider">
+                    JUMLAH PRODUK
+                  </h1>
+                  <h1 className="w-1/6 text-base font-extrabold tracking-wider">
+                    SUBTOTAL
+                  </h1>
+                </div>
+                <div className="flex flex-col gap-2">
+                  {cart.map((c) => (
+                    <div key={c.id} className="flex">
+                      <p className="w-3/6 text-base font-medium tracking-wider">
+                        {c.name}
+                      </p>
+                      <p className="w-2/6 text-center text-base font-medium tracking-wider">
+                        {c.total_product}
+                      </p>
+                      <p className="w-1/6 text-base font-medium tracking-wider">
+                        Rp {parseInt(c.price).toLocaleString("id-ID")}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="flex mt-4">
+                <div className="ml-auto w-full flex flex-col gap-3">
+                  <div className="w-1/3 flex justify-between py-1 ml-auto border-b-2 border-brown-dark">
+                    <p className="text-base font-extrabold tracking-wider">
+                      SUBTOTAL
+                    </p>
+                    <p className="text-base font-medium tracking-wider">
+                      Rp{subTotal.toLocaleString("id-ID")}
+                    </p>
+                  </div>
+                  <div className="w-1/3 flex justify-between py-1 ml-auto border-b-2 border-brown-dark">
+                    <p className="text-base font-extrabold tracking-wider">
+                      DISKON
+                    </p>
+                    <p className="text-base font-medium tracking-wider">
+                      Rp. {diskon == 0 ? "-" : diskon.toLocaleString("id-ID")}
+                    </p>
+                  </div>
+                  <div className="w-1/3 flex justify-between py-1 ml-auto border-b-2 border-brown-dark">
+                    <p className="text-base font-extrabold tracking-wider">
+                      TOTAL
+                    </p>
+                    <p className="text-base font-medium tracking-wider">
+                      Rp{(subTotal - diskon).toLocaleString("id-ID")}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              {selectPayment === "COD" ? (
+                <div className="mt-5">
+                  <h2 className="text-xl font-bold mb-4">
+                    Informasi Pembayaran
+                  </h2>
+                  <p className="mt-4">
+                    Jika barang sampai harap membayar sesuai dengan pesanan yang
+                    ada
+                  </p>
+                  <p className="mt-4">Sekian dan Terima Kasih</p>
+                </div>
+              ) : (
+                <div className="mt-5">
+                  <h2 className="text-xl font-bold mb-4">
+                    Informasi Pembayaran
+                  </h2>
+                  <ul className="list-disc pl-6">
+                    <li>
+                      <span className="font-bold">Nama Bank:</span> BCA
+                    </li>
+                    <li>
+                      <span className="font-bold">Nomor Rekening:</span>
+                      1234567890
+                    </li>
+                    <li>
+                      <span className="font-bold">Atas Nama:</span> Bu Manis
+                    </li>
+                  </ul>
+                  <p className="mt-4">
+                    Segera transfer ke nomor rekening di atas, dan setelah
+                    transfer selesai, silakan kirimkan bukti transfer ke nomor
+                    WhatsApp 08xxxxxx.
+                  </p>
+                  <p className="mt-4">
+                    Jika bukti transfer sudah diterima, pesanan akan segera
+                    diproses.
+                  </p>
+                </div>
+              )}
+              <div className="flex">
+                <div className="ml-auto">
+                  <button>BATAL</button>
+                  <button>PESAN</button>
+                </div>
+              </div>
+            </div>
+          </div>
         )}
       </div>
     );
