@@ -11,8 +11,8 @@ import DetailProduct from "./pages/DetailProduct.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import ErrorPageAdmin from "./pages/ErrorPageAdmin.jsx";
-import CartUser from "./pages/CartUser.jsx";
 import MyAccount from "./pages/MyAccount.jsx";
+import CartCustomer from "./pages/CartCustomer.jsx";
 
 const router = createBrowserRouter([
   {
@@ -42,7 +42,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/cart",
-        element: <CartUser />,
+        element: <CartCustomer />,
       },
       {
         path: "/profile",
