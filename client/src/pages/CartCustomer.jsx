@@ -12,6 +12,7 @@ export default function CartCustomer() {
   const [subTotal, setSubTotal] = useState(0);
   const [diskon, setDiskon] = useState(0);
   const [selectedBank, setSelectedBank] = useState("");
+  const [checkCode, setCheckCode] = useState("");
 
   console.log(codeVouchers);
 
@@ -43,7 +44,7 @@ export default function CartCustomer() {
       );
       setSubTotal(sum);
     }
-  }, [cart]);
+  }, [cart, diskon]);
 
   const handleBankChange = (event) => {
     if (event.target.value === "COD") {
@@ -100,28 +101,46 @@ export default function CartCustomer() {
               </div>
               <div className=" flex w-full justify-between gap-5">
                 <div className="w-1/2 py-4 border-b-[1px] border-white">
-                  <div className="flex flex-row gap-2">
+                  <form className="flex flex-row gap-2">
                     <input
                       type="text"
                       placeholder="MASUKAN KODE VOUCHER"
-                      // value={value}
-                      // onChange={onChange}
+                      value={checkCode}
+                      onChange={(e) => {
+                        setCheckCode(e.target.value);
+                      }}
                       className="w-full p-1 border text-black border-gray-300 rounded focus:outline-none placeholder:text-gray-500 placeholder:font-bold placeholder:tracking-wider"
                     />
                     <button
-                      onClick={{}}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        const codeDiscount = codeVouchers.find(
+                          (c) => c.code === checkCode
+                        );
+                        if (codeDiscount) {
+                          alert(
+                            `SELAMAT ANDA MENDAPATKAN POTONGAN BELANJA SEBESAR ${codeDiscount.discount}%`
+                          );
+                          setDiskon(
+                            (subTotal * parseInt(codeDiscount.discount)) / 100
+                          );
+                          setCheckCode("");
+                        } else {
+                          alert("KODE YANG DIMASUKAN TIDAK COCOK");
+                        }
+                      }}
                       className="bg-white rounded text-brown-dark font-semibold px-2 tracking-wider"
                     >
                       SUBMIT
                     </button>
-                  </div>
+                  </form>
                 </div>
                 <div className="w-1/2 flex flex-row items-center  justify-between py-4 border-b-[1px] border-white">
                   <h1 className="text-base font-extrabold tracking-wider">
                     DISKON
                   </h1>
                   <h1 className="text-base font-extrabold tracking-wider">
-                    Rp. 0
+                    Rp{diskon.toLocaleString("id-ID")}
                   </h1>
                 </div>
               </div>
