@@ -24,7 +24,6 @@ export default function Admin() {
   const [stocks, setStocks] = useState([]);
   const [sizes, setSizes] = useState([]);
   const [orders, setOrders] = useState([]);
-  const [theme, setTheme] = useState("light");
 
   useEffect(() => {
     // Simulasi pengambilan data produk
@@ -82,13 +81,9 @@ export default function Admin() {
           setOrders,
           editedStatus,
           setEditedStatus,
-          theme,
-          setTheme,
         }}
       >
-        <div
-          className={`flex h-screen overflow-hidden font-KumbhSans theme === "dark" ? "bg-[#1a1a29] text-white" : "bg-white text-black"`}
-        >
+        <div className="flex h-screen overflow-hidden font-KumbhSans  bg-white text-black">
           {/* Sidebar */}
           <SideBar />
           {/* Content */}
