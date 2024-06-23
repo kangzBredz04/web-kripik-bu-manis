@@ -17,8 +17,6 @@ export default function CartCustomer() {
   const [checkCode, setCheckCode] = useState("");
   const [saleCustomer, setSaleCustomer] = useState({});
 
-  console.log(codeVouchers);
-
   const bankDetails = [
     {
       id: 1,
@@ -227,14 +225,14 @@ export default function CartCustomer() {
                       address: `${address}.`,
                     });
                     console.log(saleCustomer);
+                    api.post("/sale/add", saleCustomer).then((res) => {
+                      alert(res.msg);
+                      window.location.href = "/";
+                      saleCustomer({});
+                    });
                     api.delete(
                       `/code/delete/${localStorage.getItem("id_code")}`
                     );
-                    api.post("/sale/add", saleCustomer).then((res) => {
-                      alert(res.msg);
-                      // window.location.href = "/";
-                      saleCustomer({});
-                    });
                   }
                 }}
                 className="w-full flex justify-center py-4 mb-2 bg-white outline outline-white text-brown-dark cursor-pointer hover:bg-brown-dark hover:text-white"
