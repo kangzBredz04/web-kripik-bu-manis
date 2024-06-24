@@ -12,16 +12,20 @@ export const AdminContext = createContext();
 export default function Admin() {
   const [products, setProducts] = useState();
   const [user, setUser] = useState();
+  const [customer, setCustomer] = useState();
   const [loading, setLoading] = useState(true);
   const [popUp, setPopUp] = useState(false);
   const [popUp2, setPopUp2] = useState(false);
   const [editedProduct, setEditedProduct] = useState();
   const [editedUser, setEditedUser] = useState();
+  const [editedCustomer, setEditedCustomer] = useState();
 
+  console.log(customer);
   useEffect(() => {
     setTimeout(() => {
       api.get("/product/get-all").then((res) => setProducts(res));
       api.get("/auth/get-all-user").then((res) => setUser(res));
+      api.get("/customer/get-all-customer").then((res) => setCustomer(res));
       setLoading(false);
     }, 500);
   }, [products?.id]);
@@ -44,8 +48,12 @@ export default function Admin() {
           setLoading,
           user,
           setUser,
+          customer,
+          setCustomer,
           editedUser,
           setEditedUser,
+          editedCustomer,
+          setEditedCustomer,
         }}
       >
         <div className="flex h-screen overflow-hidden font-KumbhSans  bg-white text-black">
