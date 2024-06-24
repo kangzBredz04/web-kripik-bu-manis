@@ -1,5 +1,4 @@
-import { useContext, useEffect, useRef } from "react";
-import Chart from "chart.js/auto";
+import { useContext } from "react";
 import { AdminContext } from "./Admin";
 import { FaUsers, FaFileInvoiceDollar, FaBoxes } from "react-icons/fa";
 import { IoIosShirt } from "react-icons/io";
@@ -7,67 +6,11 @@ import { Link } from "react-router-dom";
 
 export default function DashboardAdmin() {
   const { products, user, orders, stocks } = useContext(AdminContext);
-  // const [countStatus, setCountStatus] = useState({});
-
-  const countStatus = orders?.reduce((accumulator, order) => {
-    const { status } = order;
-    accumulator[status] = (accumulator[status] || 0) + 1;
-    return accumulator;
-  }, {});
-
-  console.log(countStatus);
 
   const totalStock = stocks.reduce((total, stock) => {
     return total + parseInt(stock.quantity);
   }, 0);
 
-  const chartRef = useRef();
-
-  // const { theme } = useContext(AdminContext);
-
-  useEffect(() => {
-    const ctx = chartRef.current.getContext("2d");
-    const myChart = new Chart(ctx, {
-      type: "bar",
-      data: {
-        labels: ["Processed", "Shipped", "Finished"],
-        datasets: [
-          {
-            label: "Orders",
-            data: [
-              countStatus?.Processed,
-              countStatus?.Shipped,
-              countStatus?.Finished,
-            ],
-            fill: false,
-            backgroundColor: [
-              "rgba(255, 159, 64, 0.7)",
-              "rgba(0, 157, 254, 0.7)",
-              "rgba(0, 251, 5, 0.7)",
-            ],
-            borderColor: [
-              "rgb(255, 159, 64)",
-              "rgb(0, 157, 254)",
-              "rgb(0, 251, 5)",
-            ],
-            tension: 1,
-            borderWidth: 1,
-          },
-        ],
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true,
-          },
-        },
-      },
-    });
-
-    return () => {
-      myChart.destroy();
-    };
-  }, [countStatus?.Finished, countStatus?.Processed, countStatus?.Shipped]);
   return (
     <div className={`flex-1 `}>
       {/* Main Content */}
@@ -110,13 +53,6 @@ export default function DashboardAdmin() {
             <p className="text-4xl font-bold">{totalStock}</p>
             <h3 className="text-2xl font-bold">Stok</h3>
           </Link>
-        </div>
-        {/* Sales Chart */}
-        <div className="mt-8">
-          <div className="bg-white p-4 rounded-lg shadow-md">
-            <h3 className="text-2xl font-bold mb-2">Grafik Pesanan Pengguna</h3>
-            <canvas className="w-10" ref={chartRef}></canvas>
-          </div>
         </div>
       </div>
     </div>
