@@ -63,6 +63,7 @@ export default function Login() {
           console.log(res);
           localStorage.setItem("id", res.data.id);
           localStorage.setItem("username", res.data.username);
+          localStorage.setItem("name", res.data.name);
           localStorage.setItem("role", res.data.role);
           localStorage.setItem("token", res.token);
           window.location.href = "/admin";
