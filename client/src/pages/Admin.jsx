@@ -26,30 +26,12 @@ export default function Admin() {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    // Simulasi pengambilan data produk
     setTimeout(() => {
       api.get("/product/get-all").then((res) => setProducts(res));
-      api.get("/auth/get-all").then((res) => setUser(res));
-      api.get("/auth/my-account").then((res) => {
-        setAdmin(res.data);
-        setIdAdmin(res.data.id);
-      });
-      // api.get("/stock/get-all").then((res) => setStocks(res));
-      // api.get("/size/get-all").then((res) => setSizes(res));
-      // api.get("/order/get-all").then((res) => setOrders(res));
       setLoading(false);
     }, 500);
   }, [products?.id]);
 
-  // useEffect(() => {
-  //   console.log(
-  //     `${
-  //       theme === "light"
-  //         ? "Berhasil mengubah tema menjadi terang"
-  //         : "Berhasil mengubah tema menjadi gelap"
-  //     }`
-  //   );
-  // }, [theme]);
 
   if (localStorage.getItem("role") == "admin") {
     return (
