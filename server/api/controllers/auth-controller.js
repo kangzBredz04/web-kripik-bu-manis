@@ -71,7 +71,7 @@ export const loginAccountAdmin = async (req, res) => {
     ]);
 
     if (result.rows[0]) {
-      //   return res.status(200).json({ msg: "User ditemukan !!!" });
+      // console.log("user ada");
       const isPasswordValid = await argon2.verify(
         result.rows[0].password,
         password
@@ -85,7 +85,8 @@ export const loginAccountAdmin = async (req, res) => {
         });
         res.status(200).json({
           token,
-          message: "Login berhasil !!!",
+          data: result.rows[0],
+          msg: "Login berhasil !!!",
         });
       } else {
         return res.status(401).json({ msg: "Password salah !!!" });
