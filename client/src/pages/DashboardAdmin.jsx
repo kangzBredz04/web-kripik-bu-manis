@@ -5,11 +5,11 @@ import { IoIosShirt } from "react-icons/io";
 import { Link } from "react-router-dom";
 
 export default function DashboardAdmin() {
-  const { products, user, orders, stocks } = useContext(AdminContext);
+  //   const { products, user, orders, stocks } = useContext(AdminContext);
 
-  const totalStock = stocks.reduce((total, stock) => {
-    return total + parseInt(stock.quantity);
-  }, 0);
+  //   const totalStock = stocks.reduce((total, stock) => {
+  //     return total + parseInt(stock.quantity);
+  //   }, 0);
 
   return (
     <div className={`flex-1 `}>
@@ -23,7 +23,7 @@ export default function DashboardAdmin() {
             className="flex flex-col items-center gap-2 bg-white p-2 rounded-lg shadow-xl cursor-pointer  border-black border-2"
           >
             <IoIosShirt className="text-7xl" />
-            <p className="text-4xl font-bold">{products?.length}</p>
+            {/* <p className="text-4xl font-bold">{products?.length}</p> */}
             <h3 className="text-2xl font-bold">Produk</h3>
           </Link>
           {/* User Count */}
@@ -32,7 +32,7 @@ export default function DashboardAdmin() {
             className="flex flex-col items-center gap-2 bg-white p-2 rounded-lg shadow-xl cursor-pointer border-black border-2"
           >
             <FaUsers className="text-7xl" />
-            <p className="text-4xl font-bold">{user?.length}</p>
+            {/* <p className="text-4xl font-bold">{user?.length}</p> */}
             <h3 className="text-2xl font-bold">Pengguna</h3>
           </Link>
           {/* Order Count */}
@@ -41,7 +41,7 @@ export default function DashboardAdmin() {
             className="flex flex-col items-center gap-2 bg-white p-2 rounded-lg shadow-xl cursor-pointer border-black border-2"
           >
             <FaFileInvoiceDollar className="text-7xl" />
-            <p className="text-4xl font-bold">{orders?.length}</p>
+            {/* <p className="text-4xl font-bold">{orders?.length}</p> */}
             <h3 className="text-2xl font-bold">Pesanan</h3>
           </Link>
           {/* Stock Count */}
@@ -50,7 +50,7 @@ export default function DashboardAdmin() {
             className="flex flex-col items-center gap-2 bg-white p-2 rounded-lg shadow-xl cursor-pointer border-black border-2"
           >
             <FaBoxes className="text-7xl" />
-            <p className="text-4xl font-bold">{totalStock}</p>
+            {/* <p className="text-4xl font-bold">{totalStock}</p> */}
             <h3 className="text-2xl font-bold">Stok</h3>
           </Link>
         </div>
