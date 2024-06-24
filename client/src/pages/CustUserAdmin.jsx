@@ -7,15 +7,12 @@ import { api } from "../utils";
 // import { useNavigate } from "react-router-dom";
 
 export default function CustUserAdmin() {
-  const { theme, popUp, setPopUp, editedUser, setEditedUser, user } =
+  const { popUp, setPopUp, editedUser, setEditedUser, user } =
     useContext(AdminContext);
 
+    console.log()
   return (
-    <div
-      className={`p-5 min-h-64 ${
-        theme === "dark" ? "bg-black text-white " : "bg-white text-black"
-      }`}
-    >
+    <div className="p-5 min-h-64">
       <div className="flex justify-between">
         <h2 className="text-2xl font-bold mb-4">User List</h2>
         <div>
