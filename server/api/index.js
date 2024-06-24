@@ -8,6 +8,7 @@ import AuthRoute from "./routes/auth-route.js";
 import CartRoute from "./routes/cart-route.js";
 import CodeVoucherRoute from "./routes/code-voucher-route.js";
 import SaleRoute from "./routes/sale-route.js";
+import CustomerRoute from "./routes/customer-route.js";
 
 const app = express();
 
@@ -29,6 +30,7 @@ router.use("/auth", AuthRoute);
 router.use("/cart", CartRoute);
 router.use("/code", CodeVoucherRoute);
 router.use("/sale", SaleRoute);
+router.use("/customer", CustomerRoute);
 
 app.listen(process.env.API_PORT, () =>
   console.log("Server berhasil dijalankan.")
