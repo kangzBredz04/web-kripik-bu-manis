@@ -9,7 +9,10 @@ import UnauthorizedPage from "./UnauthorizedPage.jsx";
 export const AdminContext = createContext();
 
 export default function Admin() {
-  if (localStorage.getItem("role") == "Super Admin") {
+  if (
+    localStorage.getItem("role") == "Super Admin" ||
+    localStorage.getItem("role") == "Admin"
+  ) {
     return (
       <AdminContext.Provider value={{}}>
         <div className="flex h-screen overflow-hidden font-KumbhSans  bg-white text-black">
