@@ -13,6 +13,10 @@ function App() {
   const [products, setProducts] = useState([]);
   const [codeVouchers, setCodeVouchers] = useState([]);
 
+  const [keyword, setKeyword] = useState("");
+  const [sortPrice, setSortPrice] = useState("asc");
+  const [sortBy, setSortBy] = useState("price");
+
   useEffect(() => {
     api.get("/product/get-all").then((response) => setProducts(response));
     api
@@ -33,6 +37,12 @@ function App() {
         setRegister,
         codeVouchers,
         setCodeVouchers,
+        keyword,
+        setKeyword,
+        sortPrice,
+        setSortPrice,
+        sortBy,
+        setSortBy,
       }}
     >
       <Header />
