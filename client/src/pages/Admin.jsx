@@ -21,7 +21,7 @@ export default function Admin() {
   useEffect(() => {
     setTimeout(() => {
       api.get("/product/get-all").then((res) => setProducts(res));
-      api.get("/auth/get-all").then((res) => setUser(res));
+      api.get("/auth/get-all-user").then((res) => setUser(res));
       setLoading(false);
     }, 500);
   }, [products?.id]);
