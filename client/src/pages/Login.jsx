@@ -53,6 +53,21 @@ export default function Login() {
           window.location.href = "/";
         }
       });
+    } else {
+      api.post("/auth/login-admin", loginAdmin).then((res) => {
+        console.log(res.token);
+        if (!res.token) {
+          alert(res.msg);
+        } else {
+          alert(res.msg);
+          console.log(res);
+          localStorage.setItem("id", res.data.id);
+          localStorage.setItem("username", res.data.username);
+          localStorage.setItem("role", res.data.role);
+          localStorage.setItem("token", res.token);
+          // window.location.href = "/admin";
+        }
+      });
     }
   }
 
