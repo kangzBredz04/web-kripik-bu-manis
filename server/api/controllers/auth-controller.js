@@ -119,6 +119,23 @@ export const logoutAccount = async (_req, res) => {
   res.status(200).json({ msg: "Logout berhasil" });
 };
 
+export const addAccountUser = async (req, res) => {
+  const { name, username, password, role } = req.body;
+  try {
+    const hashPassword = await argon2.hash(password);
+    const result = await pool.query(
+      "INSERT INTO users (name, username, password, role) VALUES ($1, $2, $3, $4) RETURNING *",
+      [name, username, hashPassword, role]
+    );
+    res.status(201).json({
+      msg: "Pendaftaran akun melalui telah berhasil",
+      data: result.rows[0],
+    });
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
+
 export const getAllUser = async (_req, res) => {
   try {
     const result = await pool.query("SELECT * FROM users");
