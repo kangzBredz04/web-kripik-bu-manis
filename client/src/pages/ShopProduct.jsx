@@ -8,7 +8,6 @@ import { TbSortDescending2, TbSortAscending2 } from "react-icons/tb";
 export default function Shop() {
   const {
     products,
-    wishlist,
     keyword,
     setKeyword,
     sortPrice,
@@ -16,10 +15,9 @@ export default function Shop() {
     sortBy,
     setSortBy,
     category,
-    setCategory,
+    // setCategory,
   } = useContext(AllContext);
 
-  console.log(category);
   const filteredSortedProducts = products
     .sort((a, b) => {
       if (sortPrice === "asc") {
@@ -28,75 +26,54 @@ export default function Shop() {
         return a[sortBy] > b[sortBy] ? -1 : 1;
       }
     })
-    .filter(
-      (product) =>
-        product.name_product.toLowerCase().includes(keyword) &&
-        (category === "Semua" || product.category === category)
-    );
+    .filter((product) => product.name.toLowerCase().includes(keyword));
 
   return (
-    <div className="flex flex-col">
-      <div className="mx-5 my-5 flex justify-evenly flex-row gap-8 py-4 px-3 border border-gray-400  rounded-lg">
+    <div className="flex flex-col bg-gray-300">
+      <div className="mx-5 my-5 flex justify-evenly flex-row gap-8 py-4 px-3 bg-brown-dark border-2 border-white  rounded-lg">
         <div className="flex items-center">
-          <h1 className="text-xl tracking-wider font-bold">FILTER PRODUK</h1>
+          <h1 className="text-xl tracking-widest font-bold text-white">
+            FILTER PRODUK
+          </h1>
         </div>
-        <div className="flex items-center border px-2 border-gray-300 rounded-md">
+        <div className="flex items-center  px-2">
           <input
             type="text"
             placeholder="Cari nama produk"
-            className="py-2 px-2 outline-none placeholder:text-black"
+            className="py-2 px-2 outline-none bg-transparent border-b-[1px] focus:text-white placeholder:text-white placeholder:font-semibold placeholder:tracking-wider"
             value={keyword}
             onChange={(e) => setKeyword(e.target.value)}
           />
-          <FiSearch className="text-gray-400" />
-        </div>
-        <div>
-          <select
-            name="category"
-            id=""
-            className="flex items-center border border-gray-300 rounded-md py-3 px-2 outline-none"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-          >
-            <option value="" disabled selected hidden>
-              Urut berdasarkan kategori...
-            </option>
-            <option value="Semua">Semua</option>
-            <option value="Koko Modern">Koko Modern</option>
-            <option value="Kurta Modern">Kurta Modern</option>
-            <option value="Essential Pants">Essential Pants</option>
-            <option value="Essential Shirt">Essential Shirt</option>
-            <option value="T-Shirt">T-Shirt</option>
-          </select>
+          <FiSearch className="text-white" />
         </div>
         <div
-          className="flex flex-row gap-4 items-center border border-gray-300 rounded-md py-3 px-2 outline-none cursor-pointer"
+          className="flex flex-row gap-4 items-center rounded-md py-3 px-2 outline-none cursor-pointer"
           onClick={() => {
             sortPrice === "asc" ? setSortPrice("desc") : setSortPrice("asc");
           }}
         >
-          <label htmlFor="">Urutkan harga</label>
+          <label htmlFor="" className="text-white font-semibold tracking-wider">
+            Urutkan harga
+          </label>
           {sortPrice === "asc" ? (
-            <TbSortAscending2 className="text-2xl" />
+            <TbSortAscending2 className="text-2xl text-white " />
           ) : (
-            <TbSortDescending2 className="text-2xl" />
+            <TbSortDescending2 className="text-2xl text-white" />
           )}
         </div>
       </div>
 
       {filteredSortedProducts.length > 0 ? (
-        <div className="grid grid-cols-4">
+        <div className="grid grid-cols-4 gap-5 px-5 py-5">
           {filteredSortedProducts?.map((p) => (
             <CardProduct
               key={p.id}
               id={p.id}
-              name={p.name_product}
-              image={p.image_1}
+              name={p.name}
+              image={p.image}
               price={p.price}
-              tipe={p.category}
-              status={
-                wishlist.find((item) => item.id_product === p.id) ? true : false
-              }
+              description={p.description}
+              stock={p.stock}
             />
           ))}
         </div>
