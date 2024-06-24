@@ -13,6 +13,7 @@ import Register from "./pages/Register.jsx";
 import ErrorPageAdmin from "./pages/ErrorPageAdmin.jsx";
 import MyAccount from "./pages/MyAccount.jsx";
 import CartCustomer from "./pages/CartCustomer.jsx";
+import DashboardAdmin from "./pages/DashboardAdmin.jsx";
 
 const router = createBrowserRouter([
   {
@@ -58,7 +59,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/admin",
-        // element: <DashboardAdmin />,
+        element: <DashboardAdmin />,
       },
       // {
       //   path: "/admin/profile",
