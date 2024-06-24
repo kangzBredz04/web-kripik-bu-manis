@@ -127,3 +127,19 @@ export const getAllUser = async (_req, res) => {
     res.status(500).json({ msg: error.message });
   }
 };
+
+export const updateUser = async (req, res) => {
+  const { name, username, role } = req.body;
+  try {
+    await pool.query(
+      "UPDATE users SET name = $1, username = $2, role= $3 WHERE id = $4",
+      [name, username, role, req.params.id]
+    );
+    res.status(200).json({
+      msg: "Data berhasil diubah.",
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: error.message });
+  }
+};
