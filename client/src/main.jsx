@@ -51,7 +51,6 @@ const router = createBrowserRouter([
       },
     ],
   },
-
   {
     path: "/admin",
     element: <Admin />,
@@ -61,26 +60,6 @@ const router = createBrowserRouter([
         path: "/admin",
         element: <DashboardAdmin />,
       },
-      // {
-      //   path: "/admin/profile",
-      //   element: <MyAccountAdmin />,
-      // },
-      // {
-      //   path: "/admin/user",
-      //   element: <UserAdmin />,
-      // },
-      // {
-      //   path: "/admin/stock",
-      //   element: <StockAdmin />,
-      // },
-      // {
-      //   path: "/admin/order",
-      //   element: <OrderAdmin />,
-      // },
-      // {
-      //   path: "/admin/product",
-      //   element: <ProductAdmin />,
-      // },
     ],
   },
 ]);
