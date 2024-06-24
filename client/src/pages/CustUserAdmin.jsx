@@ -9,8 +9,6 @@ import { api } from "../utils";
 export default function CustUserAdmin() {
   const { popUp, setPopUp, editedUser, setEditedUser, user } =
     useContext(AdminContext);
-
-    console.log()
   return (
     <div className="p-5 min-h-64">
       <div className="flex justify-between">
@@ -32,10 +30,8 @@ export default function CustUserAdmin() {
         <thead>
           <tr>
             <th className="border border-gray-300">No</th>
-            <th className="border border-gray-300 ">First Name</th>
-            <th className="border border-gray-300 ">Last Name</th>
+            <th className="border border-gray-300 ">Name</th>
             <th className="border border-gray-300 ">Username</th>
-            <th className="border border-gray-300 ">Email</th>
             <th className="border border-gray-300 ">Password</th>
             <th className="border border-gray-300 ">Role</th>
             <th className="border border-gray-300 ">Action</th>
@@ -45,25 +41,20 @@ export default function CustUserAdmin() {
           {/* Data rows */}
           {user?.map((u, index) => (
             <tr key={u.id}>
-              <td className="border border-gray-300 px-4 py-2">{index + 1}</td>
               <td className="border border-gray-300 px-4 py-2 text-center">
-                {u.first_name ? u.first_name : "-"}
+                {index + 1}
               </td>
               <td className="border border-gray-300 px-4 py-2 text-center">
-                {u.last_name ? u.last_name : "-"}
+                {u.name ? u.name : "-"}
               </td>
               <td className="border border-gray-300 px-4 py-2 text-center">
                 {u.username}
               </td>
               <td className="border border-gray-300 px-4 py-2 text-center">
-                {u.email.slice(0, 25)}
-                {u.email.length > 25 && "..."}
-              </td>
-              <td className="border border-gray-300 px-4 py-2 text-center">
                 ******
               </td>
               <td className="border border-gray-300 px-4 py-2 text-center">
-                {u.role ? u.role : "user"}
+                {u.role}
               </td>
               <td className="border border-gray-300 px-4 py-2 flex justify-evenly">
                 <button
@@ -76,21 +67,26 @@ export default function CustUserAdmin() {
                   <HiOutlinePencilAlt />
                 </button>
                 <button
+                  disabled={u.id == 1}
                   onClick={() => {
-                    if (
-                      confirm(
-                        `Apakah anda yakin ingin menghapus data atas username ${u.username}`
-                      )
-                    ) {
-                      api
-                        .delete(`/auth/delete/${u.id}`)
-                        .then(async (res) => {
-                          alert(res.msg);
-                        })
-                        .catch((e) => {
-                          console.log(e);
-                        });
-                      window.location.href = "/admin/user";
+                    if (u.id == 1) {
+                      alert("Tidak dapat menghapus data pemilik toko");
+                    } else {
+                      if (
+                        confirm(
+                          `Apakah anda yakin ingin menghapus data atas nama ${u.name}`
+                        )
+                      ) {
+                        api
+                          .delete(`/auth/delete/${u.id}`)
+                          .then(async (res) => {
+                            alert(res.msg);
+                          })
+                          .catch((e) => {
+                            console.log(e);
+                          });
+                        window.location.href = "/admin/user";
+                      }
                     }
                   }}
                   className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded ml-2"
@@ -100,7 +96,6 @@ export default function CustUserAdmin() {
               </td>
             </tr>
           ))}
-          {/* More data rows */}
         </tbody>
       </table>
       {popUp && (
@@ -115,10 +110,10 @@ export default function CustUserAdmin() {
                 e.preventDefault();
                 if (editedUser.id) {
                   api
-                    .put(`/auth/update/${editedUser.id}`, editedUser)
+                    .put(`/auth/update-user/${editedUser.id}`, editedUser)
                     .then(async (res) => {
                       alert(res.msg);
-                      window.location.href = "/admin/user";
+                      window.location.href = "/admin/customer-user";
                     })
                     .catch((e) => {
                       console.log(e);
@@ -142,40 +137,20 @@ export default function CustUserAdmin() {
                   htmlFor="first_name"
                   className="block text-black font-bold mb-2"
                 >
-                  First Name
+                  Name
                 </label>
                 <input
                   type="text"
                   id="first_name"
                   className="w-full border border-gray-300 px-2 py-1 focus:outline-none focus:border-gray-500"
-                  value={editedUser.first_name}
+                  value={editedUser.name}
                   onChange={(e) =>
                     setEditedUser({
                       ...editedUser,
-                      first_name: e.target.value,
+                      name: e.target.value,
                     })
                   }
                   autoFocus
-                />
-              </div>
-              <div className="mb-4">
-                <label
-                  htmlFor="last_name"
-                  className="block text-black font-bold mb-2"
-                >
-                  Last Name
-                </label>
-                <input
-                  type="text"
-                  id="last_name"
-                  className="w-full border border-gray-300 px-2 py-1 focus:outline-none focus:border-gray-500"
-                  value={editedUser.last_name}
-                  onChange={(e) =>
-                    setEditedUser({
-                      ...editedUser,
-                      last_name: e.target.value,
-                    })
-                  }
                 />
               </div>
               <div className="mb-4">
@@ -194,26 +169,6 @@ export default function CustUserAdmin() {
                     setEditedUser({
                       ...editedUser,
                       username: e.target.value,
-                    })
-                  }
-                />
-              </div>
-              <div className="mb-4">
-                <label
-                  htmlFor="email"
-                  className="block text-black font-bold mb-2"
-                >
-                  Email
-                </label>
-                <input
-                  type="text"
-                  id="email"
-                  className="w-full border border-gray-300 px-2 py-1 focus:outline-none focus:border-gray-500"
-                  value={editedUser.email}
-                  onChange={(e) =>
-                    setEditedUser({
-                      ...editedUser,
-                      email: e.target.value,
                     })
                   }
                 />
@@ -252,6 +207,7 @@ export default function CustUserAdmin() {
                   </label>
                   <select
                     id="role"
+                    disabled={editedUser.id == 1}
                     className="w-full border border-gray-300 px-2 py-1 focus:outline-none focus:border-gray-500"
                     value={editedUser.role == null ? "" : editedUser.role}
                     onChange={(e) =>
@@ -261,8 +217,8 @@ export default function CustUserAdmin() {
                       })
                     }
                   >
-                    <option value={null}>User</option>
-                    <option value={"admin"}>Admin</option>
+                    <option value={"Super Admin"}>Super Admin</option>
+                    <option value={"Admin"}>Admin</option>
                   </select>
                 </div>
               </div>
