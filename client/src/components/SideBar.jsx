@@ -26,7 +26,7 @@ export default function SideBar() {
           <h1 className="text-base font-medium">Beranda</h1>
         </Link>
         <Link
-          to="/admin/user"
+          to="/admin/customer-user"
           className="text-center flex flex-col gap-1 hover:cursor-pointer"
         >
           <FiUsers className="m-auto text-3xl" />
@@ -53,10 +53,6 @@ export default function SideBar() {
           <LuBoxes className="m-auto text-3xl" />
           <h1 className="text-base font-medium">Stok</h1>
         </Link>
-        {/* <Link className="text-center flex flex-col gap-1 hover:cursor-pointer">
-          <GrLogout className="m-auto text-3xl" />
-          <h1 className="text-base font-medium">Logout</h1>
-        </Link> */}
       </div>
     </div>
   );
