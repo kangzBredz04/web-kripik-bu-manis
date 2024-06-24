@@ -85,7 +85,7 @@ export default function CustUserAdmin() {
                           .catch((e) => {
                             console.log(e);
                           });
-                        window.location.href = "/admin/user";
+                        window.location.href = "/admin/customer-user";
                       }
                     }
                   }}
@@ -120,10 +120,10 @@ export default function CustUserAdmin() {
                     });
                 } else {
                   api
-                    .post("/auth/add", editedUser)
+                    .post("/auth/add-account-user", editedUser)
                     .then(async (res) => {
                       alert(res.msg);
-                      window.location.href = "/admin/user";
+                      window.location.href = "/admin/customer-user";
                     })
                     .catch((e) => {
                       console.log(e);
