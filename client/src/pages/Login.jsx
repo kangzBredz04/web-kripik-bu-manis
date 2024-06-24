@@ -65,7 +65,7 @@ export default function Login() {
           localStorage.setItem("username", res.data.username);
           localStorage.setItem("role", res.data.role);
           localStorage.setItem("token", res.token);
-          // window.location.href = "/admin";
+          window.location.href = "/admin";
         }
       });
     }
