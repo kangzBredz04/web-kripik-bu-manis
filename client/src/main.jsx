@@ -17,6 +17,7 @@ import DashboardAdmin from "./pages/DashboardAdmin.jsx";
 import ProfileAdmin from "./pages/ProfileAdmin.jsx";
 import ShopProduct from "./pages/ShopProduct.jsx";
 import CustUserAdmin from "./pages/CustUserAdmin.jsx";
+import Cashier from "./pages/Cashier.jsx";
 
 const router = createBrowserRouter([
   {
@@ -74,6 +75,10 @@ const router = createBrowserRouter([
       {
         path: "/admin/customer-user",
         element: <CustUserAdmin />,
+      },
+      {
+        path: "/admin/cashier",
+        element: <Cashier />,
       },
     ],
   },
