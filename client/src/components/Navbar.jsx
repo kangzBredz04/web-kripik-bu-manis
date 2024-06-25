@@ -1,9 +1,5 @@
 import { Link } from "react-router-dom";
-import { MdOutlineLanguage } from "react-icons/md";
-import { FiUser, FiMoon } from "react-icons/fi";
-// import { useContext } from "react";
-// import { AdminContext } from "../pages/Admin";
-// import { FaRegSun } from "react-icons/fa";
+import { FiUser } from "react-icons/fi";
 
 export default function Navbar() {
   return (
@@ -11,28 +7,11 @@ export default function Navbar() {
       className={`sticky top-0 py-6 px-5 font-poppins flex justify-between items-center bg-brown-dark text-white`}
     >
       <div className="flex items-center">
-        {/* <img src="/logo.png" alt="Logo" className="h-8 mr-4" /> */}
         <h1 className="text-xl font-bold tracking-widest">{`HALO SELAMAT DATANG ${localStorage
           .getItem("name")
           .toLocaleUpperCase()}`}</h1>
       </div>
       <div className="flex justify-evenly space-x-4 w-1/5">
-        <Link
-          onClick={(e) => {
-            e.preventDefault();
-            alert("Coming soon !!!");
-          }}
-        >
-          <FiMoon className="text-2xl" />
-        </Link>
-        <Link
-          onClick={(e) => {
-            e.preventDefault();
-            alert("Coming soon !!!");
-          }}
-        >
-          <MdOutlineLanguage className="text-2xl" />
-        </Link>
         <Link to="/admin/profile">
           <FiUser className="text-2xl" />
         </Link>
