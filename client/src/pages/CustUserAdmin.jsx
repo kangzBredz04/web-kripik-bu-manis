@@ -417,7 +417,7 @@ export default function CustUserAdmin() {
                   autoFocus
                 />
               </div>
-              <div className="mb-4 flex gap-4 items-center">
+              <div className="mb-4">
                 {editedCustomer.id ? (
                   ""
                 ) : (
