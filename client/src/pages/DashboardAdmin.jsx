@@ -5,12 +5,6 @@ import { IoIosShirt } from "react-icons/io";
 import { Link } from "react-router-dom";
 
 export default function DashboardAdmin() {
-  //   const { products, user, orders, stocks } = useContext(AdminContext);
-
-  //   const totalStock = stocks.reduce((total, stock) => {
-  //     return total + parseInt(stock.quantity);
-  //   }, 0);
-
   return (
     <div className={`flex-1 `}>
       {/* Main Content */}
