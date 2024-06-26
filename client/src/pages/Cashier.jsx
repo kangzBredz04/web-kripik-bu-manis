@@ -1,11 +1,14 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AdminContext } from "./Admin";
 import CashierCardProduct from "../components/CashierCardProduct";
 import CashierCheckoutProduct from "../components/CashierCheckoutProduct";
+import { FaCheckCircle } from "react-icons/fa";
 import { api } from "../utils";
 
 export default function Cashier() {
   const { products, cashier } = useContext(AdminContext);
+  const [popUp, setPopUp] = useState(false);
+  const [saleCustomer, setSaleCustomer] = useState({});
   const calculateSubTotal = () =>
     cashier.reduce((acc, curr) => acc + parseInt(curr.sub_total), 0);
 
@@ -67,7 +70,9 @@ export default function Cashier() {
               Batal Pesan
             </button>
             <button
-              onClick={() => {}}
+              onClick={() => {
+                setPopUp(!popUp);
+              }}
               className="cursor-pointer bg-teal font-bold text-white w-full rounded-md py-2"
             >
               Bayar
@@ -75,6 +80,38 @@ export default function Cashier() {
           </div>
         </div>
       </div>
+      {popUp && (
+        <div className="fixed inset-0 flex items-center justify-center">
+          <div className="absolute inset-0 bg-black opacity-50"></div>
+          <div className="bg-white z-10 w-1/4 flex flex-col items-center py-4 px-4 justify-between h-52 rounded-lg">
+            <FaCheckCircle className="text-teal w-16 h-16" />
+            <h1>Pesanan telah berhasil diselesaikan</h1>
+            <button
+              onClick={() => {
+                setSaleCustomer({
+                  id_customer: localStorage.getItem("id"),
+                  sales: cashier,
+                  sub_total: calculateSubTotal(),
+                  discount: 0,
+                  total_sale: calculateSubTotal(),
+                  type_of_payment: "COD",
+                  address: "-",
+                });
+                console.log(saleCustomer);
+                api
+                  .post("/sale/add", saleCustomer)
+                  .then(() => saleCustomer({}));
+                api.delete("/cashier/delete-all");
+                setPopUp(!popUp);
+                window.location.reload();
+              }}
+              className="bg-teal text-white py-2 w-full rounded-md"
+            >
+              Oke
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
