@@ -20,7 +20,7 @@ export default function CashierCardProduct({ id, name, image, price }) {
   return (
     <div
       onClick={() => {
-        api.post("/cashier/add", cashierProduct).then((res) => {
+        api.post("/cashier/add", cashierProduct).then(() => {
           window.location.reload();
         });
       }}
