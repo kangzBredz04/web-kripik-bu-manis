@@ -1,10 +1,9 @@
-import { useContext, useEffect, useState } from "react";
-import { AdminContext } from "./Admin";
+// import { useContext, useEffect, useState } from "react";
+// import { AdminContext } from "./Admin";
 import { FaUsers, FaFileInvoiceDollar, FaBoxes } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 export default function DashboardAdmin() {
-
   return (
     <div className="flex-1">
       <div className="p-4">
@@ -27,7 +26,7 @@ export default function DashboardAdmin() {
             <h3 className="text-2xl font-bold">Pengguna</h3>
           </Link>
           <Link
-            to="/admin/order"
+            to="/admin/sales-report"
             className="flex flex-col items-center gap-2 bg-white p-2 rounded-lg shadow-xl cursor-pointer border-black border-2"
           >
             <FaFileInvoiceDollar className="text-7xl" />
