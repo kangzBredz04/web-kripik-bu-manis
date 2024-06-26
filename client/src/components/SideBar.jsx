@@ -34,11 +34,11 @@ export default function SideBar() {
           <h1 className="text-base font-medium">Produk</h1>
         </Link>
         <Link
-          to="/admin/order"
+          to="/admin/sales-report"
           className="text-center flex flex-col gap-1 hover:cursor-pointer"
         >
           <TiShoppingCart className="m-auto text-3xl" />
-          <h1 className="text-base font-medium">Pesanan</h1>
+          <h1 className="text-base font-medium">Penjualan</h1>
         </Link>
         <Link
           to="/admin/cashier"
