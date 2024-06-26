@@ -11,6 +11,7 @@ export const AdminContext = createContext();
 
 export default function Admin() {
   const [products, setProducts] = useState();
+  const [bestProducts, setBestProducts] = useState([]);
   const [salesReport, setSalesReport] = useState([]);
   const [user, setUser] = useState();
   const [customer, setCustomer] = useState();
@@ -27,9 +28,12 @@ export default function Admin() {
       api.get("/auth/get-all-user").then((res) => setUser(res));
       api.get("/customer/get-all-customer").then((res) => setCustomer(res));
       api.get("/sale/get-sales-report").then((res) => setSalesReport(res));
+      api.get("/sale/get-best-product").then((res) => setBestProducts(res));
+
       setLoading(false);
     }, 500);
   }, [products?.id]);
+
   if (
     localStorage.getItem("role") == "Super Admin" ||
     localStorage.getItem("role") == "Admin"
@@ -57,6 +61,8 @@ export default function Admin() {
           setEditedCustomer,
           salesReport,
           setSalesReport,
+          bestProducts,
+          setBestProducts,
         }}
       >
         <div className="flex h-screen overflow-hidden font-KumbhSans  bg-white text-black">
