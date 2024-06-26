@@ -89,7 +89,6 @@ export const updateCart = async (req, res) => {
   }
 };
 
-// Controller untuk menghapus data stok berdasarkan id
 export const deleteCart = async (req, res) => {
   try {
     await pool.query("DELETE FROM carts WHERE id = $1", [req.params.id]);
