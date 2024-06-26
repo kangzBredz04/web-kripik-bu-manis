@@ -1,12 +1,16 @@
 import express from "express";
-import { addCashierProduct } from "../controllers/cashier-controller.js";
+import {
+  addCashierProduct,
+  deleteAllProductCashier,
+  deleteProductCashier,
+  getAllProductCashier,
+} from "../controllers/cashier-controller.js";
 
 const router = express.Router();
 
-// router.get("/get-sales-report", getSalesReport);
-// router.get("/get-best-product", getBestProduct);
+router.get("/get-all", getAllProductCashier);
 router.post("/add", addCashierProduct);
-// router.put("/update/:id", updateCart);
-// router.delete("/delete/:id", deleteCart);
+router.delete("/delete/:id", deleteProductCashier);
+router.delete("/delete-all", deleteAllProductCashier);
 
 export default router;
