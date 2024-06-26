@@ -5,10 +5,8 @@ export default {
     extend: {
       colors: {
         "brown-light": "#D2B48C",
-        orange: "#FFA500",
-        "green-leaf": "#8FBC8F",
-        "brown-dark": "#8B4513",
-        cream: "#FFF8DC",
+        "warm-gray": "#EAEAEA",
+        teal: "#5F9EA0",
       },
       fontFamily: {
         pacifico: ["Pacifico", "cursive"],
