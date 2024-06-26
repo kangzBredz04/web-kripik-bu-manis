@@ -1,14 +1,16 @@
 import express from "express";
 import {
   addSalesCustomer,
+  getBestProduct,
   getSalesReport,
 } from "../controllers/sale-controller.js";
 
 const router = express.Router();
 
-router.get("/get-sales-report", getSalesReport); // Router untuk mendapatkan keranjang by id customer
-router.post("/add", addSalesCustomer); // Router untuk menambahkan data keranjang
-// router.put("/update/:id", updateCart); // Router untuk mengubah data keranjang berdasarkan id
-// router.delete("/delete/:id", deleteCart); // Router untuk menghapus data keranjang berdasarkan id
+router.get("/get-sales-report", getSalesReport);
+router.get("/get-best-product", getBestProduct);
+router.post("/add", addSalesCustomer);
+// router.put("/update/:id", updateCart);
+// router.delete("/delete/:id", deleteCart);
 
 export default router;
