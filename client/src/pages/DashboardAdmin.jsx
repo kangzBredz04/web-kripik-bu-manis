@@ -8,7 +8,7 @@ export default function DashboardAdmin() {
   const { products, user, customer, salesReport, bestProducts } =
     useContext(AdminContext);
   return (
-    <div className="flex-1 bg-[#EAEAEA]">
+    <div className="flex-1 bg-warm-gray">
       <div className="py-6 px-5">
         <div className="grid grid-cols-4 gap-4">
           <Link
@@ -44,18 +44,20 @@ export default function DashboardAdmin() {
             <h3 className="text-2xl font-bold">Penjualan</h3>
           </Link>
         </div>
-        <div>
+        <div className="flex flex-col p-4">
           <p>Top Sales</p>
           {bestProducts?.map((b) => (
-            <div key={b.id} className="flex">
-              <img src={b.image} alt="" />
-              <div className="flex flex-col">
-                <p>{b.name}</p>
-                <p>{b.price}</p>
-              </div>
-              <div className="flex flex-col">
-                <p>{b.total_sales}</p>
-                <p>{b.total_sales}</p>
+            <div key={b.id} className="flex gap-3  w-1/4">
+              <img src={b.image} alt="" className="w-10 h-10" />
+              <div className="flex justify-between w-full gap-3">
+                <div className="flex flex-col">
+                  <p className="font-semibold text-xs">{b.name}</p>
+                  <p className="font-light text-xs">{b.price}</p>
+                </div>
+                <div className="flex flex-col">
+                  <p className="font-light text-xs">Total Terjual</p>
+                  <p className="font-light text-xs">{b.total_sales} pcs</p>
+                </div>
               </div>
             </div>
           ))}
