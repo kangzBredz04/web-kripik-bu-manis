@@ -60,13 +60,12 @@ export const addSalesCustomer = async (req, res) => {
   }
 };
 
-export const getSalesReport = async (req, res) => {
+export const getSalesReport = async (_req, res) => {
   try {
     const result = await pool.query(
       `SELECT s.sale_date, c.customer_code, s.sub_total, s.discount, s.total_sale, s.type_of_payment
       FROM sales s
-      JOIN customers c ON s.id_customer = c.id`,
-      [req.params.id]
+      JOIN customers c ON s.id_customer = c.id`
     );
     res.status(200).json(result.rows);
   } catch (error) {
