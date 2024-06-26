@@ -11,7 +11,7 @@ export const AdminContext = createContext();
 
 export default function Admin() {
   const [products, setProducts] = useState();
-  const [salesReport, setSalesReport] = useState();
+  const [salesReport, setSalesReport] = useState([]);
   const [user, setUser] = useState();
   const [customer, setCustomer] = useState();
   const [loading, setLoading] = useState(true);
@@ -21,7 +21,6 @@ export default function Admin() {
   const [editedUser, setEditedUser] = useState();
   const [editedCustomer, setEditedCustomer] = useState();
 
-  console.log(customer);
   useEffect(() => {
     setTimeout(() => {
       api.get("/product/get-all").then((res) => setProducts(res));
