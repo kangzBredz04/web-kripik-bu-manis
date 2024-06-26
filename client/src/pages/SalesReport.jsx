@@ -51,25 +51,25 @@ export default function SalesReport() {
           <table className="w-full border-collapse border border-gray-300 my-5">
             <thead>
               <tr className="bg-gray-300 font-bold tracking-wider">
-                <th className="border border-gray-300 px-4 py-2 text-cente">
+                <th className="border border-gray-300 px-4 py-2 text-center">
                   No
                 </th>
-                <th className="border border-gray-300 px-4 py-2 text-cente">
+                <th className="border border-gray-300 px-4 py-2 text-center">
                   Tanggal
                 </th>
-                <th className="border border-gray-300 px-4 py-2 text-cente">
+                <th className="border border-gray-300 px-4 py-2 text-center">
                   Kode Konsumen
                 </th>
-                <th className="border border-gray-300 px-4 py-2 text-cente">
+                <th className="border border-gray-300 px-4 py-2 text-center">
                   Tipe Pembayaran
                 </th>
-                <th className="border border-gray-300 px-4 py-2 text-cente">
+                <th className="border border-gray-300 px-4 py-2 text-center">
                   Sub Total
                 </th>
-                <th className="border border-gray-300 px-4 py-2 text-cente">
+                <th className="border border-gray-300 px-4 py-2 text-center">
                   Diskon
                 </th>
-                <th className="border border-gray-300 px-4 py-2 text-cente">
+                <th className="border border-gray-300 px-4 py-2 text-center">
                   Total Penjualan
                 </th>
               </tr>
