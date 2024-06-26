@@ -72,3 +72,16 @@ export const getSalesReport = async (_req, res) => {
     res.status(500).json({ msg: error.message });
   }
 };
+
+export const getBestProduct = async (_req, res) => {
+  try {
+    const result = await pool.query(
+      `SELECT p.id, p.name, p.price, p.image, SUM(s.total_product) as total_sales
+      FROM products p JOIN sales s ON p.id = s.id_product
+      GROUP BY p.id, p.name ORDER BY total_sales DESC LIMIT 3;`
+    );
+    res.status(200).json(result.rows);
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
+};
