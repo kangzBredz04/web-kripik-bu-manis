@@ -13,6 +13,7 @@ export default function Admin() {
   const [products, setProducts] = useState();
   const [bestProducts, setBestProducts] = useState([]);
   const [salesReport, setSalesReport] = useState([]);
+  const [cashier, setCashier] = useState([]);
   const [user, setUser] = useState();
   const [customer, setCustomer] = useState();
   const [loading, setLoading] = useState(true);
@@ -29,10 +30,13 @@ export default function Admin() {
       api.get("/customer/get-all-customer").then((res) => setCustomer(res));
       api.get("/sale/get-sales-report").then((res) => setSalesReport(res));
       api.get("/sale/get-best-product").then((res) => setBestProducts(res));
+      api.get("/cashier/get-all").then((res) => setCashier(res));
 
       setLoading(false);
     }, 500);
   }, [products?.id]);
+
+  console.log(cashier);
 
   if (
     localStorage.getItem("role") == "Super Admin" ||
@@ -63,6 +67,8 @@ export default function Admin() {
           setSalesReport,
           bestProducts,
           setBestProducts,
+          cashier,
+          setCashier,
         }}
       >
         <div className="flex h-screen overflow-hidden font-KumbhSans  bg-white text-black">
