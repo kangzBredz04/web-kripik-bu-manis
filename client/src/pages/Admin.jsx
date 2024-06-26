@@ -11,6 +11,7 @@ export const AdminContext = createContext();
 
 export default function Admin() {
   const [products, setProducts] = useState();
+  const [salesReport, setSalesReport] = useState();
   const [user, setUser] = useState();
   const [customer, setCustomer] = useState();
   const [loading, setLoading] = useState(true);
@@ -26,6 +27,7 @@ export default function Admin() {
       api.get("/product/get-all").then((res) => setProducts(res));
       api.get("/auth/get-all-user").then((res) => setUser(res));
       api.get("/customer/get-all-customer").then((res) => setCustomer(res));
+      api.get("/sale/get-sales-report").then((res) => setSalesReport(res));
       setLoading(false);
     }, 500);
   }, [products?.id]);
@@ -54,6 +56,8 @@ export default function Admin() {
           setEditedUser,
           editedCustomer,
           setEditedCustomer,
+          salesReport,
+          setSalesReport,
         }}
       >
         <div className="flex h-screen overflow-hidden font-KumbhSans  bg-white text-black">
