@@ -8,7 +8,7 @@ import { FaCashRegister } from "react-icons/fa";
 export default function SideBar() {
   return (
     <div
-      className={`font-poppins flex flex-col gap-7  h-screen w-40 py-4 px-4 bg-brown-dark text-white`}
+      className={`font-poppins flex flex-col gap-7  h-screen w-40 py-4 px-4 bg-[#5F9EA0] text-white`}
     >
       <div className=" text-center">
         <h1 className="text-xl font-bold tracking-widest">KRIPIK</h1>
