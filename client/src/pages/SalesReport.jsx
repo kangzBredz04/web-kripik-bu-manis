@@ -3,6 +3,9 @@ import { AdminContext } from "./Admin";
 
 export default function SalesReport() {
   const { salesReport } = useContext(AdminContext);
+  // const [subTotal, setSubtotal] = useState(0);
+  // const [dikson, setDiskon] = useState(0);
+  // const [totalSale, setTotalSale] = useState(0);
 
   const [currentDate, setCurrentDate] = useState("");
   useEffect(() => {
@@ -16,7 +19,6 @@ export default function SalesReport() {
     setCurrentDate(formattedDate);
   }, []);
 
-  // Fungsi untuk memformat tanggal
   const formatDate = (timestamp) => {
     const date = new Date(timestamp);
     const options = {
@@ -25,8 +27,17 @@ export default function SalesReport() {
       month: "long",
       day: "numeric",
     };
-    return date.toLocaleDateString("id-ID", options); // 'id-ID' untuk format tanggal Indonesia
+    return date.toLocaleDateString("id-ID", options);
   };
+
+  const calculateSubTotal = () =>
+    salesReport.reduce((acc, curr) => acc + parseInt(curr.sub_total), 0);
+
+  const calculateTotalSale = () =>
+    salesReport.reduce((acc, curr) => acc + parseInt(curr.total_sale), 0);
+
+  const calculateDiscount = () =>
+    salesReport.reduce((acc, curr) => acc + parseInt(curr.discount), 0);
 
   return (
     <div className="py-5 px-5">
@@ -39,14 +50,28 @@ export default function SalesReport() {
         {
           <table className="w-full border-collapse border border-gray-300 my-5">
             <thead>
-              <tr>
-                <th className="border border-gray-300">No</th>
-                <th className="border border-gray-300 ">Tanggal</th>
-                <th className="border border-gray-300 ">Kode Konsumen</th>
-                <th className="border border-gray-300 ">Sub Total</th>
-                <th className="border border-gray-300 ">Diskon</th>
-                <th className="border border-gray-300 ">Total Penjualan</th>
-                <th className="border border-gray-300 ">Tipe Pembayaran</th>
+              <tr className="bg-gray-300 font-bold tracking-wider">
+                <th className="border border-gray-300 px-4 py-2 text-cente">
+                  No
+                </th>
+                <th className="border border-gray-300 px-4 py-2 text-cente">
+                  Tanggal
+                </th>
+                <th className="border border-gray-300 px-4 py-2 text-cente">
+                  Kode Konsumen
+                </th>
+                <th className="border border-gray-300 px-4 py-2 text-cente">
+                  Tipe Pembayaran
+                </th>
+                <th className="border border-gray-300 px-4 py-2 text-cente">
+                  Sub Total
+                </th>
+                <th className="border border-gray-300 px-4 py-2 text-cente">
+                  Diskon
+                </th>
+                <th className="border border-gray-300 px-4 py-2 text-cente">
+                  Total Penjualan
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -63,6 +88,9 @@ export default function SalesReport() {
                     {s.customer_code}
                   </td>
                   <td className="border border-gray-300 px-4 py-2 text-center">
+                    {s.type_of_payment}
+                  </td>
+                  <td className="border border-gray-300 px-4 py-2 text-center">
                     Rp{parseInt(s.sub_total).toLocaleString("id-ID")}
                   </td>
                   <td className="border border-gray-300 px-4 py-2 text-center">
@@ -71,12 +99,28 @@ export default function SalesReport() {
                   <td className="border border-gray-300 px-4 py-2 text-center">
                     Rp{parseInt(s.total_sale).toLocaleString("id-ID")}
                   </td>
-                  <td className="border border-gray-300 px-4 py-2 text-center">
-                    {s.type_of_payment}
-                  </td>
                 </tr>
               ))}
             </tbody>
+            <tfoot>
+              <tr className="bg-gray-300 font-bold tracking-wider">
+                <td
+                  colSpan={4}
+                  className="border border-gray-300 px-4 py-2 text-center"
+                >
+                  TOTAL
+                </td>
+                <td className="border border-gray-300 px-4 py-2 text-center">
+                  Rp{parseInt(calculateSubTotal()).toLocaleString("id-ID")}
+                </td>
+                <td className="border border-gray-300 px-4 py-2 text-center">
+                  Rp{parseInt(calculateDiscount()).toLocaleString("id-ID")}
+                </td>
+                <td className="border border-gray-300 px-4 py-2 text-center">
+                  Rp{parseInt(calculateTotalSale()).toLocaleString("id-ID")}
+                </td>
+              </tr>
+            </tfoot>
           </table>
         }
       </div>
