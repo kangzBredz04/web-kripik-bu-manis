@@ -9,7 +9,7 @@ import { LuMapPin } from "react-icons/lu";
 export default function Footer() {
   // const { theme } = useContext(AdminContext);
   return (
-    <footer className="py-12 px-4 font-poppins bg-brown-dark text-white">
+    <footer className="py-12 px-4 font-poppins bg-gray-300 text-black">
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         <div>
           <h2 className="text-lg font-semibold mb-4">Bantuan</h2>
