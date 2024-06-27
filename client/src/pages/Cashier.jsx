@@ -89,12 +89,12 @@ export default function Cashier() {
             <button
               onClick={() => {
                 setSaleCustomer({
-                  id_customer: localStorage.getItem("id"),
+                  id_customer: 1,
                   sales: cashier,
                   sub_total: calculateSubTotal(),
                   discount: 0,
                   total_sale: calculateSubTotal(),
-                  type_of_payment: "COD",
+                  type_of_payment: "KASIR",
                   address: "-",
                 });
                 console.log(saleCustomer);
@@ -103,7 +103,7 @@ export default function Cashier() {
                   .then(() => saleCustomer({}));
                 api.delete("/cashier/delete-all");
                 setPopUp(!popUp);
-                window.location.reload();
+                // window.location.reload();
               }}
               className="bg-teal text-white py-2 w-full rounded-md"
             >
