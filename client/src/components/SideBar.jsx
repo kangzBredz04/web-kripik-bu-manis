@@ -12,7 +12,7 @@ export default function SideBar() {
         <h1 className="text-xl font-bold tracking-widest">KRIPIK</h1>
         <h1 className="text-xl font-bold tracking-widest">BU MANIS</h1>
       </div>
-      {localStorage.getItem("role") == "Super Admin" ? (
+      {localStorage.getItem("role") === "Super Admin" ? (
         <div className="flex flex-col justify-around h-full">
           <Link className="text-center flex flex-col gap-1 hover:cursor-pointer">
             <MdOutlineDashboard className="m-auto text-3xl" />
