@@ -70,7 +70,26 @@ export default function ProductAdmin() {
                 >
                   <HiOutlinePencilAlt />
                 </button>
-                <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded ml-2">
+                <button
+                  onClick={() => {
+                    if (
+                      confirm(
+                        `Apakah anda yakin ingin menghapus produk ${p.name}`
+                      )
+                    ) {
+                      api
+                        .delete(`/product/delete/${p.id}`)
+                        .then(async (res) => {
+                          alert(res.message);
+                        })
+                        .catch((e) => {
+                          console.log(e);
+                        });
+                      window.location.href = "/admin/product";
+                    }
+                  }}
+                  className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded ml-2"
+                >
                   <FaRegTrashAlt />
                 </button>
               </td>
