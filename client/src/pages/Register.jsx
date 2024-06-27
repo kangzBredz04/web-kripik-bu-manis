@@ -29,29 +29,21 @@ export default function Register() {
     });
   };
   return (
-    <div className="py-8 flex items-center justify-center bg-brown-light font-poppins">
+    <div className="py-8 flex items-center justify-center bg-warm-gray font-poppins">
       <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
-        <h2 className="text-3xl font-bold mb-6 text-brown-dark">
-          Register Account
-        </h2>
+        <h2 className="text-3xl font-bold mb-6 text-teal">Register Account</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label className="block text-gray-700">Customer Code</label>
+            <label className="block text-teal font-bold">Customer Code</label>
             <input
               type="text"
               className="mt-1 p-2 w-full border rounded"
               value={register.customer_code}
               disabled
-              // onChange={(e) =>
-              //   setRegister({
-              //     ...register,
-              //     customer_code: customerCode,
-              //   })
-              // }
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700">Name</label>
+            <label className="block text-teal font-bold">Name</label>
             <input
               required
               type="text"
@@ -66,7 +58,7 @@ export default function Register() {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700">Password</label>
+            <label className="block text-teal font-bold">Password</label>
             <input
               required
               type="password"
@@ -82,13 +74,13 @@ export default function Register() {
           </div>
           <button
             type="submit"
-            className="w-full py-3 bg-brown-dark text-xl text-white rounded hover:bg-white hover:text-brown-dark hover:border hover:border-brown-dark"
+            className="w-full py-3 bg-teal text-xl text-white rounded hover:bg-white hover:text-teal hover:border hover:border-teal"
           >
             Register
           </button>
         </form>
         <div className="flex justify-center mt-4">
-          <h1 className="text-brown-dark">
+          <h1 className="text-teal">
             Sudah punya akun?{" "}
             <Link to={"/login"} className="font-bold underline">
               Login
