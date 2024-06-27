@@ -11,7 +11,6 @@ import DetailProduct from "./pages/DetailProduct.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import ErrorPageAdmin from "./pages/ErrorPageAdmin.jsx";
-import MyAccount from "./pages/MyAccount.jsx";
 import CartCustomer from "./pages/CartCustomer.jsx";
 import DashboardAdmin from "./pages/DashboardAdmin.jsx";
 import ProfileAdmin from "./pages/ProfileAdmin.jsx";
@@ -20,6 +19,7 @@ import CustUserAdmin from "./pages/CustUserAdmin.jsx";
 import Cashier from "./pages/Cashier.jsx";
 import SalesReport from "./pages/SalesReport.jsx";
 import ProductAdmin from "./pages/ProductAdmin.jsx";
+import ProfileCustomer from "./pages/ProfileCustomer.jsx";
 
 const router = createBrowserRouter([
   {
@@ -57,7 +57,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/profile",
-        element: <MyAccount />,
+        element: <ProfileCustomer />,
       },
     ],
   },
