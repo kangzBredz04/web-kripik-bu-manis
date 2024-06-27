@@ -106,7 +106,7 @@ export default function CartCustomer() {
                 ))}
               </div>
             </div>
-            <form className="w-full border h-fit border-brown-dark bg-brown-dark px-4 py-2 text-white">
+            <form className="w-full border h-fit border-teal bg-teal px-4 py-2 text-white">
               <div className="flex flex-row items-center justify-between py-4 border-b-[1px] border-white">
                 <h1 className="text-base font-extrabold tracking-wider">
                   SUBTOTAL
@@ -146,7 +146,7 @@ export default function CartCustomer() {
                           alert("KODE YANG DIMASUKAN TIDAK COCOK");
                         }
                       }}
-                      className="bg-white rounded text-brown-dark font-semibold px-2 tracking-wider"
+                      className="bg-white rounded text-teal font-semibold px-2 tracking-wider"
                     >
                       SUBMIT
                     </button>
@@ -235,7 +235,7 @@ export default function CartCustomer() {
                     );
                   }
                 }}
-                className="w-full flex justify-center py-4 mb-2 bg-white outline outline-white text-brown-dark cursor-pointer hover:bg-brown-dark hover:text-white"
+                className="w-full flex justify-center py-4 mb-2 bg-white outline outline-white text-teal cursor-pointer hover:bg-teal hover:text-white"
               >
                 <h1 className="text-base font-extrabold tracking-wider">
                   CHECKOUT
@@ -272,7 +272,7 @@ export default function CartCustomer() {
                   <td>: {currentDate}</td>
                 </tr>
               </table>
-              <div className=" p-3  flex flex-col gap-3 border-y-2 border-brown-dark">
+              <div className=" p-3  flex flex-col gap-3 border-y-2 border-teal">
                 <div className="flex flex-row items-center">
                   <h1 className="w-3/6 text-base font-extrabold tracking-wider">
                     PRODUK
@@ -302,7 +302,7 @@ export default function CartCustomer() {
               </div>
               <div className="flex mt-4">
                 <div className="ml-auto w-full flex flex-col gap-3">
-                  <div className="w-1/3 flex justify-between py-1 ml-auto border-b-2 border-brown-dark">
+                  <div className="w-1/3 flex justify-between py-1 ml-auto border-b-2 border-teal">
                     <p className="text-base font-extrabold tracking-wider">
                       SUBTOTAL
                     </p>
@@ -310,7 +310,7 @@ export default function CartCustomer() {
                       Rp{subTotal.toLocaleString("id-ID")}
                     </p>
                   </div>
-                  <div className="w-1/3 flex justify-between py-1 ml-auto border-b-2 border-brown-dark">
+                  <div className="w-1/3 flex justify-between py-1 ml-auto border-b-2 border-teal">
                     <p className="text-base font-extrabold tracking-wider">
                       DISKON
                     </p>
@@ -318,7 +318,7 @@ export default function CartCustomer() {
                       Rp. {diskon == 0 ? "-" : diskon.toLocaleString("id-ID")}
                     </p>
                   </div>
-                  <div className="w-1/3 flex justify-between py-1 ml-auto border-b-2 border-brown-dark">
+                  <div className="w-1/3 flex justify-between py-1 ml-auto border-b-2 border-teal">
                     <p className="text-base font-extrabold tracking-wider">
                       TOTAL
                     </p>
