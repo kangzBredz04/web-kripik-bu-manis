@@ -24,9 +24,31 @@ export const addProduct = async (req, res) => {
     );
     res.json({
       product: result.rows[0],
-      message: "Produk berhasil ditambahkan.",
+      msg: "Produk berhasil ditambahkan.",
     });
   } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
+};
+
+export const updateProduct = async (req, res) => {
+  try {
+    await pool.query(
+      "UPDATE products SET name = $1, description = $2, price = $3, stock = $4, image = $5 WHERE id = $6",
+      [
+        req.body.name,
+        req.body.description,
+        req.body.price,
+        req.body.stock,
+        req.body.image,
+        req.params.id,
+      ]
+    );
+    res.status(200).json({
+      msg: "Produk berhasil diubah.",
+    });
+  } catch (error) {
+    console.log(error);
     res.status(500).json({ msg: error.message });
   }
 };
