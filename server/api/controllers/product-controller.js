@@ -52,3 +52,14 @@ export const updateProduct = async (req, res) => {
     res.status(500).json({ msg: error.message });
   }
 };
+
+export const deleteProduct = async (req, res) => {
+  try {
+    await pool.query("DELETE FROM products WHERE id = $1", [req.params.id]);
+    res.status(200).json({
+      msg: "Produk berhasil dihapus.",
+    });
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
+};
