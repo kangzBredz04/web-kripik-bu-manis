@@ -185,7 +185,7 @@ export default function ProductAdmin() {
                   type="number"
                   id="stock"
                   className="w-full border border-gray-300 px-2 py-1 focus:outline-none focus:border-gray-500"
-                  value={editedProduct.price}
+                  value={editedProduct.stock}
                   onChange={(e) =>
                     setEditedProduct({
                       ...editedProduct,
