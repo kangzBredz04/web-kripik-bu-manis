@@ -29,8 +29,8 @@ export default function Shop() {
     .filter((product) => product.name.toLowerCase().includes(keyword));
 
   return (
-    <div className="flex flex-col bg-gray-300">
-      <div className="mx-5 my-5 flex justify-evenly flex-row gap-8 py-4 px-3 bg-brown-dark border-2 border-white  rounded-lg">
+    <div className="flex flex-col bg-warm-gray">
+      <div className="mx-5 my-5 flex justify-evenly flex-row gap-8 py-4 px-3 bg-teal border-2 border-white  rounded-lg">
         <div className="flex items-center">
           <h1 className="text-xl tracking-widest font-bold text-white">
             FILTER PRODUK
