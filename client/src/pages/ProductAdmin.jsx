@@ -33,6 +33,7 @@ export default function ProductAdmin() {
             <th className="border border-gray-300 ">Deskripsi</th>
             <th className="border border-gray-300 ">Harga</th>
             <th className="border border-gray-300 ">Stok</th>
+            <th className="border border-gray-300 ">Gambar</th>
             <th className="border border-gray-300 ">Aksi</th>
           </tr>
         </thead>
@@ -55,6 +56,9 @@ export default function ProductAdmin() {
               </td>
               <td className="border border-gray-300 px-4 py-2 text-center">
                 {p.stock}
+              </td>
+              <td className="border border-gray-300 px-4 py-2 text-center">
+                {p.image}
               </td>
               <td className="border border-gray-300 px-4 py-2 flex justify-evenly">
                 <button
@@ -186,6 +190,26 @@ export default function ProductAdmin() {
                     setEditedProduct({
                       ...editedProduct,
                       stock: e.target.value,
+                    })
+                  }
+                />
+              </div>
+              <div className="mb-4">
+                <label
+                  htmlFor="image"
+                  className="block text-black font-bold mb-2"
+                >
+                  Gambar
+                </label>
+                <input
+                  type="text"
+                  id="image"
+                  className="w-full border border-gray-300 px-2 py-1 focus:outline-none focus:border-gray-500"
+                  value={editedProduct.image}
+                  onChange={(e) =>
+                    setEditedProduct({
+                      ...editedProduct,
+                      image: e.target.value,
                     })
                   }
                 />
