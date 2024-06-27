@@ -73,17 +73,17 @@ export default function Login() {
   }
 
   return (
-    <div className="py-12 flex items-center justify-center bg-gray-200 font-poppins">
+    <div className="py-12 flex items-center justify-center bg-warm-gray font-poppins">
       <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
-        <h2 className="text-3xl mb-6 text-brown-dark font-bold">
+        <h2 className="text-3xl mb-6 text-teal font-bold">
           {isCustomerLogin ? "Customer Login" : "Admin Login"}
         </h2>
         <div className="my-4 text-center grid grid-cols-2">
           <span
             className={`py-2 cursor-pointer ${
               isCustomerLogin
-                ? "bg-brown-dark font-semibold text-white"
-                : "text-brown-dark font-bold"
+                ? "bg-teal font-semibold text-white"
+                : "text-teal font-bold"
             }`}
             onClick={() => setIsCustomerLogin(true)}
           >
@@ -92,8 +92,8 @@ export default function Login() {
           <span
             className={` py-2 cursor-pointer ${
               !isCustomerLogin
-                ? "bg-brown-dark font-semibold text-white"
-                : "text-brown-dark font-bold"
+                ? "bg-teal font-semibold text-white"
+                : "text-teal font-bold"
             }`}
             onClick={() => setIsCustomerLogin(false)}
           >
@@ -104,7 +104,7 @@ export default function Login() {
           {isCustomerLogin ? (
             <>
               <div className="mb-4">
-                <label className="block text-brown-dark font-bold">
+                <label className="block text-teal font-bold">
                   Customer Code
                 </label>
                 <input
@@ -118,9 +118,7 @@ export default function Login() {
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-brown-dark font-bold">
-                  Password
-                </label>
+                <label className="block text-teal font-bold">Password</label>
                 <input
                   type="password"
                   id="password"
@@ -134,9 +132,7 @@ export default function Login() {
           ) : (
             <>
               <div className="mb-4">
-                <label className="block text-brown-dark font-bold">
-                  Username
-                </label>
+                <label className="block text-teal font-bold">Username</label>
                 <input
                   type="text"
                   id="username"
@@ -147,9 +143,7 @@ export default function Login() {
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-brown-dark font-bold">
-                  Password
-                </label>
+                <label className="block text-teal font-bold">Password</label>
                 <input
                   type="password"
                   id="password"
@@ -164,13 +158,13 @@ export default function Login() {
           <button
             type="submit"
             onSubmit={handleSubmit}
-            className="w-full py-3 font-bold text-xl bg-brown-dark text-white rounded hover:bg-white hover:border hover:border-brown-dark hover:text-brown-dark"
+            className="w-full py-3 font-bold text-xl bg-teal text-white rounded hover:bg-white hover:border hover:border-teal hover:text-teal"
           >
             Login
           </button>
         </form>
         <div className="flex justify-center mt-4">
-          <h1 className="text-brown-dark">
+          <h1 className="text-teal">
             Belum punya akun?{" "}
             <Link to={"/register"} className="font-bold underline">
               Register
