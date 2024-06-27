@@ -11,7 +11,7 @@ export default function Navbar() {
       </div>
       <div className="">
         <Link to="/admin/profile" className="flex items-center gap-3">
-          <p>Profile</p>
+          <p>Profil Akun</p>
           <FiUser className="text-2xl" />
         </Link>
       </div>
