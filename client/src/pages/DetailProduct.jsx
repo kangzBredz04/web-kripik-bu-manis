@@ -34,7 +34,7 @@ export default function DetailProduct() {
 
   if (product?.id) {
     return (
-      <div className="bg-brown-light font-poppins">
+      <div className="bg-warm-gray font-poppins">
         <div className="flex justify-center py-3">
           <h1 className="text-4xl font-bold tracking-wider">DETAIL PRODUK</h1>
         </div>
@@ -44,9 +44,7 @@ export default function DetailProduct() {
           </div>
           <div>
             <div className="my-10 mx-8 flex flex-col gap-5">
-              <h1 className="text-4xl font-bold text-brown-dark">
-                {product.name}
-              </h1>
+              <h1 className="text-4xl font-bold text-teal">{product.name}</h1>
               <h1 className="font-semibold text-2xl">
                 Rp{parseInt(product.price).toLocaleString("id-ID")} {""}/Kg
               </h1>
@@ -54,7 +52,7 @@ export default function DetailProduct() {
             </div>
             <div className="my-10 mx-8 gap-5 flex items-center justify-between">
               <div className="flex gap-5 items-center">
-                <button className="py-3 px-3 bg-brown-dark rounded-full text-white text-xl font-bold">
+                <button className="py-3 px-3 bg-teal rounded-full text-white text-xl font-bold">
                   <FaMinus
                     onClick={() => {
                       if (cartProduct.total_product > 1) {
@@ -68,7 +66,7 @@ export default function DetailProduct() {
                   />
                 </button>
                 <p className="text-2xl">{cartProduct.total_product}</p>
-                <button className="py-3 px-3 bg-brown-dark rounded-3xl text-white text-xl font-bold">
+                <button className="py-3 px-3 bg-teal rounded-3xl text-white text-xl font-bold">
                   <FaPlus
                     onClick={() => {
                       if (cartProduct.total_product < product.stock) {
@@ -94,7 +92,7 @@ export default function DetailProduct() {
                     navigate("/login");
                   }
                 }}
-                className="w-full py-2 px-11 bg-brown-dark rounded-3xl text-white text-xl font-bold"
+                className="w-full py-2 px-11 bg-teal rounded-3xl text-white text-xl font-bold"
               >
                 MASUKAN KERANJANG
               </button>
