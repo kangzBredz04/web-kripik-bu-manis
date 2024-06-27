@@ -36,7 +36,7 @@ export default function CustUserAdmin() {
         <div>
           {/* ADMIN DAN SUPER ADMIN */}
           <div className="flex justify-between">
-            <h2 className="text-2xl font-bold mb-4">Admin List</h2>
+            <h2 className="text-2xl font-bold mb-4">Daftar Admin</h2>
             <div>
               <button
                 onClick={() => {
@@ -45,7 +45,7 @@ export default function CustUserAdmin() {
                 }}
                 className="flex justify-between gap-2 items-center bg-green-600 hover:bg-green-700 text-white font-bold py-1 px-2 rounded"
               >
-                <MdOutlineAddBox /> Add Admin
+                <MdOutlineAddBox /> Tambah Admin
               </button>
             </div>
           </div>
@@ -54,11 +54,11 @@ export default function CustUserAdmin() {
             <thead>
               <tr>
                 <th className="border border-gray-300">No</th>
-                <th className="border border-gray-300 ">Name</th>
+                <th className="border border-gray-300 ">Nama</th>
                 <th className="border border-gray-300 ">Username</th>
                 <th className="border border-gray-300 ">Password</th>
                 <th className="border border-gray-300 ">Role</th>
-                <th className="border border-gray-300 ">Action</th>
+                <th className="border border-gray-300 ">Aksi</th>
               </tr>
             </thead>
             <tbody>
@@ -127,7 +127,7 @@ export default function CustUserAdmin() {
         <div>
           {/* CUSTOMER */}
           <div className="flex justify-between">
-            <h2 className="text-2xl font-bold mb-4">Customer List</h2>
+            <h2 className="text-2xl font-bold mb-4">Daftar Konsument</h2>
             <div>
               <button
                 onClick={() => {
@@ -136,7 +136,7 @@ export default function CustUserAdmin() {
                 }}
                 className="flex justify-between gap-2 items-center bg-green-600 hover:bg-green-700 text-white font-bold py-1 px-2 rounded"
               >
-                <MdOutlineAddBox /> Add Customer
+                <MdOutlineAddBox /> Tambah Konsumen
               </button>
             </div>
           </div>
@@ -145,10 +145,10 @@ export default function CustUserAdmin() {
             <thead>
               <tr>
                 <th className="border border-gray-300">No</th>
-                <th className="border border-gray-300 ">Customer Code</th>
-                <th className="border border-gray-300 ">Name</th>
+                <th className="border border-gray-300 ">Kode Konsumen</th>
+                <th className="border border-gray-300 ">Nama</th>
                 <th className="border border-gray-300 ">Password</th>
-                <th className="border border-gray-300 ">Action</th>
+                <th className="border border-gray-300 ">Aksi</th>
               </tr>
             </thead>
             <tbody>
@@ -213,7 +213,7 @@ export default function CustUserAdmin() {
           <div className="absolute inset-0 bg-black opacity-50"></div>
           <div className="bg-white py-4 px-4 w-96 rounded-2xl shadow-lg z-50">
             <h2 className="text-xl font-bold mb-4 text-center tracking-wider">
-              {editedCustomer.id ? "EDIT" : "ADD NEW"} CUSTOMER
+              {editedCustomer.id ? "EDIT" : "TAMBAH"} KONSUMEN
             </h2>
             <form
               onSubmit={(e) => {
@@ -250,7 +250,7 @@ export default function CustUserAdmin() {
                   htmlFor="customer_code"
                   className="block text-black font-bold mb-2"
                 >
-                  Customer Code
+                  Kode Konsumen
                 </label>
                 <input
                   type="text"
@@ -265,7 +265,7 @@ export default function CustUserAdmin() {
                   htmlFor="name"
                   className="block text-black font-bold mb-2"
                 >
-                  Name
+                  Nama
                 </label>
                 <input
                   type="text"
@@ -313,13 +313,13 @@ export default function CustUserAdmin() {
                   onClick={() => setPopUp2(!popUp2)}
                   className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold px-4 py-2 rounded mr-2"
                 >
-                  Cancel
+                  Batal
                 </button>
                 <button
                   type="submit"
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold px-4 py-2 rounded"
                 >
-                  Save
+                  Simpan
                 </button>
               </div>
             </form>
@@ -331,7 +331,7 @@ export default function CustUserAdmin() {
           <div className="absolute inset-0 bg-black opacity-50"></div>
           <div className="bg-white py-4 px-4 w-96 rounded-2xl shadow-lg z-50">
             <h2 className="text-xl font-bold mb-4 text-center tracking-wider">
-              {editedUser.id ? "EDIT" : "ADD NEW"} USER
+              {editedUser.id ? "EDIT" : "TAMBAH"} ADMIN
             </h2>
             <form
               onSubmit={(e) => {
@@ -365,7 +365,7 @@ export default function CustUserAdmin() {
                   htmlFor="first_name"
                   className="block text-black font-bold mb-2"
                 >
-                  Name
+                  Nama
                 </label>
                 <input
                   type="text"
@@ -456,13 +456,13 @@ export default function CustUserAdmin() {
                   onClick={() => setPopUp(!popUp)}
                   className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold px-4 py-2 rounded mr-2"
                 >
-                  Cancel
+                  Batal
                 </button>
                 <button
                   type="submit"
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold px-4 py-2 rounded"
                 >
-                  Save
+                  Simpan
                 </button>
               </div>
             </form>
