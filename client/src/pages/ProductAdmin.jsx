@@ -77,14 +77,9 @@ export default function ProductAdmin() {
                         `Apakah anda yakin ingin menghapus produk ${p.name}`
                       )
                     ) {
-                      api
-                        .delete(`/product/delete/${p.id}`)
-                        .then(async (res) => {
-                          alert(res.message);
-                        })
-                        .catch((e) => {
-                          console.log(e);
-                        });
+                      api.delete(`/product/delete/${p.id}`).catch((e) => {
+                        console.log(e);
+                      });
                       window.location.href = "/admin/product";
                     }
                   }}
