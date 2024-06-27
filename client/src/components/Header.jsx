@@ -17,7 +17,7 @@ export default function Header() {
     setShowPopup(!showPopup);
   };
   return (
-    <header className="bg-brown-dark text-white border  sticky top-0 z-50 font-poppins">
+    <header className="bg-teal text-white border  sticky top-0 z-50 font-poppins">
       <div className="container mx-auto  py-4 flex justify-between items-center">
         <div className="flex items-center">
           <Link to="/" className="text-xl font-bold tracking-widest">
@@ -43,7 +43,7 @@ export default function Header() {
             {cart.length < 1 ? (
               ""
             ) : (
-              <div className="absolute -right-2 -top-2 text-brown-dark px-[5px] bg-white rounded-full text-xs font-semibold">
+              <div className="absolute -right-2 -top-2 text-teal px-[5px] bg-white rounded-full text-xs font-semibold">
                 {cart?.length}
               </div>
             )}
@@ -68,12 +68,12 @@ export default function Header() {
           {showPopup && (
             <div className="absolute right-1 mt-11 w-48 bg-white border border-gray-200 shadow-lg rounded-lg">
               <div className="p-4 flex flex-col items-center">
-                <FaUserCircle size={50} className="text-brown-dark mb-4" />
+                <FaUserCircle size={50} className="text-teal mb-4" />
                 <div className="text-center">
-                  <p className="text-sm text-brown-dark font-semibold">
+                  <p className="text-sm text-teal font-semibold">
                     Customer Code: {`${localStorage.getItem("customer_code")}`}
                   </p>
-                  <p className="text-sm text-brown-dark font-semibold">
+                  <p className="text-sm text-teal font-semibold">
                     Name: {`${localStorage.getItem("name")}`}
                   </p>
                   <button
@@ -83,7 +83,7 @@ export default function Header() {
                       localStorage.removeItem("name");
                       window.location.href = "/login";
                     }}
-                    className="bg-brown-dark mt-2 py-1 px-9 rounded-lg"
+                    className="bg-teal mt-2 py-1 px-9 rounded-lg"
                   >
                     Logout
                   </button>
