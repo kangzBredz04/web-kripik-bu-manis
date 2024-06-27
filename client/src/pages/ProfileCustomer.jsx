@@ -5,7 +5,7 @@ import { api } from "../utils";
 import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import { AllContext } from "../App";
 
-export default function MyAccount() {
+export default function ProfileCustomer() {
   const [user, setUser] = useOutletContext();
   const { orders, setOrders } = useContext(AllContext);
   const [editedUser, setEditedUser] = useState({});
