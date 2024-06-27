@@ -51,7 +51,7 @@ export default function Header() {
           </Link>
           {localStorage.getItem("id") ? (
             <Link
-              // to="/login"
+              to="/profile"
               onClick={togglePopup}
               className="text-white hover:text-gray-200"
             >
