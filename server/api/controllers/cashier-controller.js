@@ -17,7 +17,7 @@ export const addCashierProduct = async (req, res) => {
 export const getAllProductCashier = async (_req, res) => {
   try {
     const result = await pool.query(
-      `SELECT c.id, c.total_product, c.price, c.sub_total, p.name
+      `SELECT c.id, c.total_product, c.id_product, c.price, c.sub_total, p.name
       FROM cashier_product c
       JOIN products p ON c.id_product = p.id`
     );
