@@ -24,10 +24,10 @@ export default function CashierCardProduct({ id, name, image, price }) {
           window.location.reload();
         });
       }}
-      className="bg-white cursor-pointer flex flex-col justify-between font-poppins rounded-md"
+      className="bg-teal text-white cursor-pointer flex flex-col justify-between font-poppins rounded-md"
     >
       <div className="rounded-md">
-        <img src={image} alt="" className="rounded-md" />
+        <img src={`/${image}`} alt="" className="rounded-md" />
         <div className="p-1 items-center flex flex-col justify-between">
           <div className="flex flex-col gap-1">
             <p className="text-base text-center font-bold">{name}</p>
