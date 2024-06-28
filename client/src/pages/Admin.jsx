@@ -5,13 +5,13 @@ import Footer from "../components/Footer.jsx";
 import { createContext, useEffect, useState } from "react";
 import UnauthorizedPage from "./UnauthorizedPage.jsx";
 import { api } from "../utils.js";
-// import UnauthorizedPage from "./UnauthorizedPage";
 
 export const AdminContext = createContext();
 
 export default function Admin() {
   const [products, setProducts] = useState();
   const [bestProducts, setBestProducts] = useState([]);
+  const [bestCustomers, setBestCustomers] = useState([]);
   const [salesReport, setSalesReport] = useState([]);
   const [cashier, setCashier] = useState([]);
   const [user, setUser] = useState();
@@ -30,13 +30,11 @@ export default function Admin() {
       api.get("/customer/get-all-customer").then((res) => setCustomer(res));
       api.get("/sale/get-sales-report").then((res) => setSalesReport(res));
       api.get("/sale/get-best-product").then((res) => setBestProducts(res));
+      api.get("/sale/get-best-customer").then((res) => setBestCustomers(res));
       api.get("/cashier/get-all").then((res) => setCashier(res));
-
       setLoading(false);
     }, 500);
   }, [products?.id]);
-
-  console.log(cashier);
 
   if (
     localStorage.getItem("role") == "Super Admin" ||
@@ -67,6 +65,8 @@ export default function Admin() {
           setSalesReport,
           bestProducts,
           setBestProducts,
+          bestCustomers,
+          setBestCustomers,
           cashier,
           setCashier,
         }}
