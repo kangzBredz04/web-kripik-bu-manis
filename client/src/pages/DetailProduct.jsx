@@ -32,27 +32,28 @@ export default function DetailProduct() {
     });
   }, []);
 
+  console.log(products);
   if (product?.id) {
     return (
-      <div className="bg-warm-gray font-poppins">
-        <div className="flex justify-center py-3">
+      <div className="bg-warm-gray font-poppins text-teal py-6">
+        <div className="flex justify-center py-5">
           <h1 className="text-4xl font-bold tracking-wider">DETAIL PRODUK</h1>
         </div>
-        <div className="mx-32 flex flex-row rounded-lg bg-white">
-          <div className="border border-gray-200 w-96 rounded-lg">
-            <img src={product.image} alt="" className="rounded-s-lg" />
+        <div className="mx-32 flex flex-row rounded-lg bg-teal text-white">
+          <div className="w-96 rounded-lg">
+            <img src={`/${product.image}`} alt="" className="rounded-s-lg" />
           </div>
           <div>
             <div className="my-10 mx-8 flex flex-col gap-5">
-              <h1 className="text-4xl font-bold text-teal">{product.name}</h1>
+              <h1 className="text-4xl font-bold">{product.name}</h1>
               <h1 className="font-semibold text-2xl">
                 Rp{parseInt(product.price).toLocaleString("id-ID")} {""}/Kg
               </h1>
               <p className="font-light text-xl">{product.description}</p>
             </div>
-            <div className="my-10 mx-8 gap-5 flex items-center justify-between">
+            <div className="mt-16 mx-8 gap-5 flex items-center justify-between">
               <div className="flex gap-5 items-center">
-                <button className="py-3 px-3 bg-teal rounded-full text-white text-xl font-bold">
+                <button className="py-3 px-3 bg-white rounded-full text-teal text-xl font-bold">
                   <FaMinus
                     onClick={() => {
                       if (cartProduct.total_product > 1) {
@@ -66,7 +67,7 @@ export default function DetailProduct() {
                   />
                 </button>
                 <p className="text-2xl">{cartProduct.total_product}</p>
-                <button className="py-3 px-3 bg-teal rounded-3xl text-white text-xl font-bold">
+                <button className="py-3 px-3 bg-white rounded-3xl text-teal text-xl font-bold">
                   <FaPlus
                     onClick={() => {
                       if (cartProduct.total_product < product.stock) {
@@ -85,14 +86,14 @@ export default function DetailProduct() {
                   if (localStorage.getItem("id")) {
                     api.post("/cart/add", cartProduct).then((res) => {
                       alert(res.msg);
-                      window.location.reload();
+                      window.location.href = "/cart";
                     });
                   } else {
                     alert("Anda harus login dahulu");
                     navigate("/login");
                   }
                 }}
-                className="w-full py-2 px-11 bg-teal rounded-3xl text-white text-xl font-bold"
+                className="w-full py-2 px-11 bg-white rounded-3xl text-teal text-xl font-bold tracking-wider"
               >
                 MASUKAN KERANJANG
               </button>
