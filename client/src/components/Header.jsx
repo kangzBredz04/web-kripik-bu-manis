@@ -10,18 +10,18 @@ import { useContext, useState } from "react";
 import { AllContext } from "../App";
 
 export default function Header() {
-  const { wishlist, cart } = useContext(AllContext);
+  const { cart } = useContext(AllContext);
   const [showPopup, setShowPopup] = useState(false);
   const navigate = useNavigate();
-  const togglePopup = () => {
-    setShowPopup(!showPopup);
-  };
   return (
-    <header className="bg-teal text-white border  sticky top-0 z-50 font-poppins">
+    <header className="bg-teal text-white  sticky top-0 z-50 font-poppins">
       <div className="container mx-auto  py-4 flex justify-between items-center">
         <div className="flex items-center">
-          <Link to="/" className="text-xl font-bold tracking-widest">
-            KRIPIK BU MANIS
+          <Link
+            to="/"
+            className="text-3xl font-extrabold tracking-widest font-caveat"
+          >
+            Kripik Bu Manis
           </Link>
         </div>
         <nav className="grow flex justify-evenly">
@@ -50,11 +50,7 @@ export default function Header() {
             <SlBag className="text-xl" />
           </Link>
           {localStorage.getItem("id") ? (
-            <Link
-              to="/profile"
-              onClick={togglePopup}
-              className="text-white hover:text-gray-200"
-            >
+            <Link to="/profile" className="text-white hover:text-gray-200">
               <FiUser className="text-xl" />
             </Link>
           ) : (
@@ -64,32 +60,6 @@ export default function Header() {
             >
               LOGIN
             </Link>
-          )}
-          {showPopup && (
-            <div className="absolute right-1 mt-11 w-48 bg-white border border-gray-200 shadow-lg rounded-lg">
-              <div className="p-4 flex flex-col items-center">
-                <FaUserCircle size={50} className="text-teal mb-4" />
-                <div className="text-center">
-                  <p className="text-sm text-teal font-semibold">
-                    Customer Code: {`${localStorage.getItem("customer_code")}`}
-                  </p>
-                  <p className="text-sm text-teal font-semibold">
-                    Name: {`${localStorage.getItem("name")}`}
-                  </p>
-                  <button
-                    onClick={() => {
-                      localStorage.removeItem("id");
-                      localStorage.removeItem("customer_code");
-                      localStorage.removeItem("name");
-                      window.location.href = "/login";
-                    }}
-                    className="bg-teal mt-2 py-1 px-9 rounded-lg"
-                  >
-                    Logout
-                  </button>
-                </div>
-              </div>
-            </div>
           )}
         </div>
       </div>
