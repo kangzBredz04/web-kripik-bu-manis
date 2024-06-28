@@ -40,7 +40,7 @@ export default function SalesReport() {
     salesReport.reduce((acc, curr) => acc + parseInt(curr.discount), 0);
 
   return (
-    <div className="py-5 px-5">
+    <div className="py-5 px-5 bg-warm-gray text-teal">
       <div className="flex flex-col items-center">
         <p className="text-2xl font-bold tracking-wider">Laporan Penjualan</p>
         <p className="text-2xl font-bold tracking-wider">Kripik Bu Manis</p>
@@ -78,25 +78,25 @@ export default function SalesReport() {
               {/* Data rows */}
               {salesReport?.map((s, index) => (
                 <tr key={s.id}>
-                  <td className="border border-gray-300 px-4 py-2 text-center">
+                  <td className="border-[1px] border-teal px-4 py-2 text-center">
                     {index + 1}
                   </td>
-                  <td className="border border-gray-300 px-4 py-2 text-center">
+                  <td className="border-[1px] border-teal px-4 py-2 text-center">
                     {formatDate(s.sale_date)}
                   </td>
-                  <td className="border border-gray-300 px-4 py-2 text-center">
+                  <td className="border-[1px] border-teal px-4 py-2 text-center">
                     {s.customer_code}
                   </td>
-                  <td className="border border-gray-300 px-4 py-2 text-center">
+                  <td className="border-[1px] border-teal px-4 py-2 text-center">
                     {s.type_of_payment}
                   </td>
-                  <td className="border border-gray-300 px-4 py-2 text-center">
+                  <td className="border-[1px] border-teal px-4 py-2 text-center">
                     Rp{parseInt(s.sub_total).toLocaleString("id-ID")}
                   </td>
-                  <td className="border border-gray-300 px-4 py-2 text-center">
+                  <td className="border-[1px] border-teal px-4 py-2 text-center">
                     Rp{parseInt(s.discount).toLocaleString("id-ID")}
                   </td>
-                  <td className="border border-gray-300 px-4 py-2 text-center">
+                  <td className="border-[1px] border-teal px-4 py-2 text-center">
                     Rp{parseInt(s.total_sale).toLocaleString("id-ID")}
                   </td>
                 </tr>
