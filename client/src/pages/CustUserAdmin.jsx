@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect } from "react";
 import { AdminContext } from "./Admin";
@@ -31,56 +32,58 @@ export default function CustUserAdmin() {
   }, []);
 
   return (
-    <div className="p-5 min-h-64">
+    <div className="p-5 min-h-64 bg-warm-gray text-teal">
       {localStorage.getItem("role") == "Super Admin" ? (
         <div>
           {/* ADMIN DAN SUPER ADMIN */}
           <div className="flex justify-between">
-            <h2 className="text-2xl font-bold mb-4">Daftar Admin</h2>
+            <h2 className="text-2xl font-extrabold tracking-wide mb-4">
+              Daftar Admin
+            </h2>
             <div>
               <button
                 onClick={() => {
                   setEditedUser({});
                   setPopUp(!popUp);
                 }}
-                className="flex justify-between gap-2 items-center bg-green-600 hover:bg-green-700 text-white font-bold py-1 px-2 rounded"
+                className="flex justify-between gap-2 items-center bg-teal hover:bg-green-700 text-white font-bold py-1 px-2 rounded"
               >
                 <MdOutlineAddBox /> Tambah Admin
               </button>
             </div>
           </div>
           {/* Table for CRUD Data */}
-          <table className="w-full border-collapse border border-gray-300">
+          <table className="w-full border-collapse border-2 border-teal">
             <thead>
               <tr>
-                <th className="border border-gray-300">No</th>
-                <th className="border border-gray-300 ">Nama</th>
-                <th className="border border-gray-300 ">Username</th>
-                <th className="border border-gray-300 ">Password</th>
-                <th className="border border-gray-300 ">Role</th>
-                <th className="border border-gray-300 ">Aksi</th>
+                <th className="border-2 border-teal">No</th>
+                <th className="border-2 border-teal ">Nama</th>
+                <th className="border-2 border-teal ">Username</th>
+                <th className="border-2 border-teal ">Password</th>
+                <th className="border-2 border-teal ">Role</th>
+                <th className="border-2 border-teal ">Aksi</th>
               </tr>
             </thead>
             <tbody>
               {/* Data rows */}
               {user?.map((u, index) => (
                 <tr key={u.id}>
-                  <td className="border border-gray-300 px-4 py-2 text-center">
+                  <td className="border-2 border-teal px-4 py-2 text-center">
                     {index + 1}
                   </td>
-                  <td className="border border-gray-300 px-4 py-2 text-center">
+                  <td className="border-2 border-teal px-4 py-2 text-center">
                     {u.name ? u.name : "-"}
                   </td>
-                  <td className="border border-gray-300 px-4 py-2 text-center">
+                  <td className="border-2 border-teal px-4 py-2 text-center">
                     {u.username}
                   </td>
-                  <td className="border border-gray-300 px-4 py-2 text-center">
+                  <td className="border-2 border-teal px-4 py-2 text-center">
                     ******
                   </td>
-                  <td className="border border-gray-300 px-4 py-2 text-center">
+                  <td className="border-2 border-teal px-4 py-2 text-center">
                     {u.role}
                   </td>
-                  <td className="border border-gray-300 px-4 py-2 flex justify-evenly">
+                  <td className="border border-teal px-4 py-2 flex justify-evenly">
                     <button
                       onClick={() => {
                         setEditedUser(u);
@@ -127,51 +130,50 @@ export default function CustUserAdmin() {
         <div>
           {/* CUSTOMER */}
           <div className="flex justify-between">
-            <h2 className="text-2xl font-bold mb-4">Daftar Konsument</h2>
+            <h2 className="text-2xl font-bold mb-4">Daftar Konsumen</h2>
             <div>
               <button
                 onClick={() => {
                   setEditedCustomer({});
                   setPopUp2(!popUp2);
                 }}
-                className="flex justify-between gap-2 items-center bg-green-600 hover:bg-green-700 text-white font-bold py-1 px-2 rounded"
+                className="flex justify-between gap-2 items-center bg-teal hover:bg-green-700 text-white font-bold py-1 px-2 rounded"
               >
                 <MdOutlineAddBox /> Tambah Konsumen
               </button>
             </div>
           </div>
           {/* Table for CRUD Data */}
-          <table className="w-full border-collapse border border-gray-300">
+          <table className="w-full border-collapse border-2 border-teal">
             <thead>
               <tr>
-                <th className="border border-gray-300">No</th>
-                <th className="border border-gray-300 ">Kode Konsumen</th>
-                <th className="border border-gray-300 ">Nama</th>
-                <th className="border border-gray-300 ">Password</th>
-                <th className="border border-gray-300 ">Aksi</th>
+                <th className="border-2 border-teal">No</th>
+                <th className="border-2 border-teal ">Kode Konsumen</th>
+                <th className="border-2 border-teal ">Nama</th>
+                <th className="border-2 border-teal ">Password</th>
+                <th className="border-2 border-teal ">Aksi</th>
               </tr>
             </thead>
             <tbody>
               {/* Data rows */}
               {customer?.map((c, index) => (
                 <tr key={c.id}>
-                  <td className="border border-gray-300 px-4 py-2 text-center">
+                  <td className="border-2 border-teal px-4 py-2 text-center">
                     {index + 1}
                   </td>
-                  <td className="border border-gray-300 px-4 py-2 text-center">
+                  <td className="border-2 border-teal px-4 py-2 text-center">
                     {c.customer_code ? c.customer_code : "-"}
                   </td>
-                  <td className="border border-gray-300 px-4 py-2 text-center">
+                  <td className="border-2 border-teal px-4 py-2 text-center">
                     {c.name}
                   </td>
-                  <td className="border border-gray-300 px-4 py-2 text-center">
+                  <td className="border-2 border-teal px-4 py-2 text-center">
                     ******
                   </td>
-                  <td className="border border-gray-300 px-4 py-2 flex justify-evenly">
+                  <td className="border border-teal px-4 py-2 flex justify-evenly">
                     <button
                       onClick={() => {
                         setEditedCustomer(c);
-                        console.log(c);
                         setPopUp2(!popUp2);
                       }}
                       className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
@@ -186,7 +188,7 @@ export default function CustUserAdmin() {
                           )
                         ) {
                           api
-                            .delete(`/auth/delete/${c.id}`)
+                            .delete(`/customer/delete-customer/${c.id}`)
                             .then(async (res) => {
                               alert(res.msg);
                             })
@@ -221,7 +223,7 @@ export default function CustUserAdmin() {
                 if (editedCustomer.id) {
                   api
                     .put(
-                      `/auth/update-user/${editedCustomer.id}`,
+                      `/customer/update-customer/${editedCustomer.id}`,
                       editedCustomer
                     )
                     .then(async (res) => {
@@ -361,10 +363,7 @@ export default function CustUserAdmin() {
               }}
             >
               <div className="mb-4">
-                <label
-                  htmlFor="first_name"
-                  className="block text-black font-bold mb-2"
-                >
+                <label htmlFor="first_name" className="block  font-bold mb-2">
                   Nama
                 </label>
                 <input
@@ -382,10 +381,7 @@ export default function CustUserAdmin() {
                 />
               </div>
               <div className="mb-4">
-                <label
-                  htmlFor="username"
-                  className="block text-black font-bold mb-2"
-                >
+                <label htmlFor="username" className="block font-bold mb-2">
                   Username
                 </label>
                 <input
@@ -406,10 +402,7 @@ export default function CustUserAdmin() {
                   ""
                 ) : (
                   <div>
-                    <label
-                      htmlFor="password"
-                      className="block text-black font-bold mb-2"
-                    >
+                    <label htmlFor="password" className="block font-bold mb-2">
                       Password
                     </label>
                     <input
@@ -427,23 +420,21 @@ export default function CustUserAdmin() {
                   </div>
                 )}
                 <div className="flex-grow">
-                  <label
-                    htmlFor="role"
-                    className="block text-black font-bold mb-2"
-                  >
+                  <label htmlFor="role" className="block font-bold mb-2">
                     Role
                   </label>
                   <select
                     id="role"
-                    disabled={editedUser.id == 1}
                     className="w-full border border-gray-300 px-2 py-1 focus:outline-none focus:border-gray-500"
-                    value={editedUser.role == null ? "" : editedUser.role}
-                    onChange={(e) =>
+                    value={editedUser.role}
+                    onChange={(e) => {
+                      e.preventDefault();
                       setEditedUser({
                         ...editedUser,
                         role: e.target.value,
-                      })
-                    }
+                      });
+                      console.log(editedUser);
+                    }}
                   >
                     <option value={"Super Admin"}>Super Admin</option>
                     <option value={"Admin"}>Admin</option>
