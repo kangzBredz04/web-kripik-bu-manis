@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import { FaPlus, FaMinus } from "react-icons/fa6";
-import { IoMdCloseCircleOutline } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { IoCloseSharp } from "react-icons/io5";
 import { api } from "../utils";
 
 export default function CardCart({
@@ -14,7 +13,7 @@ export default function CardCart({
 }) {
   return (
     <div className="flex flex-row items-center justify-between gap-5 py-2 border-b-[1px] border-black font-poppins">
-      <IoMdCloseCircleOutline
+      <IoCloseSharp
         className="text-2xl cursor-pointer"
         onClick={() => {
           api.delete(`/cart/delete/${id_cart}`).then(() => {
@@ -22,10 +21,7 @@ export default function CardCart({
           });
         }}
       />
-      <Link
-        to={`/product/${id_product}`}
-        className="w-3/5 flex flex-row items-center gap-7 py-2"
-      >
+      <div className="w-3/5 flex flex-row items-center gap-7 py-2">
         <img src={image} alt="" className="w-16" />
         <div className="flex flex-col gap-3">
           <h1 className="text-base font-extrabold tracking-wider">{name}</h1>
@@ -33,7 +29,7 @@ export default function CardCart({
             {total_product} x Rp{parseInt(price).toLocaleString("id-ID")}
           </h1>
         </div>
-      </Link>
+      </div>
       <div className="w-1/5">
         <div className="flex flex-row items-center py-3 px-2 justify-between ">
           <FaMinus
