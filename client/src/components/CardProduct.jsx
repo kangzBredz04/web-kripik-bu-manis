@@ -10,20 +10,20 @@ export default function CardProduct({
   stock,
 }) {
   return (
-    <div className="bg-white flex flex-col justify-between font-poppins rounded-md">
+    <div className="bg-teal flex flex-col justify-between font-poppins rounded-md">
       <div className="rounded-md">
-        <img src={image} alt="" className="rounded-md" />
+        <img src={`/${image}`} alt="" className="rounded-md" />
         <div className="p-5 flex flex-col justify-between h-52">
           <div className="flex flex-col gap-1">
-            <p className="text-xl text-teal font-bold">{name}</p>
-            <p className="text-base font-bold">
+            <p className="text-xl text-white font-bold">{name}</p>
+            <p className="text-base text-white font-bold">
               Rp{parseInt(price).toLocaleString("id-ID")}
             </p>
-            <p className="text-xs font-medium">{description}</p>
+            <p className="text-xs font-medium text-white">{description}</p>
           </div>
           <div>
             <button
-              className="py-2 px-5 bg-teal rounded-3xl text-white text-xs font-bold"
+              className="py-3 px-5 bg-white rounded-lg w-full text-teal text-xs font-bold hover:text-white hover:bg-transparent hover:outline"
               onClick={() => {
                 localStorage.setItem("id_product", id);
                 window.location.href = `/product/${localStorage.getItem(
