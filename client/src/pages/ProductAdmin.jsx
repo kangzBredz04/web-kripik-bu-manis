@@ -10,7 +10,7 @@ export default function ProductAdmin() {
     useContext(AdminContext);
 
   return (
-    <div className="p-5 min-h-64">
+    <div className="p-5 min-h-64 bg-warm-gray text-teal">
       <div className="flex justify-between">
         <h2 className="text-2xl font-bold mb-4">Daftar Produk</h2>
         <div>
@@ -19,48 +19,48 @@ export default function ProductAdmin() {
               setEditedProduct({});
               setPopUp(!popUp);
             }}
-            className="flex justify-between gap-2 items-center bg-green-600 hover:bg-green-700 text-white font-bold py-1 px-2 rounded"
+            className="flex justify-between gap-2 items-center bg-teal hover:bg-green-700 text-white font-bold py-1 px-2 rounded"
           >
             <MdOutlineAddBox /> Tambah Produk
           </button>
         </div>
       </div>
-      <table className="w-full border-collapse border border-gray-300">
+      <table className="w-full border-collapse border-2 border-teal">
         <thead>
           <tr>
-            <th className="border border-gray-300">No</th>
-            <th className="border border-gray-300 ">Nama</th>
-            <th className="border border-gray-300 ">Deskripsi</th>
-            <th className="border border-gray-300 ">Harga</th>
-            <th className="border border-gray-300 ">Stok</th>
-            <th className="border border-gray-300 ">Gambar</th>
-            <th className="border border-gray-300 ">Aksi</th>
+            <th className="border-2 border-teal">No</th>
+            <th className="border-2 border-teal ">Nama</th>
+            <th className="border-2 border-teal ">Deskripsi</th>
+            <th className="border-2 border-teal ">Harga</th>
+            <th className="border-2 border-teal ">Stok</th>
+            <th className="border-2 border-teal ">Gambar</th>
+            <th className="border-2 border-teal ">Aksi</th>
           </tr>
         </thead>
         <tbody>
           {/* Data rows */}
           {products?.map((p, index) => (
             <tr key={p.id}>
-              <td className="border border-gray-300 px-4 py-2 text-center">
+              <td className="border-2 border-teal px-4 py-2 text-center">
                 {index + 1}
               </td>
-              <td className="border border-gray-300 px-4 py-2 text-center">
+              <td className="border-2 border-teal px-4 py-2 text-center">
                 {p.name}
               </td>
-              <td className="border border-gray-300 px-4 py-2 text-center">
+              <td className="border-2 border-teal px-4 py-2 text-center">
                 {p.description.slice(0, 25)}
                 {p.description.length > 25 && "..."}
               </td>
-              <td className="border border-gray-300 px-4 py-2 text-center">
+              <td className="border-2 border-teal px-4 py-2 text-center">
                 Rp{parseInt(p.price).toLocaleString("id-ID")}
               </td>
-              <td className="border border-gray-300 px-4 py-2 text-center">
+              <td className="border-2 border-teal px-4 py-2 text-center">
                 {p.stock}
               </td>
-              <td className="border border-gray-300 px-4 py-2 text-center">
+              <td className="border-2 border-teal px-4 py-2 text-center">
                 {p.image}
               </td>
-              <td className="border border-gray-300 px-4 py-2 flex justify-evenly">
+              <td className="border border-teal px-4 py-2 flex justify-evenly">
                 <button
                   onClick={() => {
                     setEditedProduct(p);
