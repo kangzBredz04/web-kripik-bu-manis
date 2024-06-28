@@ -1,4 +1,5 @@
-import { useContext, useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useContext, useEffect, useState } from "react";
 import { AdminContext } from "./Admin";
 import CashierCardProduct from "../components/CashierCardProduct";
 import CashierCheckoutProduct from "../components/CashierCheckoutProduct";
@@ -12,8 +13,20 @@ export default function Cashier() {
   const calculateSubTotal = () =>
     cashier.reduce((acc, curr) => acc + parseInt(curr.sub_total), 0);
 
+  useEffect(() => {
+    setSaleCustomer({
+      id_customer: 1,
+      sales: cashier,
+      sub_total: calculateSubTotal(),
+      discount: 0,
+      total_sale: calculateSubTotal(),
+      type_of_payment: "KASIR",
+      address: "-",
+    });
+  }, [cashier]);
+
   return (
-    <div className="bg-warm-gray flex">
+    <div className="bg-warm-gray flex text-teal">
       <div className="w-2/3">
         <div className="grid grid-cols-3 gap-5 px-4 py-4">
           {products?.map((p) => (
@@ -27,7 +40,7 @@ export default function Cashier() {
           ))}
         </div>
       </div>
-      <div className="w-1/3 m-5 border-2 border-black flex flex-col justify-between">
+      <div className="w-1/3 m-5 border-2 border-teal flex flex-col justify-between">
         <div>
           <div className="flex flex-col items-center px-2 py-3">
             <h1 className="text-xl font-extrabold tracking-widest">Checkout</h1>
@@ -97,13 +110,13 @@ export default function Cashier() {
                   type_of_payment: "KASIR",
                   address: "-",
                 });
-                console.log(saleCustomer);
                 api
                   .post("/sale/add", saleCustomer)
-                  .then(() => saleCustomer({}));
+                  .then((res) => alert(res.msg));
                 api.delete("/cashier/delete-all");
+                setSaleCustomer({});
                 setPopUp(!popUp);
-                // window.location.reload();
+                window.location.reload();
               }}
               className="bg-teal text-white py-2 w-full rounded-md"
             >
