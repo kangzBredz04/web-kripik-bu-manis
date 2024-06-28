@@ -15,6 +15,7 @@ export default {
         montserrat: ["Montserrat", "sans-serif"],
         playfair: ["Playfair Display", "serif"],
         poppins: ["Poppins", "sans-serif"],
+        caveat: ["Caveat", "cursive"],
       },
     },
   },
