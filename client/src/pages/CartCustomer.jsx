@@ -1,9 +1,7 @@
-/* eslint-disable no-unused-vars */
 import NotLogin from "./NotLogin";
 import { useContext, useEffect, useState } from "react";
 import { AllContext } from "../App";
 import CardCart from "../components/CardCart";
-import { useNavigate } from "react-router-dom";
 import NotCart from "./NotCart";
 import { api } from "../utils";
 
@@ -51,8 +49,6 @@ export default function CartCustomer() {
     setSelectPayment(e.target.value);
   };
 
-  const navigate = useNavigate();
-
   const [isReceiptOpen, setIsReceiptOpen] = useState(false);
 
   function handleIsReceiptOpen() {
@@ -70,12 +66,21 @@ export default function CartCustomer() {
       day: "numeric",
     });
     setCurrentDate(formattedDate);
-  }, []);
+    setSaleCustomer({
+      id_customer: localStorage.getItem("id"),
+      sales: cart,
+      sub_total: subTotal,
+      discount: diskon,
+      total_sale: subTotal - diskon,
+      type_of_payment: selectPayment,
+      address: `${address}.`,
+    });
+  }, [address, cart, diskon, selectPayment, subTotal]);
 
   if (localStorage.getItem("id")) {
     return (
-      <div className="flex flex-col gap-5 py-5 bg-gray-200 font-poppins">
-        <h1 className="text-center font-bold tracking-widest text-2xl">
+      <div className="flex flex-col gap-5 py-5 bg-warm-gray font-poppins text-teal">
+        <h1 className="text-center font-extrabold text-teal tracking-widest text-2xl">
           KERANJANG
         </h1>
         {cart.length > 0 ? (
@@ -210,29 +215,8 @@ export default function CartCustomer() {
               <button
                 onClick={(e) => {
                   e.preventDefault();
-                  if (selectPayment == "" || address == "") {
-                    alert(
-                      "METODE PEMBAYARAN DAN ALAMAT PENGIRIMAN JANGAN SAMPAI KOSONG"
-                    );
-                  } else {
-                    setSaleCustomer({
-                      id_customer: localStorage.getItem("id"),
-                      sales: cart,
-                      sub_total: subTotal,
-                      discount: diskon,
-                      total_sale: subTotal - diskon,
-                      type_of_payment: selectPayment,
-                      address: `${address}.`,
-                    });
-                    console.log(saleCustomer);
-                    api.post("/sale/add", saleCustomer).then((res) => {
-                      alert(res.msg);
-                      window.location.href = "/";
-                      saleCustomer({});
-                    });
-                    api.delete(
-                      `/code/delete/${localStorage.getItem("id_code")}`
-                    );
+                  if (address != "" && handlePayment != "") {
+                    setIsReceiptOpen(!isReceiptOpen);
                   }
                 }}
                 className="w-full flex justify-center py-4 mb-2 bg-white outline outline-white text-teal cursor-pointer hover:bg-teal hover:text-white"
@@ -248,9 +232,9 @@ export default function CartCustomer() {
         )}
         {isReceiptOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-            <div className="bg-white w-full max-w-4xl h-5/6 p-6 rounded-lg shadow-lg overflow-y-auto relative">
+            <div className="bg-teal text-white w-full max-w-4xl h-5/6 p-6 rounded-lg shadow-lg overflow-y-auto relative">
               <button
-                className="absolute text-xl top-4 right-4 text-gray-700 font-bold"
+                className="absolute text-xl top-4 right-4  font-bold"
                 onClick={handleIsReceiptOpen}
               >
                 &#x2715;
@@ -261,7 +245,7 @@ export default function CartCustomer() {
               <table className="my-3 font-medium">
                 <tr>
                   <td>NAMA CUSTOMER</td>
-                  <td>: {localStorage.getItem("name").toLocaleUpperCase()}</td>
+                  <td> : {localStorage.getItem("name").toLocaleUpperCase()}</td>
                 </tr>
                 <tr>
                   <td>ALAMAT</td>
@@ -272,8 +256,8 @@ export default function CartCustomer() {
                   <td>: {currentDate}</td>
                 </tr>
               </table>
-              <div className=" p-3  flex flex-col gap-3 border-y-2 border-teal">
-                <div className="flex flex-row items-center">
+              <div className=" p-3  flex flex-col gap-3 border-b-2 border-white">
+                <div className="flex flex-row items-center border-y-2 border-white py-2">
                   <h1 className="w-3/6 text-base font-extrabold tracking-wider">
                     PRODUK
                   </h1>
@@ -368,9 +352,49 @@ export default function CartCustomer() {
                 </div>
               )}
               <div className="flex">
-                <div className="ml-auto">
-                  <button>BATAL</button>
-                  <button>PESAN</button>
+                <div className="ml-auto flex gap-5">
+                  <button
+                    className="bg-white font-bold text-teal outline rounded-lg  hover:bg-transparent hover:text-white py-2 px-10 hover:outline-2 hover:outline-white"
+                    onClick={() => {
+                      setIsReceiptOpen(!isReceiptOpen);
+                    }}
+                  >
+                    BATAL
+                  </button>
+                  <button
+                    className="bg-white font-bold text-teal outline rounded-lg hover:bg-transparent hover:text-white py-2 px-10 hover:outline-2 hover:outline-white"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      if (selectPayment == "" || address == "") {
+                        alert(
+                          "METODE PEMBAYARAN DAN ALAMAT PENGIRIMAN JANGAN SAMPAI KOSONG"
+                        );
+                      } else {
+                        setSaleCustomer({
+                          id_customer: localStorage.getItem("id"),
+                          sales: cart,
+                          sub_total: subTotal,
+                          discount: diskon,
+                          total_sale: subTotal - diskon,
+                          type_of_payment: selectPayment,
+                          address: `${address}.`,
+                        });
+                        api.post("/sale/add", saleCustomer).then((res) => {
+                          alert(res.msg);
+                        });
+                        if (saleCustomer.discount) {
+                          api.delete(
+                            `/code/delete/${localStorage.getItem("id_code")}`
+                          );
+                        }
+                        window.location.href = "/profile";
+                        saleCustomer({});
+                        setIsReceiptOpen(!isReceiptOpen);
+                      }
+                    }}
+                  >
+                    PESAN
+                  </button>
                 </div>
               </div>
             </div>
