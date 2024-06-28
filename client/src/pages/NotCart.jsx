@@ -11,13 +11,13 @@ export default function NotCart() {
         <SlBag className="text-9xl text-teal" />
       </div>
       <h1 className="text-2xl font-semibold text-teal">
-        Your Cart Is Currently Empty
+        Keranjang masih kosong !!!
       </h1>
       <Link
         to="/shop"
-        className="bg-teal text-white hover:bg-transparent hover:text-teal py-3 px-7 outline"
+        className="bg-teal font-bold text-white outline outline-teal hover:bg-transparent hover:text-teal py-3 px-7 hover:outline-1 hover:outline-teal"
       >
-        RETURN TO SHOP
+        Kembali Belanja
       </Link>
     </div>
   );
