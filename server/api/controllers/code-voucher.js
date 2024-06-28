@@ -1,6 +1,5 @@
 import { pool } from "../config/db.js";
 
-// Controller untuk mendapatkan data keranjang berdasarkan id customer
 export const getCodeVoucher = async (req, res) => {
   try {
     const result = await pool.query(
@@ -15,7 +14,6 @@ export const getCodeVoucher = async (req, res) => {
   }
 };
 
-// Controller untuk menghapus data kode voucher berdasarkan id
 export const deleteCodeVoucher = async (req, res) => {
   try {
     await pool.query("DELETE FROM voucher_codes WHERE id = $1", [
