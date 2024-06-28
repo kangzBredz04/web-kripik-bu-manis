@@ -7,7 +7,7 @@ export default function ProfileAdmin() {
 
   if (localStorage.getItem("id")) {
     return (
-      <div className="py-6 px-7 font-KumbhSans bg-warm-gray">
+      <div className="py-6 px-7 font-KumbhSans bg-warm-gray text-teal">
         <h2 className="text-2xl font-extrabold mb-4">My Account</h2>
         <form>
           <div className="flex gap-5">
@@ -73,9 +73,7 @@ export default function ProfileAdmin() {
             onClick={() => {
               if (confirm("Apakah yakin anda akan logout")) {
                 api.get("/auth/logout").then((res) => {
-                  localStorage.removeItem("token");
-                  localStorage.removeItem("role");
-                  localStorage.removeItem("id");
+                  localStorage.clear();
                   alert(res.msg);
                   window.location.href = "/login";
                 });
