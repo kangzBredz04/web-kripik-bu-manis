@@ -11,8 +11,8 @@ export default function Navbar() {
       </div>
       <div className="">
         <Link to="/admin/profile" className="flex items-center gap-3">
-          <p>Profil Akun</p>
-          <FiUser className="text-2xl" />
+          <p className="font-bold tracking-wider">Profil Akun</p>
+          <FiUser className="text-2xl font-bold" />
         </Link>
       </div>
     </nav>
