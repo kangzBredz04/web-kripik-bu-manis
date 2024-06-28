@@ -26,3 +26,28 @@ export const getAllCustomer = async (_req, res) => {
     res.status(500).json({ msg: error.message });
   }
 };
+
+export const updateAccountCustomer = async (req, res) => {
+  const { name } = req.body;
+  try {
+    await pool.query("UPDATE customers SET name = $1 WHERE id = $2", [
+      name,
+      req.params.id,
+    ]);
+    res.status(200).json({
+      msg: "Data berhasil diubah.",
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: error.message });
+  }
+};
+
+export const deleteAccountCustomer = async (req, res) => {
+  try {
+    await pool.query("DELETE FROM customers WHERE id = $1", [req.params.id]);
+    res.status(200).json({ msg: "Data berhasil dihapus." });
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
+};
