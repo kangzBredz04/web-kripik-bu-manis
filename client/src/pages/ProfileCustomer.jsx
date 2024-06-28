@@ -1,205 +1,118 @@
-/* eslint-disable no-unused-vars */
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import Loading from "../components/Loading";
 import { api } from "../utils";
-import { Link, useNavigate, useOutletContext } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AllContext } from "../App";
 
 export default function ProfileCustomer() {
-  const [user, setUser] = useOutletContext();
-  const { orders, setOrders } = useContext(AllContext);
-  const [editedUser, setEditedUser] = useState({});
-  const [allUser, setAllUser] = useState([]);
+  const { sales, codeVouchers } = useContext(AllContext);
 
   const navigate = useNavigate();
 
-  function filterOrders(status) {
-    return orders?.filter((order) => order.status === status);
-  }
-
   if (localStorage.getItem("id")) {
     return (
-      <div className="py-6 px-7 font-KumbhSans bg-gray-100">
-        <h2 className="text-2xl font-bold mb-4">My Account</h2>
-        {/* Form untuk mengubah data user */}
+      <div className="py-6 px-7 font-poppins bg-warm-gray text-teal">
+        <h2 className="text-2xl font-bold mb-4">Data Akun</h2>
         <div>
-          <div className="flex gap-5">
-            {/* Nama Depan */}
-            <div className="grow mb-4">
-              <label
-                htmlFor="firstName"
-                className="block text-black font-bold mb-2"
-              >
-                First Name
-              </label>
-              <input
-                type="text"
-                id="firstName"
-                name="firstName"
-                value={user?.first_name}
-                disabled
-                className="w-full border border-gray-400 px-2 py-2 focus:outline-none focus:border-gray-600"
-              />
-            </div>
-            {/* Nama Belakang */}
-            <div className="grow mb-4">
-              <label
-                htmlFor="lastName"
-                className="block text-black font-bold mb-2"
-              >
-                Last Name
-              </label>
-              <input
-                type="text"
-                id="lastName"
-                name="lastName"
-                value={user?.last_name}
-                disabled
-                className="w-full border border-gray-400 px-2 py-2 focus:outline-none focus:border-gray-600"
-              />
-            </div>
-          </div>
-          {/* Username */}
           <div className="mb-4">
-            <label
-              htmlFor="username"
-              className="block text-black font-bold mb-2"
-            >
-              Username
-            </label>
+            <label className="block font-bold mb-2">Kode Konsumen</label>
             <input
               type="text"
-              id="username"
-              name="username"
-              value={user?.username}
+              value={localStorage.getItem("customer_code")}
               disabled
-              className="w-full border border-gray-400 px-2 py-2 focus:outline-none focus:border-gray-600"
+              className="w-full border-2 border-teal px-2 py-2 font-semibold tracking-widest"
             />
           </div>
-          {/* Email */}
           <div className="mb-4">
-            <label htmlFor="email" className="block text-black font-bold mb-2">
-              Email
-            </label>
+            <label className="block font-bold mb-2">Nama</label>
             <input
-              type="email"
-              id="email"
-              name="email"
-              value={user?.email}
+              type="text"
+              value={localStorage.getItem("name")}
               disabled
-              className="w-full border border-gray-400 px-2 py-2 focus:outline-none focus:border-gray-600"
+              className="w-full border-2 border-teal px-2 py-2 font-semibold tracking-widest"
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block font-bold mb-2">Password</label>
+            <input
+              type="text"
+              value="******"
+              disabled
+              className="w-full border-2 border-teal px-2 py-2 font-semibold tracking-widest"
             />
           </div>
         </div>
-
         <div className="mt-8">
-          <h2 className="text-2xl font-bold mb-4">My Orders</h2>
-          {orders?.length > 0 ? (
+          {codeVouchers?.length > 0 ? (
             <div className="flex flex-col gap-4">
-              {filterOrders("Processed").length != 0 && (
-                <h1 className="font-semibold text-orange-400 mb-3">
-                  Processed
-                </h1>
-              )}
-              <table className="w-full">
-                <div className="flex flex-col gap-3">
-                  {filterOrders("Processed").length != 0 &&
-                    filterOrders("Processed")?.map((o) => (
-                      <tr
-                        key={o.id}
-                        className="border border-gray-300 py-2 px-4 flex justify-between items-center"
-                      >
-                        <td className="text-center">
-                          <img src={o.image_1} alt="" className="w-10" />
-                        </td>
-                        <td className="text-center">{o.name_product}</td>
-                        <td className="text-center">
-                          Rp
-                          {(
-                            parseInt(o.price) * parseInt(o.total_product)
-                          ).toLocaleString("id-ID")}
-                        </td>
-                        <td className="text-center">{o.name_size}</td>
-                        <td className="text-center">{o.total_product}</td>
-                        <td className="text-center">{o.status}</td>
-                      </tr>
-                    ))}
-                </div>
+              <h2 className="text-2xl font-bold">Daftar Kode Vocuher</h2>
+              <table className="w-1/2">
+                <thead className="flex flex-col gap-3 border-y-[1px] border-teal">
+                  <tr className="py-2 px-4 grid grid-cols-3">
+                    <td>No</td>
+                    <td className="text-center">Kode Voucher</td>
+                    <td className="text-center">Total Diskon</td>
+                  </tr>
+                </thead>
+                <tbody className="flex flex-col gap-3">
+                  {codeVouchers?.map((c, index) => (
+                    <tr key={c.id} className="py-2 px-4 grid grid-cols-3">
+                      <td>{index + 1}</td>
+                      <td className="text-center">{c.code}</td>
+                      <td className="text-center">{`${c.discount} %`}</td>
+                    </tr>
+                  ))}
+                </tbody>
               </table>
-
-              <div>
-                {filterOrders("Shipped").length != 0 && (
-                  <h1 className="font-semibold text-green-400 mb-3">Shipped</h1>
-                )}
-                <table className="w-full">
-                  <div className="flex flex-col gap-3">
-                    {filterOrders("Shipped").length != 0 &&
-                      filterOrders("Shipped")?.map((o) => (
-                        <tr
-                          key={o.id}
-                          className="border border-gray-300 py-2 px-4 flex justify-between items-center"
-                        >
-                          <td className="text-center">
-                            <img src={o.image_1} alt="" className="w-10" />
-                          </td>
-                          <td className="text-center">{o.name_product}</td>
-                          <td className="text-center">
-                            Rp
-                            {(
-                              parseInt(o.price) * parseInt(o.total_product)
-                            ).toLocaleString("id-ID")}
-                          </td>
-                          <td className="text-center">{o.name_size}</td>
-                          <td className="text-center">{o.total_product}</td>
-                          <td className="text-center">{o.status}</td>
-                        </tr>
-                      ))}
-                  </div>
-                </table>
-              </div>
-              <div>
-                {filterOrders("Finished").length != 0 && (
-                  <h1 className="font-semibold text-blue-400 mb-3">Finished</h1>
-                )}
-                <table className="w-full">
-                  <div className="flex flex-col gap-3">
-                    {filterOrders("Finished").length != 0 &&
-                      filterOrders("Finished")?.map((o) => (
-                        <tr
-                          key={o.id}
-                          className="border border-gray-300 py-2 px-4 flex justify-between items-center"
-                        >
-                          <td className="text-center">
-                            <img src={o.image_1} alt="" className="w-10" />
-                          </td>
-                          <td className="text-center">{o.name_product}</td>
-                          <td className="text-center">
-                            {" "}
-                            Rp
-                            {(
-                              parseInt(o.price) * parseInt(o.total_product)
-                            ).toLocaleString("id-ID")}
-                          </td>
-                          <td className="text-center">{o.name_size}</td>
-                          <td className="text-center">{o.total_product}</td>
-                          <td className="text-center">{o.status}</td>
-                        </tr>
-                      ))}
-                  </div>
-                </table>
-              </div>
+            </div>
+          ) : (
+            ""
+          )}
+        </div>
+        <div className="mt-8">
+          <h2 className="text-2xl font-bold mb-4">Daftar Pesanan</h2>
+          {sales?.length > 0 ? (
+            <div className="flex flex-col gap-4">
+              <table className="w-full">
+                <thead className="flex flex-col gap-3 border-y-[1px] border-teal">
+                  <tr className="py-2 px-4 grid grid-cols-5">
+                    <td>Gambar</td>
+                    <td>Kode Voucher</td>
+                    <td>Total Diskon</td>
+                    <td>Total Diskon</td>
+                    <td>Total Diskon</td>
+                  </tr>
+                </thead>
+                <tbody className="flex flex-col gap-3">
+                  {sales?.map((s) => (
+                    <tr key={s.id} className="py-2 px-4 grid grid-cols-5">
+                      <td>
+                        <img src={s.image} alt="" className="w-10" />
+                      </td>
+                      <td>{s.name}</td>
+                      <td>
+                        Rp
+                        {(
+                          parseInt(s.price) * parseInt(s.total_product)
+                        ).toLocaleString("id-ID")}
+                      </td>
+                      <td className="px-10">{s.total_product}</td>
+                      <td>{s.type_of_payment}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           ) : (
             <div className="flex flex-col items-center py-5 gap-5">
               <h1 className="text-center font-bold text-xl">
-                Tidak ada pesanan yang sedang dalam proses, dikirim atau sudah
-                selesai.
+                Tidak ada pesanan yang sedang sudah selesai.
               </h1>
               <Link
                 to="/shop"
-                className="bg-black w-1/4 text-center text-white hover:bg-white hover:text-black py-3 px-7 outline"
+                className="bg-teal w-1/4 text-center text-white hover:bg-transparent hover:text-teal hover:outline font-bold tracking-wide py-3 px-7"
               >
-                RETURN TO SHOP
+                Kembali Belanja
               </Link>
             </div>
           )}
@@ -207,39 +120,16 @@ export default function ProfileCustomer() {
         <div className="w-full flex mt-5 justify-end gap-3">
           <button
             onClick={() => {
-              if (confirm(`Apakah anda yakin ingin menghapus akun ini ?`)) {
-                api
-                  .delete(`/auth/delete/${localStorage.getItem("id")}`)
-                  .then(async (res) => {
-                    alert(res.msg);
-                  })
-                  .catch((e) => {
-                    console.log(e);
-                  });
-                window.location.href = "/login";
-              }
-            }}
-            className="w-1/3 bg-black text-white py-3 hover:bg-white hover:text-black outline"
-          >
-            Hapus Akun
-          </button>
-          <button
-            onClick={() => {
               if (confirm("Apakah yakin anda akan logout ?")) {
-                api.get("/auth/logout").then((res) => {
-                  alert(res.msg);
-                  setUser({});
-                  localStorage.removeItem("token");
-                  localStorage.removeItem("role");
-                  localStorage.removeItem("id");
-                  window.location.reload();
-                  navigate("/login");
+                api.get("/auth/logout").then(() => {
+                  localStorage.clear();
+                  window.location.href = "/login";
                 });
               }
             }}
-            className="w-1/3 bg-black text-white py-3 hover:bg-white hover:text-black outline"
+            className="w-1/3 bg-teal font-bold tracking-wide text-white py-3 hover:bg-transparent hover:outline hover:outline-teal hover:text-teal"
           >
-            Keluar
+            Keluar Akun
           </button>
         </div>
       </div>
