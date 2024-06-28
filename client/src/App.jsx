@@ -12,6 +12,7 @@ function App() {
   const [register, setRegister] = useState({});
   const [products, setProducts] = useState([]);
   const [codeVouchers, setCodeVouchers] = useState([]);
+  const [sales, setSales] = useState([]);
 
   const [keyword, setKeyword] = useState("");
   const [sortPrice, setSortPrice] = useState("asc");
@@ -25,7 +26,11 @@ function App() {
     api
       .get(`/code/get/${localStorage.getItem("id")}`)
       .then((response) => setCodeVouchers(response));
+    api
+      .get(`/sale/get/${localStorage.getItem("id")}`)
+      .then((response) => setSales(response));
   }, [user?.id]);
+
   return (
     <AllContext.Provider
       value={{
@@ -43,6 +48,8 @@ function App() {
         setSortPrice,
         sortBy,
         setSortBy,
+        sales,
+        setSales,
       }}
     >
       <Header />
