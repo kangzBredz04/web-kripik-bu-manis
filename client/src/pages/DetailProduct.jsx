@@ -2,13 +2,10 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import { AllContext } from "../App";
-import { GoShareAndroid } from "react-icons/go";
-import { IoBookmark, IoBookmarkOutline } from "react-icons/io5";
 import { PiHandsPrayingBold } from "react-icons/pi";
 import { api } from "../utils";
 import CardProduct from "../components/CardProduct";
 import Loading from "../components/Loading";
-// import { api } from "../utils";
 
 import { FaPlus, FaMinus } from "react-icons/fa6";
 
@@ -32,7 +29,8 @@ export default function DetailProduct() {
     });
   }, []);
 
-  console.log(products);
+  console.log(product);
+
   if (product?.id) {
     return (
       <div className="bg-warm-gray font-poppins text-teal py-6">
@@ -51,53 +49,62 @@ export default function DetailProduct() {
               </h1>
               <p className="font-light text-xl">{product.description}</p>
             </div>
-            <div className="mt-16 mx-8 gap-5 flex items-center justify-between">
-              <div className="flex gap-5 items-center">
-                <button className="py-3 px-3 bg-white rounded-full text-teal text-xl font-bold">
-                  <FaMinus
-                    onClick={() => {
-                      if (cartProduct.total_product > 1) {
-                        setCartProduct({
-                          ...cartProduct,
-                          total_product:
-                            parseInt(cartProduct.total_product) - 1,
-                        });
-                      }
-                    }}
-                  />
-                </button>
-                <p className="text-2xl">{cartProduct.total_product}</p>
-                <button className="py-3 px-3 bg-white rounded-3xl text-teal text-xl font-bold">
-                  <FaPlus
-                    onClick={() => {
-                      if (cartProduct.total_product < product.stock) {
-                        setCartProduct({
-                          ...cartProduct,
-                          total_product:
-                            parseInt(cartProduct.total_product) + 1,
-                        });
-                      }
-                    }}
-                  />
+            {product?.stock > 0 ? (
+              <div className="mt-16 mx-8 gap-5 flex items-center justify-between">
+                <div className="flex gap-5 items-center">
+                  <button className="py-3 px-3 bg-white rounded-full text-teal text-xl font-bold">
+                    <FaMinus
+                      onClick={() => {
+                        if (cartProduct.total_product > 1) {
+                          setCartProduct({
+                            ...cartProduct,
+                            total_product:
+                              parseInt(cartProduct.total_product) - 1,
+                          });
+                        }
+                      }}
+                    />
+                  </button>
+                  <p className="text-2xl">{cartProduct.total_product}</p>
+                  <button className="py-3 px-3 bg-white rounded-3xl text-teal text-xl font-bold">
+                    <FaPlus
+                      onClick={() => {
+                        if (cartProduct.total_product < product.stock) {
+                          setCartProduct({
+                            ...cartProduct,
+                            total_product:
+                              parseInt(cartProduct.total_product) + 1,
+                          });
+                        }
+                      }}
+                    />
+                  </button>
+                </div>
+                <button
+                  onClick={() => {
+                    if (localStorage.getItem("id")) {
+                      api.post("/cart/add", cartProduct).then((res) => {
+                        alert(res.msg);
+                        window.location.href = "/cart";
+                      });
+                    } else {
+                      alert("Anda harus login dahulu");
+                      navigate("/login");
+                    }
+                  }}
+                  className="w-full py-2 px-11 bg-white rounded-3xl text-teal text-xl font-bold tracking-wider"
+                >
+                  MASUKAN KERANJANG
                 </button>
               </div>
-              <button
-                onClick={() => {
-                  if (localStorage.getItem("id")) {
-                    api.post("/cart/add", cartProduct).then((res) => {
-                      alert(res.msg);
-                      window.location.href = "/cart";
-                    });
-                  } else {
-                    alert("Anda harus login dahulu");
-                    navigate("/login");
-                  }
-                }}
-                className="w-full py-2 px-11 bg-white rounded-3xl text-teal text-xl font-bold tracking-wider"
-              >
-                MASUKAN KERANJANG
-              </button>
-            </div>
+            ) : (
+              <div className="my-1 mx-8 flex flex-row items-center gap-3">
+                <h1 className="text-center text-2xl font-bold">
+                  MOHON MAAF STOK LAGI KOSONG
+                </h1>
+                <PiHandsPrayingBold className="text-2xl" />
+              </div>
+            )}
           </div>
         </div>
         <div className="w-full py-7">

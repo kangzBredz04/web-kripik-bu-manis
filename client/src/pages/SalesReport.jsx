@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { AdminContext } from "./Admin";
+import * as XLSX from "xlsx";
 
 export default function SalesReport() {
   const { salesReport } = useContext(AdminContext);
@@ -39,8 +40,137 @@ export default function SalesReport() {
   const calculateDiscount = () =>
     salesReport.reduce((acc, curr) => acc + parseInt(curr.discount), 0);
 
+  const generateExcel = () => {
+    // Definisikan header untuk laporan penjualan
+    const header = [
+      [
+        "Tanggal",
+        "Kode Konsumen",
+        "Sub Total",
+        "Diskon",
+        "Total Penjualan",
+        "Jenis Pembayaran",
+      ],
+    ];
+
+    // Siapkan data untuk laporan penjualan
+    const body = salesReport.map((s) => [
+      formatDate(s.sale_date),
+      s.customer_code,
+      s.sub_total,
+      s.discount,
+      s.total_sale,
+      s.type_of_payment,
+    ]);
+
+    // Gabungkan header dan body
+    const data = [
+      ...header,
+      ...body,
+      ["Created " + new Date().toLocaleString()],
+    ];
+
+    // Buat worksheet dari data yang sudah digabungkan
+    const worksheet = XLSX.utils.aoa_to_sheet(data);
+
+    const wscols = [
+      { wch: 20 },
+      { wch: 15 },
+      { wch: 15 },
+      { wch: 10 },
+      { wch: 15 },
+      { wch: 20 },
+    ];
+    worksheet["!cols"] = wscols;
+
+    // Format cell untuk header dan data
+    const headerCellStyle = {
+      font: { bold: true },
+      alignment: { horizontal: "center", vertical: "center" },
+    };
+    const centerCellStyle = {
+      alignment: { horizontal: "center", vertical: "center" },
+    };
+    const currencyCellStyle = {
+      numFmt: '"Rp"#,##0.00',
+      alignment: { horizontal: "center", vertical: "center" },
+    };
+
+    // Terapkan gaya ke header
+    for (let col = 0; col < header[0].length; col++) {
+      const cellAddress = XLSX.utils.encode_cell({ r: 0, c: col });
+      worksheet[cellAddress].s = headerCellStyle;
+    }
+
+    // Terapkan gaya ke body
+    for (let row = 1; row <= body.length; row++) {
+      for (let col = 0; col < body[0].length; col++) {
+        const cellAddress = XLSX.utils.encode_cell({ r: row, c: col });
+        if (col == 3) {
+          // Kolom harga
+          worksheet[cellAddress].s = currencyCellStyle;
+        } else {
+          worksheet[cellAddress].s = centerCellStyle;
+        }
+      }
+    }
+
+    // Buat workbook dan tambahkan worksheet ke dalamnya
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Sales Data");
+
+    // Simpan file Excel
+    XLSX.writeFile(workbook, "laporan-penjualan.xlsx");
+  };
+
+  // const generateExcel = () => {
+  //   // Buat worksheet dari data penjualan
+  //   const worksheet = XLSX.utils.json_to_sheet(salesReport);
+
+  //   // Tambahkan header yang lebih rapi
+  //   XLSX.utils.sheet_add_aoa(
+  //     worksheet,
+  //     [
+  // [
+  //   "Tanggal",
+  //   "Kode Konsumen",
+  //   "Sub Total",
+  //   "Diskon",
+  //   "Total Penjualan",
+  //   "Jenis Pembayaran",
+  // ],
+  //     ],
+  //     { origin: "A1" }
+  //   );
+
+  //   // Buat workbook dan tambahkan worksheet ke workbook
+  //   const workbook = XLSX.utils.book_new();
+  //   XLSX.utils.book_append_sheet(workbook, worksheet, "Laporan Penjualan");
+
+  //   // Atur lebar kolom untuk memastikan tata letak yang rapi
+  // const wscols = [
+  //   { wch: 30 },
+  //   { wch: 20 },
+  //   { wch: 20 },
+  //   { wch: 20 },
+  //   { wch: 20 },
+  //   { wch: 20 },
+  // ];
+  // worksheet["!cols"] = wscols;
+
+  //   // Tambahkan timestamp di akhir file
+  //   XLSX.utils.sheet_add_aoa(
+  //     worksheet,
+  //     [["Created " + new Date().toLocaleString()]],
+  //     { origin: -1 }
+  //   );
+
+  //   // Simpan file Excel
+  //   XLSX.writeFile(workbook, "laporan-penjualan.xlsx");
+  // };
+
   return (
-    <div className="py-5 px-5 bg-warm-gray text-teal">
+    <div id="laporan-penjualan" className="py-5 px-5 bg-warm-gray text-teal">
       <div className="flex flex-col items-center">
         <p className="text-2xl font-bold tracking-wider">Laporan Penjualan</p>
         <p className="text-2xl font-bold tracking-wider">Kripik Bu Manis</p>
@@ -123,6 +253,12 @@ export default function SalesReport() {
             </tfoot>
           </table>
         }
+        <button
+          onClick={generateExcel}
+          className="py-2 px-10 rounded-md font-bold tracking-wide bg-teal text-white"
+        >
+          Download Excel
+        </button>
       </div>
     </div>
   );
