@@ -134,7 +134,12 @@ export default function CustUserAdmin() {
             <div>
               <button
                 onClick={() => {
-                  setEditedCustomer({});
+                  const randomCode = Math.floor(1000 + Math.random() * 9000); // Generate a 4-digit random number
+                  // setCustomerCode(`CS${randomCode}`);
+                  setEditedCustomer({
+                    ...editedCustomer,
+                    customer_code: `CS${randomCode}`,
+                  });
                   setPopUp2(!popUp2);
                 }}
                 className="flex justify-between gap-2 items-center bg-teal hover:bg-green-700 text-white font-bold py-1 px-2 rounded"
